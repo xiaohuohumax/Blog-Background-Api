@@ -91,6 +91,28 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    ImageNiceById(id, inc) {
+        return new Promise((res, rej) => schemaModel.ImageModel.updateOne({
+            _id: mongoose.Types.ObjectId(id)
+        }, {
+            $inc: {
+                nice: inc
+            }
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    VideoMusicNiceById(id, inc) {
+        return new Promise((res, rej) => schemaModel.VideoMusicModel.updateOne({
+            _id: mongoose.Types.ObjectId(id)
+        }, {
+            $inc: {
+                nice: inc
+            }
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
     // 文章删除 通过 id
     ArticleDeleteById(id) {
         return new Promise((res, rej) =>
@@ -356,8 +378,8 @@ module.exports = {
         }))
     },
     // 后台用户 注册
-    WebUserAdd(params) {
-        return new Promise((res, rej) => new schemaModel.WebUserModel(params).save((error, result) => {
+    WebUserAdd(name,pass) {
+        return new Promise((res, rej) => new schemaModel.WebUserModel({name,pass}).save((error, result) => {
             error ? rej(error) : res(result);
         }))
     },
@@ -761,7 +783,7 @@ module.exports = {
     DanMuInsert(params) {
         let pramasChange = {
             ...params,
-            adminId: mongoose.Types.ObjectId(params.adminId)
+            userId: mongoose.Types.ObjectId(params.userId)
         }
         return new Promise((res, rej) => new schemaModel.DanMuModel(pramasChange).save((error, result) => {
             error ? rej(error) : res(result);

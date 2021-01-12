@@ -284,12 +284,18 @@ app.post('/user/api/videomusicFindByPage', require('./api/videoMusic/videoMusicF
 // /user/api/videomusicfindbyid
 // 音乐视频 查找通过 id
 app.post('/user/api/videomusicfindbyid', require('./api/videoMusic/videoMusicFindbyid'));
+// 
+// 音乐视频点赞 通过id
+app.post('/user/api/videoMusicNiceById', require('./api/videoMusic/videoMusicNiceById'));
 // /user/api/imageFindPage
 // 图包分页查询
 app.post('/user/api/imageFindPage', require('./api/image/imageFindPage'));
 // /user/api/imageFindbyid
 // 图包 id 查询
 app.post('/user/api/imageFindbyid', require('./api/image/imageFindbyid'));
+// /user/api/imageNiceById
+// 图包点赞 通过id
+app.post('/user/api/imageNiceById', require('./api/image/imageNiceById'));
 // /user/api/webUserFindbyid
 // 前台用户 id 查询
 app.post('/user/api/webUserFindbyid', require('./api/webUser/webUserFindbyid'));

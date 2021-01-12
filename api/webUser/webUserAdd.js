@@ -11,9 +11,8 @@ module.exports = async (req,res) => {
     if (isExisit) {
         resFlag.message = "此用户已被注册";
         resFlag.flag = false;
-
     } else {
-        await link.WebUserAdd(req.body);
+        await link.WebUserAdd(req.body.name,req.body.pass);
         resFlag.message = "注册成功";
         resFlag.flag = true;
     }

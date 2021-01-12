@@ -2,10 +2,7 @@ let link = require('../../mongoose/link');
 let endecode = require('../../tools/endecode');
 
 module.exports = async (req, res, next) => {
-    let {
-        userKey
-    } = req.body;
-
+    let userKey = req.headers['authorization'];
     try {
 
         let [name, pass] = endecode.decode(userKey).split('{|}');
