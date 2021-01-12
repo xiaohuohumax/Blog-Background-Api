@@ -1,0 +1,9 @@
+node_modules
+.gitkeep
+
+/static/files/*
+/static/tools/*
+/static/*.*
+
+/upload/file
+/upload/tool
