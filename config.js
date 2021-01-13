@@ -1,9 +1,9 @@
 module.exports = {
     database: {
-        host: 'localhost',
-        user: 'xiaohuohu',
-        password: '1915970986',
-        database: 'web',
+        host: 'localhost', // 主机
+        user: 'xiaohuohu', // 用户名
+        password: '1915970986', // 密码
+        database: 'web', // 数据库名称
     },
     localhost:"localhost",
     listening: 8888, // 开启端口
