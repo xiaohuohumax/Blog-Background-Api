@@ -96,7 +96,7 @@ app.post('/admin/adminByNameFindIcon', require('./api/adminUser/adminByNameFindI
 app.post('/admin/adminuserlogin', require('./api/adminUser/adminUserLogin'));
 
 // 开放检测 未登录则401
-app.post('/admin/api/*', require('./api/adminUser/adminUserCheck'));
+// app.post('/admin/api/*', require('./api/adminUser/adminUserCheck'));
 
 // /articleinsert
 // 文章
@@ -156,7 +156,7 @@ app.post('/admin/api/imageUpdate', require('./api/image/imageUpdate'));
 // 通过 id 删除图包
 app.post('/admin/api/imageDeleteById', require('./api/image/imageDeleteById'));
 // /webUserFindByPage
-// 后台用户分页查询
+// 前台用户分页查询
 app.post('/admin/api/webUserFindByPage', require('./api/webUser/webUserFindByPage'));
 // /webUserFindbyid
 // 前台用户 id 查询
