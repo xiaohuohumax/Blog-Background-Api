@@ -378,8 +378,11 @@ module.exports = {
         }))
     },
     // 后台用户 注册
-    WebUserAdd(name,pass) {
-        return new Promise((res, rej) => new schemaModel.WebUserModel({name,pass}).save((error, result) => {
+    WebUserAdd(name, pass) {
+        return new Promise((res, rej) => new schemaModel.WebUserModel({
+            name,
+            pass
+        }).save((error, result) => {
             error ? rej(error) : res(result);
         }))
     },
@@ -451,12 +454,12 @@ module.exports = {
             },
 
         ];
-        if (select.start != "" && select.end != "") {
+        if (select.length > 2 && select[0] != "" && select[1] != "") {
             sec.push({
                 $match: {
                     uploadTime: {
-                        "$gte": new Date(select.start),
-                        "$lte": new Date(select.end)
+                        "$gte": new Date(select[0]),
+                        "$lte": new Date(select[1])
                     }
                 }
             });
@@ -479,10 +482,10 @@ module.exports = {
             }))
     },
     // 站内留言添加
-    AdminMessageInsert(params) {
+    AdminMessageInsert(adminId,message) {
         let pramasChange = {
-            ...params,
-            adminId: mongoose.Types.ObjectId(params.adminId)
+            message,
+            adminId: mongoose.Types.ObjectId(adminId)
         }
         return new Promise((res, rej) => new schemaModel.AdminMessageModel(pramasChange).save((error, result) => {
             error ? rej(error) : res(result);
