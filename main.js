@@ -96,9 +96,9 @@ app.post('/admin/adminByNameFindIcon', require('./api/adminUser/adminByNameFindI
 app.post('/admin/adminuserlogin', require('./api/adminUser/adminUserLogin'));
 
 // 开放检测 未登录则401
-// app.post('/admin/api/*', require('./api/adminUser/adminUserCheck'));
+app.post('/admin/api/*', require('./api/adminUser/adminUserCheck'));
 
-// /articleinsert
+// /articleinsert 
 // 文章
 app.post('/admin/api/articleinsert', require('./api/article/articleInsert'));
 // /adminUserUpdate
@@ -116,6 +116,9 @@ app.post('/admin/api/articleFindByPage', require('./api/article/aerticleFindByPa
 // /articlefindbyid
 // 文章查找 通过id
 app.post('/admin/api/articlefindbyid', require('./api/article/aerticleFindbyid'));
+// /articleDeleteById
+// 文章通过id 删除
+app.post('/admin/api/articleDeleteById', require('./api/article/articleDeleteById'));
 // /adminUserFindByPage
 // 后台用户分页查询
 app.post('/admin/api/adminUserFindByPage', require('./api/adminUser/adminUserFindByPage'));
@@ -125,7 +128,7 @@ app.post('/admin/api/adminUserFindbyid', require('./api/adminUser/adminUserFindb
 // /adminuseradd
 // 后台注册
 app.post('/admin/api/adminuseradd', require('./api/adminUser/adminUserAdd'));
-// /videomusicinsert
+// /videomusicinsert 
 // 视频音乐
 app.post('/admin/api/videomusicinsert', require('./api/videoMusic/videoMusicInsert'));
 // /videomusicfindbyid
@@ -179,9 +182,6 @@ app.post('/admin/api/noticeFindByPage', require('./api/notice/noticeFindByPage')
 // /noticeDeleteById
 // 删除公告
 app.post('/admin/api/noticeDeleteById', require('./api/notice/noticeDeleteById'));
-// /articleDeleteById
-// 文章通过id 删除
-app.post('/admin/api/articleDeleteById', require('./api/article/articleDeleteById'));
 // /statsWebUserLevel
 // 统计前台等级组成
 app.post('/admin/api/statsWebUserLevel', require('./api/stats/statsWebUserLevel'));
@@ -207,6 +207,8 @@ app.post('/admin/api/commentFindByPageMore', require('./api/comment/commentFindB
 // /commentGetArticleByIdKind
 // 获取评论
 app.post('/admin/api/commentGetArticleByIdKind', require('./api/comment/commentGetArticleByIdKind'));
+// 获取评论 通过id
+app.post('/admin/api/commentFindById', require('./api/comment/commentFindById'));
 // /commentDeleteById
 // 删除评论
 app.post('/admin/api/commentDeleteById', require('./api/comment/commentDeleteById'));
@@ -246,7 +248,9 @@ app.post('/admin/api/virtualFileRemove', require('./api/virtualFile/virtualFileR
 // 文件复制
 app.post('/admin/api/virtualFileCopy', require('./api/virtualFile/virtualFileCopy'));
 
-
+// /webSetUpdate
+// 修改设置
+app.post('/admin/api/webSetUpdate', require('./api/webSet/webSetUpdate'));
 
 
 
@@ -345,9 +349,7 @@ app.post('/user/api/toolFindKind', require('./api/tool/toolFindKind'));
 // /webset/webSetFindOnly
 // 网站设置
 app.post('/webset/webSetFindOnly', require('./api/webSet/webSetFindOnly'));
-// /webSetUpdate
-// 修改设置
-app.post('/webset/webSetUpdate', require('./api/webSet/webSetUpdate'));
+
 /* ====================================== /网站设置 ====================================== */
 
 //配置服务端口

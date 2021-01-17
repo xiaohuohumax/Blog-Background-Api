@@ -674,6 +674,15 @@ module.exports = {
                 })
             }))
     },
+    CommentFindById(id) {
+        return new Promise((res, rej) => schemaModel.CommentModel.find({
+            _id: mongoose.Types.ObjectId(id)
+        }, {
+            pass: 0
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
     // 评论详细查询
     CommentFindByPageMore(page,
         pageSteep,
