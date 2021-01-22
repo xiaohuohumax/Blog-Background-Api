@@ -123,7 +123,7 @@ app.post('/admin/api/articleDeleteById', require('./api/article/articleDeleteByI
 // 后台用户分页查询
 app.post('/admin/api/adminUserFindByPage', require('./api/adminUser/adminUserFindByPage'));
 // /adminUserFindbyid
-// 通过 id 查询信息
+// 通过 id 查询信息 
 app.post('/admin/api/adminUserFindbyid', require('./api/adminUser/adminUserFindbyid'));
 // /adminuseradd
 // 后台注册
@@ -234,7 +234,9 @@ app.post('/admin/api/toolFindKind', require('./api/tool/toolFindKind'));
 // 文件上传
 app.post('/admin/api/virtualFileInsert', fileMulter.single("file"), require('./api/virtualFile/virtualFileInsert'));
 // 文件目录显示
-app.post('/admin/api/virtualFileFind', require('./api/virtualFile/virtualFileFind'));
+// app.post('/admin/api/virtualFileFind', require('./api/virtualFile/virtualFileFind'));
+// 文件分页查询
+app.post('/admin/api/virtualFileFindByPage', require('./api/virtualFile/virtualFileFindByPage'));
 // 删除文件夹/文件
 app.post('/admin/api/virtualFileDeleteById', require('./api/virtualFile/virtualFileDeleteById'));
 // 新建文件夹

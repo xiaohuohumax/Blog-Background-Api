@@ -482,7 +482,7 @@ module.exports = {
             }))
     },
     // 站内留言添加
-    AdminMessageInsert(adminId,message) {
+    AdminMessageInsert(adminId, message) {
         let pramasChange = {
             message,
             adminId: mongoose.Types.ObjectId(adminId)
@@ -976,6 +976,27 @@ module.exports = {
                 return val;
             }));
         }))
+    },
+    // 文件列表分页
+    VirtualFileFindByPage(page, pageSteep, parentId) {
+        let sec = {
+            parentId
+        };
+        return new Promise((res, rej) =>
+            schemaModel.VirtualModel.find(sec).countDocuments((err, content) => {
+                schemaModel.VirtualModel.find(sec).sort({
+                    uploadTime: -1,
+                    kind: 1
+                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
+                    error ? rej(error) : res({
+                        fileSum: content,
+                        files: result.map(val => {
+                            val._doc.virtualUrl = virtualFileUrl(`/${val.md5}`)
+                            return val;
+                        })
+                    });
+                })
+            }))
     },
     // 文件查询 通过id
     VirtualFileFindById(id) {

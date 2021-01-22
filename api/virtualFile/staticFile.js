@@ -14,12 +14,6 @@ module.exports = async function (req, res) {
             message: '参数错误!'
         }).end();
     }
-
-    let item = await link.VirtualFileFindById(id);
-    if (item) {
-        res.header("Content-Type", mime.getType(item.name));
-        res.sendFile(`${fileCache}/${item.md5}`);
-    } else {
-        res.status(403).send("Sorry! You can't see that.");
-    }
+    res.header("Content-Type", mime.getType(id));
+    res.sendFile(`${fileCache}/${id}`);
 }

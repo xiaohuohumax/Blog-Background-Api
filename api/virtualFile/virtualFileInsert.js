@@ -18,6 +18,8 @@ module.exports = async (req, res) => {
     let size = file.size; // 文件大小
     let tempPath = file.path; // 缓存位置(绝对路径)
     let md5 = await getMD5(tempPath); // 获取md5
+    let suffix = path.extname(name)
+    md5 = `${md5}${suffix}`
     let filePath = path.join(fileCache, md5); // 游戏存储路径
 
     // 文件转移改名
