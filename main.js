@@ -244,7 +244,7 @@ app.post('/admin/api/virtualFileInsertDir', require('./api/virtualFile/virtualFi
 // 修改名字
 app.post('/admin/api/virtualFileUpdateName', require('./api/virtualFile/virtualFileUpdateName'));
 // 通过名字查询
-app.post('/admin/api/virtualFileFindByName', require('./api/virtualFile/virtualFileFindByName'));
+// app.post('/admin/api/virtualFileFindByName', require('./api/virtualFile/virtualFileFindByName'));
 // 文件移动
 app.post('/admin/api/virtualFileRemove', require('./api/virtualFile/virtualFileRemove'));
 // 文件复制

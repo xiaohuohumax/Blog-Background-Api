@@ -5,9 +5,10 @@ module.exports = async (req, res) => {
     let {
         parentId,
         page,
-        pageSteep
+        pageSteep,
+        selectWord
     } = req.body;
     parentId = parentId ? parentId : '-1'
-    let result = await link.VirtualFileFindByPage(page, pageSteep, parentId);
+    let result = await link.VirtualFileFindByPage(page, pageSteep, parentId,selectWord);
     res.json(result)
 }

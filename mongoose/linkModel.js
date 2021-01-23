@@ -978,9 +978,12 @@ module.exports = {
         }))
     },
     // 文件列表分页
-    VirtualFileFindByPage(page, pageSteep, parentId) {
+    VirtualFileFindByPage(page, pageSteep, parentId, selectWord) {
         let sec = {
-            parentId
+            parentId,
+            name: {
+                $regex: new RegExp(selectWord, 'i')
+            }
         };
         return new Promise((res, rej) =>
             schemaModel.VirtualModel.find(sec).countDocuments((err, content) => {
