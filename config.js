@@ -5,10 +5,11 @@ module.exports = {
         password: '1915970986', // 密码
         database: 'web', // 数据库名称
     },
-    localhost:"localhost",
+    localhost: "localhost",
     listening: 8888, // 开启端口
     encodeDecodeKey: '0123456789abcdef', // 加密秘钥
     encodeDecodeiv: '0123456789abcdef', // 加密向量
+    websocketListening: 8889, // websocket 开启端口
 
     webSet: {
         webName: 'XiaoHuoHu', // 名称

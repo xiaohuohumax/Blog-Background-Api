@@ -14,6 +14,8 @@ let link = require('./mongoose/link');
 
 let ip = require('./tools/ip');
 
+let websocketModel = require('./websocket/websocket');
+
 let {
     toolMulter,
     fileMulter
@@ -39,6 +41,9 @@ app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "X-Requested-With, Origin, X-Requested-With, Content-Type, Accept,Authorization");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("X-Powered-By", ' 3.2.1');
+
+    // 注入websocket 实例
+    req.websocketModel = websocketModel;
     next();
 
     // res.header("Content-Type", "application/json;charset=utf-8");
@@ -60,13 +65,17 @@ app.all('*', function (req, res, next) {
 
 // 设置数据库 网站设置初始化
 link.webSetFindOnly().then(res => {
-    if(!res){
+    if (!res) {
         console.log("加载配置文件")
         link.webSetInsert(config.webSet).then(() => {
             // link.webSetFindOnly().then(res => console.log(res))
         });
     }
 })
+
+
+
+
 // // 错误捕获
 // app.use(function (err, req, res, next) {
 //     console.error(err.stack);
@@ -199,7 +208,7 @@ app.post('/admin/api/statsAdminUserGender', require('./api/stats/statsAdminUserG
 app.post('/admin/api/statsAdminUserLevel', require('./api/stats/statsAdminUserLevel'));
 
 
- 
+
 
 // /commentFindByPageMore
 // 获取评论分页
@@ -243,7 +252,7 @@ app.post('/admin/api/virtualFileDeleteById', require('./api/virtualFile/virtualF
 app.post('/admin/api/virtualFileInsertDir', require('./api/virtualFile/virtualFileInsertDir'));
 // 修改名字
 app.post('/admin/api/virtualFileUpdateName', require('./api/virtualFile/virtualFileUpdateName'));
-// 通过名字查询
+// 通过名字查询 
 // app.post('/admin/api/virtualFileFindByName', require('./api/virtualFile/virtualFileFindByName'));
 // 文件移动
 app.post('/admin/api/virtualFileRemove', require('./api/virtualFile/virtualFileRemove'));
@@ -353,6 +362,8 @@ app.post('/user/api/toolFindKind', require('./api/tool/toolFindKind'));
 app.post('/webset/webSetFindOnly', require('./api/webSet/webSetFindOnly'));
 
 /* ====================================== /网站设置 ====================================== */
+
+
 
 //配置服务端口
 app.listen(config.listening, function () {
