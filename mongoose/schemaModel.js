@@ -257,6 +257,14 @@ module.exports = {
             type: Array,
             default: []
         },
+        bannerIcon: {
+            type: Array,
+            default: []
+        },
+        copyRight: {
+            type: String,
+            default: ''
+        },
     })),
     // 弹幕大纲
     DanMuModel: mogoose.model('danmus', mogoose.Schema({

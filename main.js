@@ -1,22 +1,24 @@
 const express = require('express');
-// cookice
-// const cookice = require('cookie-parser');
 
-let bodyParser = require('body-parser');
+const cookice = require('cookie-parser');
+
+const bodyParser = require('body-parser');
 
 const config = require('./config.js');
 
-let path = require('path');
+const path = require('path');
 
-let app = express();
+const app = express();
 
-let link = require('./mongoose/link');
+const link = require('./mongoose/link');
 
-let ip = require('./tools/ip');
+const ip = require('./tools/ip');
 
-let websocketModel = require('./websocket/websocket');
+const websocketModel = require('./websocket/websocket');
 
-let {
+const session = require("express-session");
+
+const {
     toolMulter,
     fileMulter
 } = require('./tools/multers');
@@ -26,8 +28,7 @@ let {
 //     }
 // })(console.log)
 
-// 使用中间件
-// app.use(cookice());
+
 // app.use(bodyParser());
 // app.use(express.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -35,13 +36,41 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+
+// 使用中间件
+app.use(cookice());
+
+// session
+app.use(session({
+    secret: 'sessiontest', //与cookieParser中的一致
+    resave: false,
+    name:"seeeionid",
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: false,
+        secure: true,
+        sameSite: 'none',
+        maxAge: 60 * 60 * 24 * 1000,
+    },
+}));
+
+
 //设置跨域访问
 app.all('*', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With, Origin, X-Requested-With, Content-Type, Accept,Authorization");
+    res.header("Access-Control-Allow-Origin", req.headers.origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type,Authorization");
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By", ' 3.2.1');
 
+
+    console.log(req.session.id)
+
+    // console.log(JSON.stringify(req.cookies) + "|" + req.method + "|" + req.headers.origin + req.path)
+    res.cookie("name", 'zhangsan');
+    res.cookie("name2", 'zhangsan阿斯顿发');
+    res.cookie("name3", 'zhangsa阿斯蒂芬n');
+    res.cookie("name4", 'zhangsa阿斯蒂芬n');
+    res.cookie("name5", 'zhang阿斯蒂芬san');
     // 注入websocket 实例
     req.websocketModel = websocketModel;
     next();

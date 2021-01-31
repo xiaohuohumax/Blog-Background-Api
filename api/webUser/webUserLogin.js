@@ -24,6 +24,10 @@ module.exports = async (req, res) => {
                 loginTime: new Date()
             });
 
+            // 设置session
+            req.session.userinf = user;
+            // console.log(user)
+
         } else {
             inf = "你已被限制登录!";
         }

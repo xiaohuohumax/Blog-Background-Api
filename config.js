@@ -21,17 +21,10 @@ module.exports = {
         webKeyWords: ["xiaohuohu", "个人博客", "boke"], // 关键字
         webFontFamily: '微软雅黑',
         webTheme: 'color', // 网站主题
-        webThemeList: [{
+        webThemeList: [
+            {
                 name: "明亮",
-                theme: "light"
-            },
-            {
-                name: "暗系",
-                theme: "dark"
-            },
-            {
-                name: "彩色",
-                theme: "color"
+                url:"",
             },
         ],
         userDefIcon: [],

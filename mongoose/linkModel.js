@@ -470,13 +470,12 @@ module.exports = {
                     _id: -1
                 }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
 
-                    let changeRes = result.map(value => {
-                        value.admin = value.admin[0];
-                        return value;
-                    })
                     error ? rej(error) : res({
                         webMessageSum: content.length,
-                        webMessages: changeRes
+                        webMessages: result.map(value => {
+                            value.admin = value.admin[0];
+                            return value;
+                        })
                     });
                 })
             }))
@@ -663,13 +662,12 @@ module.exports = {
                     _id: -1
                 }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
 
-                    let changeRes = result.map(value => {
-                        value.user = value.user[0];
-                        return value;
-                    })
                     error ? rej(error) : res({
                         commentSum: content.length,
-                        comments: changeRes
+                        comments: result.map(value => {
+                            value.user = value.user[0];
+                            return value;
+                        })
                     });
                 })
             }))

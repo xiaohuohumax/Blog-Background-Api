@@ -3,14 +3,24 @@ let endecode = require('../../tools/endecode');
 
 module.exports = async (req, res, next) => {
     let userKey = req.headers['authorization'];
+
+    
+
+    console.log(req.cookies['connect.sid'])
+
+    console.log(req.session.userinf+"\\\\\===================")
+
+    if(req.session.userinf){
+
+    }
     try {
 
         let [name, pass] = endecode.decode(userKey).split('{|}');
 
-        console.log(name, pass,userKey)
+        // console.log(name, pass,userKey)
 
         let result = await link.WebUserLogin(name, pass);
-        console.log(result)
+        // console.log(result)
 
         if(result.length >0){
             req.user = {
