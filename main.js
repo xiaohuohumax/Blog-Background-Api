@@ -46,12 +46,12 @@ app.use(session({
     resave: false,
     name:"seeeionid",
     saveUninitialized: true,
-    cookie: {
-        httpOnly: false,
-        secure: true,
-        sameSite: 'none',
-        maxAge: 60 * 60 * 24 * 1000,
-    },
+    // cookie: {
+    //     httpOnly: false,
+    //     secure: true,
+    //     sameSite: 'none',
+    //     maxAge: 60 * 60 * 24 * 1000,
+    // },
 }));
 
 
@@ -66,11 +66,11 @@ app.all('*', function (req, res, next) {
     console.log(req.session.id)
 
     // console.log(JSON.stringify(req.cookies) + "|" + req.method + "|" + req.headers.origin + req.path)
-    res.cookie("name", 'zhangsan');
-    res.cookie("name2", 'zhangsan阿斯顿发');
-    res.cookie("name3", 'zhangsa阿斯蒂芬n');
-    res.cookie("name4", 'zhangsa阿斯蒂芬n');
-    res.cookie("name5", 'zhang阿斯蒂芬san');
+    // res.cookie("name", 'zhangsan');
+    // res.cookie("name2", 'zhangsan阿斯顿发');
+    // res.cookie("name3", 'zhangsa阿斯蒂芬n');
+    // res.cookie("name4", 'zhangsa阿斯蒂芬n');
+    // res.cookie("name5", 'zhang阿斯蒂芬san');
     // 注入websocket 实例
     req.websocketModel = websocketModel;
     next();
@@ -306,6 +306,8 @@ app.post('/user/webUserLogin', require('./api/webUser/webUserLogin'));
 // /user/api/webUserAdd
 // 用户注册
 app.post('/user/webUserAdd', require('./api/webUser/webUserAdd'));
+// 验证码生成
+app.get('/user/checkCode', require('./api/checkCode/createCheckCode'));
 
 // 修改用户设置
 app.post('/user/api/WebUserUpdateById', require('./api/webUser/WebUserUpdateById'));

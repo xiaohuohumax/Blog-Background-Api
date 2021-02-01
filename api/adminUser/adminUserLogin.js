@@ -16,6 +16,8 @@ module.exports = async (req, res) => {
             key = endecode.encode(`${name}{|}${pass}`);
             inf = result[0];
 
+            req.session.admininf = user;
+
             // 更新信息
             await link.AdminUserUpdateById(inf._id, {
                 loginIp: ip(req),

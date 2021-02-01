@@ -1,3 +1,7 @@
+const {
+    resolve
+} = require('path');
+
 module.exports = {
     database: {
         host: 'localhost', // 主机
@@ -11,6 +15,18 @@ module.exports = {
     encodeDecodeiv: '0123456789abcdef', // 加密向量
     websocketListening: 8889, // websocket 开启端口
 
+    svgCaptcha: { // 验证码 设置
+        size: 4, // 6个字符
+        ignoreChars: '0o1ilLO',
+        noise: 0,
+        color: "teal",
+        background: "#00000000",
+        fontUrl: resolve("./static/fonts/ZCOOL - Addict Italic/ZCOOL Addict Italic 01.ttf"),
+        width:80,
+        fontSize: 24,
+        height: 28
+    },
+
     webSet: {
         webName: 'XiaoHuoHu', // 名称
         webDescription: '个人博客', // 介绍
@@ -21,12 +37,10 @@ module.exports = {
         webKeyWords: ["xiaohuohu", "个人博客", "boke"], // 关键字
         webFontFamily: '微软雅黑',
         webTheme: 'color', // 网站主题
-        webThemeList: [
-            {
-                name: "明亮",
-                url:"",
-            },
-        ],
+        webThemeList: [{
+            name: "明亮",
+            url: "",
+        }, ],
         userDefIcon: [],
         bannerIcon: [],
         copyRight: "",

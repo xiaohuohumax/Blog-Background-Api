@@ -2,39 +2,32 @@ let link = require('../../mongoose/link');
 let endecode = require('../../tools/endecode');
 
 module.exports = async (req, res, next) => {
-    let userKey = req.headers['authorization'];
 
-    
+    const user = req.session.userinf;
 
-    console.log(req.cookies['connect.sid'])
+    console.log(JSON.stringify(req.session.userinf))
 
-    console.log(req.session.userinf+"\\\\\===================")
+    user ? next() : res.sendStatus(401); // 未登录
 
-    if(req.session.userinf){
+    // let userKey = req.headers['authorization'];
 
-    }
-    try {
+    // try {
 
-        let [name, pass] = endecode.decode(userKey).split('{|}');
+    //     let [name, pass] = endecode.decode(userKey).split('{|}');
 
-        // console.log(name, pass,userKey)
+    //     // console.log(name, pass,userKey)
 
-        let result = await link.WebUserLogin(name, pass);
-        // console.log(result)
+    //     let result = await link.WebUserLogin(name, pass);
+    //     // console.log(result)
 
-        if(result.length >0){
-            req.user = {
-                inf: result[0],
-                key: userKey
-            };    
-            return next()
-        }
-    } catch (error) {
-        console.log(error)
-    }
-
-    res.json({
-        flag: false,
-        message: '身份验证失败'
-    })
+    //     if(result.length >0){
+    //         req.user = {
+    //             inf: result[0],
+    //             key: userKey
+    //         };    
+    //         return next()
+    //     }
+    // } catch (error) {
+    //     console.log(error)
+    // }
 }
