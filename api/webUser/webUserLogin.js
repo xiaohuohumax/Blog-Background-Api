@@ -5,34 +5,45 @@ let ip = require('../../tools/ipByReq');
 module.exports = async (req, res) => {
     let {
         name,
-        pass
+        pass,
+        code
     } = req.body;
-    let result = await link.WebUserLogin(name, pass);
-
-
     let key, inf, flag = false;
-    if (result.length > 0) { // 此用户存在
-        let user = result[0];
-        if (user.allowLogin) {
-            flag = true;
-            key = endecode.encode(`${name}{|}${pass}`);
-            inf = result[0];
 
-            // 更新信息
-            await link.WebUserUpdateById(inf._id, {
-                loginIp: ip(req),
-                loginTime: new Date()
-            });
-
-            // 设置session
-            req.session.userinf = user;
-
-        } else {
-            inf = "你已被限制登录!";
+    for (let x = 0; x < 1; x++) {
+        if (code != req.session.captcha) {
+            inf = "验证码错误!";
+            break;
         }
-    }else{
-        inf = "登录失败,请检查!";
+
+        let result = await link.WebUserLogin(name, pass);
+
+
+        if (result.length == 0) { // 此用户存在
+            inf = "登录失败,请检查!";
+            break;
+        }
+
+        let user = result[0];
+        if (!user.allowLogin) {
+            inf = "你已被限制登录!";
+            break;
+        }
+
+        flag = true;
+        key = endecode.encode(`${name}{|}${pass}`);
+        inf = result[0];
+
+        // 设置session
+        req.session.userinf = user;
+
+        // 更新信息
+        link.WebUserUpdateById(inf._id, {
+            loginIp: ip(req),
+            loginTime: new Date()
+        });
     }
+
     res.json({
         flag,
         key,

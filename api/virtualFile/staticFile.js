@@ -14,6 +14,6 @@ module.exports = async function (req, res) {
             message: '参数错误!'
         }).end();
     }
-    res.header("Content-Type", mime.getType(id));
+    res.header("Content-Type", mime.lookup(id));
     res.sendFile(`${fileCache}/${id}`);
 }

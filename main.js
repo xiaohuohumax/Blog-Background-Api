@@ -44,14 +44,11 @@ app.use(cookice());
 app.use(session({
     secret: 'sessiontest', //与cookieParser中的一致
     resave: false,
-    name:"seeeionid",
+    name: "seeeionid",
     saveUninitialized: true,
-    // cookie: {
-    //     httpOnly: false,
-    //     secure: true,
-    //     sameSite: 'none',
-    //     maxAge: 60 * 60 * 24 * 1000,
-    // },
+    cookie: {
+        httpOnly: false,
+    },
 }));
 
 
