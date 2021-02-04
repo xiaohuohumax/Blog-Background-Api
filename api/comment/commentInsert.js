@@ -2,7 +2,7 @@ let link = require('../../mongoose/link');
 
 module.exports = async (req, res) => {
 
-    let user = req.user.inf;
+    const user = req.session.userinf;
 
     let allowTalk = user.allowTalk;
     let result = {

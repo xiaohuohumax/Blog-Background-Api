@@ -19,11 +19,11 @@ module.exports = {
         size: 4, // 6个字符
         ignoreChars: '0o1ilLO',
         noise: 0,
-        color: "teal",
-        background: "#00000000",
+        color: true,
+        // background: "#9e5a4b",
         fontUrl: resolve("./static/fonts/ZCOOL - Addict Italic/ZCOOL Addict Italic 01.ttf"),
         width:80,
-        fontSize: 24,
+        fontSize: 28,
         height: 28
     },
 

@@ -363,7 +363,7 @@ app.post('/user/api/commentNiceById', require('./api/comment/commentNiceById'));
 
 // /user/api/webUserFindByKey
 // 更新用户信息
-app.post('/user/api/webUserFindByKey', require('./api/webUser/webUserCheck'), require('./api/webUser/webUserFindByKey'));
+// app.post('/user/api/webUserFindByKey', require('./api/webUser/webUserCheck'), require('./api/webUser/webUserFindByKey'));
 // /user/api/danmuInsert
 // 添加
 app.post('/user/api/danmuInsert', require('./api/danmu/danmuInsert'));
