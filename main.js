@@ -11,6 +11,10 @@ const ip = require('./tools/ip');
 const routerAdmin = require("./router/routerAdmin");
 const routerWeb = require("./router/routerWeb");
 const routerApp = require("./router/routerApp");
+// websocket
+const websocket = require('./model/websocket/websocket');
+// result
+const result = require('./model/result/result');
 
 const app = express();
 
@@ -41,6 +45,9 @@ app.use(session({
     },
 }));
 
+app.use(websocket);
+app.use(result);
+
 // 静态文件接口
 app.use("/", express.static(path.join(__dirname, 'static')));
 // 网站总接口
@@ -49,6 +56,12 @@ app.use("/", routerApp);
 app.use("/admin", routerAdmin);
 // 博客管理接口
 app.use("/user", routerWeb);
+// 全局错误拦截
+app.use(function (err, req, res, next) {
+    let $result = req.$result(false, "发生意外错误!", err.message);
+    res.json($result);
+    console.log(`[${req.path}] ${err.message}`);
+});
 
 //配置服务端口
 app.listen(config.listening, function () {

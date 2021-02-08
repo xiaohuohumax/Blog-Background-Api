@@ -8,16 +8,11 @@ let copyDirOrFileById = require('./copyDirOrFileById');
 
 module.exports = async (req, res) => {
 
+    let $result = req.$result(false, "未实现!");
+
     let ids = req.body.ids; // 
     let parentId = req.body.parentId; // 目标文件夹 id
 
-    let result = {
-        flag: true,
-        msg: "未实现!",
-        sum: 0,
-        nameNoRepeat: 0,
-        nameRepeat: 0
-    }
     for (let id of ids) {
         await copyDirOrFileById(id);
     }
@@ -37,5 +32,5 @@ module.exports = async (req, res) => {
     //     }
     // }
     // console.log(result)
-    res.json(result);
+    res.json($result);
 }

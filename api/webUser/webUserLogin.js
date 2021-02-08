@@ -8,11 +8,12 @@ module.exports = async (req, res) => {
         pass,
         code
     } = req.body;
-    let key, inf, flag = false;
+    let $result = req.$result(false);
+
 
     for (let x = 0; x < 1; x++) {
         if (code != req.session.captcha) {
-            inf = "验证码错误!";
+            $result.msg = "验证码错误!";
             break;
         }
 
@@ -20,19 +21,20 @@ module.exports = async (req, res) => {
 
 
         if (result.length == 0) { // 此用户存在
-            inf = "登录失败,请检查!";
+            $result.msg = "登录失败,请检查!";
             break;
         }
 
         let user = result[0];
         if (!user.allowLogin) {
-            inf = "你已被限制登录!";
+            $result.msg = "你已被限制登录!";
             break;
         }
 
-        flag = true;
-        key = endecode.encode(`${name}{|}${pass}`);
-        inf = result[0];
+        $result.flag = true;
+        $result.data.key = endecode.encode(`${name}{|}${pass}`);
+        let inf = result[0];
+        $result.data.inf = result[0];
 
         // 设置session
         req.session.userinf = user;
@@ -44,9 +46,5 @@ module.exports = async (req, res) => {
         });
     }
 
-    res.json({
-        flag,
-        key,
-        inf
-    })
+    res.json($result)
 }

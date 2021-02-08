@@ -1,7 +1,7 @@
 let link = require('../../mongoose/link');
 
 module.exports = async (req, res) => {
-
+    let $result = req.$result();
     let {
         parentId,
         page,
@@ -9,6 +9,6 @@ module.exports = async (req, res) => {
         selectWord
     } = req.body;
     parentId = parentId ? parentId : '-1'
-    let result = await link.VirtualFileFindByPage(page, pageSteep, parentId,selectWord);
-    res.json(result)
+    $result.data = await link.VirtualFileFindByPage(page, pageSteep, parentId,selectWord);
+    res.json($result)
 }

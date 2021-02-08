@@ -8,10 +8,7 @@ module.exports = async (req, res) => {
     // 解压缓存路径
     let fileCache = path.resolve('./static/files');
 
-    let result = {
-        flag: true,
-        msg: "上传成功!"
-    };
+    let $result = req.$result(true,"上传成功!");
 
     var file = req.file; // 上传的文件
     let name = file.originalname; // 源文件名字
@@ -27,8 +24,8 @@ module.exports = async (req, res) => {
         fs.renameSync(tempPath, filePath);
     } catch (error) {
         console.log(error)
-        result.lag = false;
-        result.msg = "转移失败!";
+        $result.flag = false;
+        $result.msg = "转移失败!";
     }
 
     try {
@@ -39,7 +36,7 @@ module.exports = async (req, res) => {
         console.log(error)
     }
     name = await getNoRepeatName(name, req.body.parentId);
-    result.flag ? await link.VirtualFileInsert({
+    $result.flag ? await link.VirtualFileInsert({
         adminId: req.body.adminId, // 用户id
         parentId: req.body.parentId, // 父目录
         name, // 文件名
@@ -49,5 +46,5 @@ module.exports = async (req, res) => {
     }) : '';
 
     // 解压
-    res.json(result);
+    res.json($result);
 }

@@ -1,6 +1,8 @@
-module.exports = {
+let errorCatch = require('../model/errorCatch');
+
+let api = {
     // 通过名字获取头像
-    adminByNameFindIcon: require('./adminUser/adminByNameFindIcon'),
+    adminByNameFindIcon: require('./adminUser/adminByNameFindIcon'), //
     // 后台登录
     adminUserLogin: require('./adminUser/adminUserLogin'),
     // 开放检测 未登录则401
@@ -148,3 +150,10 @@ module.exports = {
     // 网站状态查询
     webSetFindOnly: require('./webSet/webSetFindOnly')
 }
+
+// 错误拦截
+for (const key in api) {
+    api[key] = errorCatch(api[key])
+}
+
+module.exports = api;

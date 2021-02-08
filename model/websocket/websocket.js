@@ -1,8 +1,8 @@
 let ws = require("nodejs-websocket");
 
-let ip = require('../tools/ip');
+let ip = require('../../tools/ip');
 
-const config = require('../config.js');
+const config = require('../../config.js');
 
 class WebsocketModel {
     constructor() {
@@ -33,6 +33,9 @@ class WebsocketModel {
         })
     }
 }
+const websocketModel = new WebsocketModel();
 console.log(`websocket listening at http://${ip}:${config.websocketListening}`);
-
-module.exports = new WebsocketModel();
+module.exports = (req, res, next) => {
+    req.$websocketModel = websocketModel;
+    next();
+};

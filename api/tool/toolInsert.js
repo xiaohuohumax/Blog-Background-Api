@@ -9,10 +9,7 @@ module.exports = async (req, res) => {
     // 解压缓存路径
     let gameCache = path.resolve('./static/tools');
 
-    let result = {
-        flag: true,
-        msg: "上传成功!"
-    };
+    let $result = req.$result(true,"上传成功");
 
     var file = req.file; // 上传的文件
     // let path = req.body.path; // 上传路径位置
@@ -30,8 +27,8 @@ module.exports = async (req, res) => {
         } catch (error) {}
     }
     if (!fs.existsSync(path.join(gamePath, "index.html"))) {
-        result.msg = "压缩包中未检测到 index.html !";
-        result.flag = false;
+        $result.msg = "压缩包中未检测到 index.html !";
+        $result.flag = false;
         try {
             if(fs.existsSync(gamePath)) {
                 deleteDir(gamePath);
@@ -48,12 +45,12 @@ module.exports = async (req, res) => {
         console.log(error)
     }
 
-    result.flag ? await link.ToolInsert({
+    $result.flag ? await link.ToolInsert({
         md5,
         ...req.body
     }) : "";
 
     // let fileCacheName = path.basename(tempPath);
     // 解压
-    res.json(result);
+    res.json($result);
 }

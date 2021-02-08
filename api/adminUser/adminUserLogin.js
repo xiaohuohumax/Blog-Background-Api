@@ -8,13 +8,17 @@ module.exports = async (req, res) => {
         pass
     } = req.body;
     let result = await link.AdminUserLogin(name, pass);
-    let key, inf, flag = false;
+
+    let $result = req.$result();
+    $result.flag = false;
+
     if (result.length > 0) { // 此用户存在
         let user = result[0];
         if (user.allowLogin) {
-            flag = true;
-            key = endecode.encode(`${name}{|}${pass}`);
-            inf = result[0];
+            $result.flag = true;
+            $result.data.key = endecode.encode(`${name}{|}${pass}`);
+            let inf = result[0];
+            $result.data.inf = inf;
 
             req.session.admininf = user;
 
@@ -25,15 +29,11 @@ module.exports = async (req, res) => {
             });
 
         } else {
-            inf = "你已被限制登录!";
+            $result.msg = "你已被限制登录!";
         }
-    }else{
-        inf = "登录失败,请检查!";
+    } else {
+        $result.msg = "登录失败,请检查!";
     }
 
-    res.json({
-        flag,
-        key,
-        inf
-    })
+    res.json($result)
 }

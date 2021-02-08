@@ -3,8 +3,6 @@ const api = require("../api/api");
 const express = require('express');
 
 const router = express.Router();
-// websocket
-const websocketModel = require('../websocket/websocket');
 
 //设置跨域访问
 router.all('*', function (req, res, next) {
@@ -15,7 +13,6 @@ router.all('*', function (req, res, next) {
     // console.log(req.session.id);
     // console.log(JSON.stringify(req.cookies) + "|" + req.method + "|" + req.headers.origin + req.path)
     // 注入websocket 实例
-    req.websocketModel = websocketModel;
     next();
 });
 // 动态静态资源

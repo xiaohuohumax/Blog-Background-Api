@@ -13,7 +13,7 @@ module.exports = {
     listening: 8888, // 开启端口
     encodeDecodeKey: '0123456789abcdef', // 加密秘钥
     encodeDecodeiv: '0123456789abcdef', // 加密向量
-    websocketListening: 8889, // websocket 开启端口
+    websocketListening: 8890, // websocket 开启端口
 
     svgCaptcha: { // 验证码 设置
         size: 4, // 6个字符

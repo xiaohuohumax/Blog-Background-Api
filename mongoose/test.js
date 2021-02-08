@@ -9,5 +9,3 @@ let link = require('./link')
 // }).then(res => console.log(res)).catch(err => console.log(err))
 
 link.ArticleFind({}).then(res => console.log(res)).catch(err => console.log(err))
-
-// 博客管理窗口变换 美化

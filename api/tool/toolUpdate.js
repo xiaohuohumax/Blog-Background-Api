@@ -8,10 +8,7 @@ let fs = require('fs');
 module.exports = async (req, res) => {
     let gameCache = path.resolve('./static/tools');
 
-    let result = {
-        flag: true,
-        msg: "修改成功!"
-    };
+    let $result = req.$result(true,"修改成功");
 
     var file = req.file; // 上传的文件
     let newdata = {
@@ -28,8 +25,8 @@ module.exports = async (req, res) => {
             } catch (error) {}
         }
         if (!fs.existsSync(path.join(gamePath, "index.html"))) {
-            result.msg = "压缩包中未检测到 index.html !";
-            result.flag = false;
+            $result.msg = "压缩包中未检测到 index.html !";
+            $result.flag = false;
             try {
                 if (fs.existsSync(gamePath)) {
                     deleteDir(gamePath);
@@ -45,10 +42,10 @@ module.exports = async (req, res) => {
         } catch (error) {
             console.log(error)
         }
-        result.flag ? newdata.md5 = md5 : "";
+        $result.flag ? newdata.md5 = md5 : "";
     }
 
     await link.ToolUpdateById(req.body.id, newdata);
 
-    res.json(result)
+    res.json($result)
 }

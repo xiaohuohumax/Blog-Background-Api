@@ -6,14 +6,16 @@ module.exports = async (req, res) => {
         id,
         kind
     } = req.body;
-    let result;
+    let $result = req.$result();
 
+    let result;
     if (kind == articleEnum.article) {
         result = await link.ArticleFindById(id);
-    }else if (kind == articleEnum.video) {
+    } else if (kind == articleEnum.video) {
         result = await link.VideoMusicFindById(id);
-    }else if (kind == articleEnum.image) {
+    } else if (kind == articleEnum.image) {
         result = await link.ImageFindById(id);
     }
-    res.json(result)
+    $result.data = result;
+    res.json($result)
 }

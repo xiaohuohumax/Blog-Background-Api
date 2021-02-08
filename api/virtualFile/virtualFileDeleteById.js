@@ -18,18 +18,16 @@ async function deleteFile(id, result) {
         }
     }
     await link.VirtualFileDeleteById(file._id); // 删除文件或文件夹
-    result.sum++;
+    result.data.sum++;
 }
 
 module.exports = async (req, res) => {
 
-    let result = {
-        flag: true,
-        msg: "删除成功",
-        sum: 0
-    }
-    await deleteFile(req.body.id, result);
+    let $result = req.$result(true, "删除成功");
+
+    $result.data.sum = 0;
+    await deleteFile(req.body.id, $result);
     // 判断文件类型
 
-    res.json(result)
+    res.json($result)
 }

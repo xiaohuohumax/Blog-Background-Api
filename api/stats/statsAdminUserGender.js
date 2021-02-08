@@ -1,6 +1,7 @@
 let link = require('../../mongoose/link');
 
 module.exports = async (req,res) => {
-    let result = await link.StatsAdminUserGender();
-    res.json(result)
+    let $result = req.$result();
+    $result.data = await link.StatsAdminUserGender();
+    res.json($result)
 }
