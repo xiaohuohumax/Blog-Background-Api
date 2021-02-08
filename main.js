@@ -1,8 +1,6 @@
 const express = require('express');
 const cookice = require('cookie-parser');
 const bodyParser = require('body-parser');
-const session = require("express-session");
-const path = require('path');
 
 const config = require('./config.js');
 const link = require('./mongoose/link');
@@ -15,6 +13,10 @@ const routerApp = require("./router/routerApp");
 const websocket = require('./model/websocket/websocket');
 // result
 const result = require('./model/result/result');
+// session
+const session = require('./model/session');
+const errorCallback = require("./model/errorCallback");
+const staticFileCallback = require("./model/staticFileCallback");
 
 const app = express();
 
@@ -26,30 +28,20 @@ link.webSetFindOnly().then(res => {
     }
 })
 
+// 使用中间件
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-const secret = "sessiontest";
-// 使用中间件
-app.use(cookice(secret));
-
+// cookie
+app.use(cookice());
 // session
-app.use(session({
-    secret,
-    resave: false,
-    name: "seeeionid",
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: false,
-    },
-}));
-
+app.use(session);
 app.use(websocket);
 app.use(result);
 
 // 静态文件接口
-app.use("/", express.static(path.join(__dirname, 'static')));
+app.use("/", staticFileCallback);
 // 网站总接口
 app.use("/", routerApp);
 // 后台管理接口
@@ -57,13 +49,9 @@ app.use("/admin", routerAdmin);
 // 博客管理接口
 app.use("/user", routerWeb);
 // 全局错误拦截
-app.use(function (err, req, res, next) {
-    let $result = req.$result(false, "发生意外错误!", err.message);
-    res.json($result);
-    console.log(`[${req.path}] ${err.message}`);
-});
+app.use(errorCallback);
 
 //配置服务端口
-app.listen(config.listening, function () {
+app.listen(config.listening, () => {
     console.log(`api listening at http://${ip}:${config.listening}`);
 })
