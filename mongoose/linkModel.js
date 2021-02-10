@@ -2,6 +2,9 @@ let schemaModel = require('./schemaModel');
 let mongoose = require('mongoose');
 let toolsUrl = require('../tools/toolsUrl');
 let virtualFileUrl = require('../tools/virtualFileUrl');
+const {
+    ObjectID
+} = require('mongodb');
 module.exports = {
     // 文章添加
     ArticleInsert(params) {
@@ -442,6 +445,28 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    WebUserDeleteById(id) {
+        return new Promise((res, rej) =>
+            schemaModel.WebUserModel.deleteOne({
+                _id: mongoose.Types.ObjectId(id)
+            }, (error) => {
+                error ? rej(error) : res({
+                    flag: true
+                });
+            })
+        )
+    },
+    adminUserDeleteById(id) {
+        return new Promise((res, rej) =>
+            schemaModel.AdminUserModel.deleteOne({
+                _id: mongoose.Types.ObjectId(id)
+            }, (error) => {
+                error ? rej(error) : res({
+                    flag: true
+                });
+            })
+        )
+    },
     // 站内留言 分页查询 number number obj{start,end}
     AdminMessageFindByPage(page, pageSteep, select) {
         let sec = [{
@@ -661,7 +686,6 @@ module.exports = {
                 schemaModel.CommentModel.aggregate(sec).sort({
                     _id: -1
                 }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-
                     error ? rej(error) : res({
                         commentSum: content.length,
                         comments: result.map(value => {
@@ -1072,6 +1096,43 @@ module.exports = {
                 }`) : "";
                 return val;
             }));
+        }))
+    },
+    // 通过角色数组查询对应角色
+    RoleFindByIds(ids) {
+        let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
+
+        return new Promise((res, rej) => schemaModel.RoleModel.find({
+            _id: {
+                $in: ObjectIds
+            }
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    // 添加角色
+    RoleInsert(params) {
+        return new Promise((res, rej) => new schemaModel.RoleModel(params).save((error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+
+    // 通过资源数组查询对应资源
+    ResourceFindByIds(ids) {
+        let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
+
+        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+            _id: {
+                $in: ObjectIds
+            }
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    // 添加资源
+    ResourceInsert(params) {
+        return new Promise((res, rej) => new schemaModel.ResourceModel(params).save((error, result) => {
+            error ? rej(error) : res(result);
         }))
     },
 }

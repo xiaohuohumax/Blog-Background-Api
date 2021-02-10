@@ -2,6 +2,7 @@ const {
     ObjectID
 } = require('mongodb');
 let mogoose = require('mongoose');
+let authorityEnum = require("./authorityEnum");
 
 module.exports = {
     // 文章大纲
@@ -33,6 +34,10 @@ module.exports = {
     AdminUserModel: mogoose.model('adminusers', mogoose.Schema({
         name: String,
         pass: String,
+        roles: { // 拥有角色
+            type: Array,
+            default: []
+        },
         loginIp: {
             type: String,
             default: "00:00:00:00"
@@ -299,5 +304,31 @@ module.exports = {
             type: String,
             default: "dir" // dir 文件夹 file 文件
         }
+    })),
+    // 权限部分
+    // 角色大纲
+    RoleModel: mogoose.model('roles', mogoose.Schema({
+        name: String, // 角色名称
+        code: String, // 唯一标记
+        resources: { // 拥有的资源
+            type: Array,
+            default: []
+        },
+    })),
+    // 资源大纲
+    ResourceModel: mogoose.model('rseources', mogoose.Schema({
+        name: String, // 资源名称
+        index: { // 所排顺序
+            type: Number,
+            default: 0
+        },
+        path: String, // 资源对应路径
+        icon: String, // 菜单时的图标
+        parentId: String, // 父菜单
+        code: String, // 唯一标记
+        kind: { // 类型 菜单 子目录 其他部分
+            type: String,
+            default: authorityEnum.other // 默认非菜单
+        },
     })),
 }

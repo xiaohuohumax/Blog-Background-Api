@@ -2,7 +2,7 @@ let errorCatch = require('../model/errorCatch');
 
 let api = {
     // 通过名字获取头像
-    adminByNameFindIcon: require('./adminUser/adminByNameFindIcon'), //
+    adminByNameFindIcon: require('./adminUser/adminByNameFindIcon'),
     // 后台登录
     adminUserLogin: require('./adminUser/adminUserLogin'),
     // 开放检测 未登录则401
@@ -23,6 +23,8 @@ let api = {
     articleDeleteById: require('./article/articleDeleteById'),
     // 通过 id 查询信息 
     adminUserFindbyid: require('./adminUser/adminUserFindbyid'),
+    // 后台用户删除账号
+    adminUserDeleteById: require('./adminUser/adminUserDeleteById'),
     // 后台注册
     adminUserAdd: require('./adminUser/adminUserAdd'),
     // 视频音乐
@@ -109,6 +111,8 @@ let api = {
     webUserCheck: require('./webUser/webUserCheck'),
     // 用户注册
     webUserAdd: require('./webUser/webUserAdd'),
+    // 删除前端用户
+    webUserDeleteById: require('./webUser/webUserDeleteById'),
     // 验证码生成
     createCheckCode: require('./checkCode/createCheckCode'),
     // 后台用户分页查询
@@ -151,9 +155,14 @@ let api = {
     webSetFindOnly: require('./webSet/webSetFindOnly')
 }
 
-// 错误拦截
-for (const key in api) {
-    api[key] = errorCatch(api[key])
+// 若为单一函数则转为路由数组,若为数组则不管 ()=>{} ==> [()=>{}]
+for (let key in api) {
+    let apiItem = api[key];
+    api[key] = typeof (apiItem) === 'function' ? [apiItem] : apiItem;
+    // 错误拦截
+    for (const item in api[key]) {
+        api[key][item] = errorCatch(api[key][item])
+    }
 }
 
 module.exports = api;

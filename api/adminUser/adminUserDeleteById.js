@@ -2,6 +2,6 @@ let link = require('../../mongoose/link');
 
 module.exports = async (req, res) => {
     let $result = req.$result();
-    $result.data = await link.WebUserUpdateById(req.body.id, req.body.params);
-    res.json($result);
+    $result.data = await link.adminUserDeleteById(req.body.id);
+    res.json($result)
 }
