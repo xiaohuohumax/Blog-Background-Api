@@ -5,7 +5,10 @@ let deleteDir = require('../../tools/deleteDir');
 let path = require('path');
 let fs = require('fs');
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]),async (req, res) => {
     let gameCache = path.resolve('./static/tools');
 
     let $result = req.$result(true,"修改成功");
@@ -48,4 +51,4 @@ module.exports = async (req, res) => {
     await link.ToolUpdateById(req.body.id, newdata);
 
     res.json($result)
-}
+}]

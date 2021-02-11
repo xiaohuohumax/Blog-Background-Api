@@ -3,9 +3,13 @@ let getMD5 = require('../../tools/md5');
 let path = require('path');
 let fs = require('fs');
 
+
 let getNoRepeatName = require('./getNoRepeatName');
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]),async (req, res) => {
 
     let $result = req.$result(true, "移动成功!");
     let ids = req.body.ids; // ["21312123"]
@@ -32,4 +36,4 @@ module.exports = async (req, res) => {
         }
     }
     res.json($result);
-}
+}]

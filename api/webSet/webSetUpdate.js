@@ -2,7 +2,10 @@ let link = require('../../mongoose/link');
 
 let websocketCode = require('../../model/websocket/websocketCode');
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]),async (req, res) => {
 
     let $result = req.$result(true, "移动成功!");
     $result.data = await link.webUpdate(req.body.params);
@@ -11,6 +14,5 @@ module.exports = async (req, res) => {
     req.$websocketModel.sendJsonToAllUser(websocketCode.FLUSH_WEBSET, {
         msg: ""
     })
-
     res.json($result)
-}
+}]

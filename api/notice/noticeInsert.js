@@ -1,9 +1,10 @@
-let link = require('../../mongoose/link');
+const link = require('../../mongoose/link');
 
-let authorizeAdmin = require("../../model/authorizeAdmin");
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
 
-
-module.exports = [authorizeAdmin(["user_cod"],["resource_code"]), async (req, res) => {
+module.exports = [authAdminByResource(["user_cod"]), async (req, res) => {
     let $result = req.$result();
     $result.data = await link.NoticeInsert(req.body);
     res.json($result)

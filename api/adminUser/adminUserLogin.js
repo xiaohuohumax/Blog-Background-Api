@@ -4,6 +4,7 @@ let ip = require('../../tools/ipByReq');
 
 let authorityEnum = require('../../mongoose/authorityEnum');
 
+
 module.exports = async (req, res) => {
     let {
         name,
@@ -59,10 +60,11 @@ module.exports = async (req, res) => {
         $result.data.resources = resources;
 
         // 产生菜单栏
+        const resourceKind = authorityEnum.menu.code;
 
-        const rootMenu = resources.filter(val => val.kind == authorityEnum.menu && val.parentId == "-1");
+        const rootMenu = resources.filter(val => val.kind == resourceKind && val.parentId == "-1");
 
-        const itemMenu = resources.filter(val => val.kind == authorityEnum.menu && val.parentId != "-1");
+        const itemMenu = resources.filter(val => val.kind == resourceKind && val.parentId != "-1");
 
         // 菜单显示
         const menu = [];

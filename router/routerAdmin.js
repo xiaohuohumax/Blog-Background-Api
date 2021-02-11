@@ -20,8 +20,6 @@ router.post('/api/articleinsert', ...api.articleInsert);
 router.post('/api/adminUserUpdate', ...api.adminUserUpdate);
 // 文章修改
 router.post('/api/articleUpdate', ...api.articleUpdate);
-// 文章全部查询
-router.post('/api/articlefind', ...api.articleFind);
 // 文章分页查询
 router.post('/api/articleFindByPage', ...api.articleFindByPage);
 // 文章查找 通过id
@@ -35,7 +33,7 @@ router.post('/api/adminUserFindbyid', ...api.adminUserFindbyid);
 // 删除后台用户
 router.post('/api/adminUserDeleteById', ...api.adminUserDeleteById);
 // 后台注册
-router.post('/api/adminuseradd', ...api.adminUserAdd);
+router.post('/api/adminUserInsert', ...api.adminUserInsert);
 // 视频音乐
 router.post('/api/videomusicinsert', ...api.videoMusicInsert);
 // 音乐视频 查找通过 id
@@ -119,11 +117,35 @@ router.post('/api/virtualFileUpdateName', ...api.virtualFileUpdateName);
 // 通过名字查询 
 // router.post('/api/virtualFileFindByName', ...api.virtualFileFindByName);
 // 文件移动
-router.post('/api/virtualFileRemove', ...api.virtualFileRemove);
+router.post('/api/virtualFileMove', ...api.virtualFileMove);
 // 文件复制
 router.post('/api/virtualFileCopy', ...api.virtualFileCopy);
 // 修改设置
 router.post('/api/webSetUpdate', ...api.webSetUpdate);
-
-
+// 查询全部角色
+router.post('/api/authorityFindAllRole', ...api.authorityFindAllRole);
+// 角色分页
+router.post('/api/authorityFindRoleByPage', ...api.authorityFindRoleByPage);
+// 角色通过id查询详细
+router.post('/api/authorityFindRoleById', ...api.authorityFindRoleById);
+// 通过id数组获取资源列表
+router.post('/api/authorityFindRresourceByIds', ...api.authorityFindRresourceByIds);
+// 资源分页查询
+router.post('/api/authorityFindRresourceByPage', ...api.authorityFindRresourceByPage);
+// 更新角色通过id
+router.post('/api/authorityRoleUpdateById', ...api.authorityRoleUpdateById);
+// 创建角色
+router.post('/api/authorityRoleInsert', ...api.authorityRoleInsert);
+// 删除角色
+router.post('/api/authorityRoleDeleteById', ...api.authorityRoleDeleteById);
+// 获取资源通过id
+router.post('/api/authorityFindRresourceById', ...api.authorityFindRresourceById);
+ // 获取顶级菜单目录包括原来的自己
+router.post('/api/authorityFindRootMenu', ...api.authorityFindRootMenu);
+// 创建资源
+router.post('/api/authorityResourceInsert', ...api.authorityResourceInsert);
+ // 删除资源
+router.post('/api/authorityResourceDeleteById', ...api.authorityResourceDeleteById);
+// 更新资源
+router.post('/api/authorityResourceUpdateById', ...api.authorityResourceUpdateById);
 module.exports = router;

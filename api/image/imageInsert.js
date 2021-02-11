@@ -1,7 +1,10 @@
 let link = require('../../mongoose/link');
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]), async (req, res) => {
     let $result = req.$result();
-    $result.data = await link.ImageInsert(req.body);
+    $result.data = await link.ImageInsert(req.body.params);
     res.json($result)
-} 
+}]

@@ -1,6 +1,9 @@
 let link = require('../../mongoose/link');
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]),async (req, res) => {
     let $result = req.$result();
     let {
         parentId,
@@ -11,4 +14,4 @@ module.exports = async (req, res) => {
     parentId = parentId ? parentId : '-1'
     $result.data = await link.VirtualFileFindByPage(page, pageSteep, parentId,selectWord);
     res.json($result)
-}
+}]

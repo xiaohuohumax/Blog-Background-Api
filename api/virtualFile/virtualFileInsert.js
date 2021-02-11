@@ -4,7 +4,10 @@ let path = require('path');
 let fs = require('fs');
 let getNoRepeatName = require('./getNoRepeatName');
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]),async (req, res) => {
     // 解压缓存路径
     let fileCache = path.resolve('./static/files');
 
@@ -47,4 +50,4 @@ module.exports = async (req, res) => {
 
     // 解压
     res.json($result);
-}
+}]

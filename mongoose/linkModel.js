@@ -2,6 +2,9 @@ let schemaModel = require('./schemaModel');
 let mongoose = require('mongoose');
 let toolsUrl = require('../tools/toolsUrl');
 let virtualFileUrl = require('../tools/virtualFileUrl');
+
+let authorityEnum = require('./authorityEnum');
+
 const {
     ObjectID
 } = require('mongodb');
@@ -16,12 +19,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
-    // 文章查询
-    ArticleFind(params) {
-        return new Promise((res, rej) => schemaModel.ArticleModel.find(params, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
-    },
+    
     // 文章查询通过 id
     ArticleFindById(id) {
         return new Promise((res, rej) => schemaModel.ArticleModel.find({
@@ -188,8 +186,7 @@ module.exports = {
         }, (error, result) => {
             error ? rej(error) : res(result);
         }))
-    },
-    // 后台用户查询通过 name
+    }, // 后台用户查询通过 name
     AdminUserFindByName(name) {
         return new Promise((res, rej) => schemaModel.AdminUserModel.find({
             name: name
@@ -230,12 +227,12 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
-    // 音乐视频查询
-    VideoMusicFind(params) {
-        return new Promise((res, rej) => schemaModel.VideoMusicModel.find(params, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
-    },
+    // // 音乐视频查询
+    // VideoMusicFind(params) {
+    //     return new Promise((res, rej) => schemaModel.VideoMusicModel.find(params, (error, result) => {
+    //         error ? rej(error) : res(result);
+    //     }))
+    // },
     // 文章查询通过 分页
     VideoMusicFindByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
@@ -1117,6 +1114,12 @@ module.exports = {
         }))
     },
 
+    // authorityResourceInsert(params) {
+    //     return new Promise((res, rej) => new schemaModel.ResourceModel(params).save((error, result) => {
+    //         error ? rej(error) : res(result);
+    //     }))
+    // },
+
     // 通过资源数组查询对应资源
     ResourceFindByIds(ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
@@ -1129,10 +1132,176 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    ResourceFindById(id) {
+        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+            _id: mongoose.Types.ObjectId(id)
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
     // 添加资源
     ResourceInsert(params) {
         return new Promise((res, rej) => new schemaModel.ResourceModel(params).save((error, result) => {
             error ? rej(error) : res(result);
+        }))
+    },
+
+    // 查询所有角色
+    AuthorityFindAllRole() {
+        return new Promise((res, rej) => schemaModel.RoleModel.find({}).exec((error, result) => {
+            error ? res({}) : res(result);
+        }))
+    },
+    // 角色分页查询
+    AuthorityFindRoleByPage(page, pageSteep, select) {
+        let regexp = new RegExp(select, 'i');
+        let sec = {
+            $or: [{
+                    name: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    code: {
+                        $regex: regexp
+                    }
+                },
+
+            ],
+        };
+        return new Promise((res, rej) =>
+            schemaModel.RoleModel.find(sec).countDocuments((err, content) => {
+                schemaModel.RoleModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
+                    error ? rej(error) : res({
+                        roleSum: content,
+                        roles: result
+                    });
+                })
+            }))
+    },
+    // 角色通过id查询
+    AuthorityFindRoleById(id) {
+        return new Promise((res, rej) => schemaModel.RoleModel.find({
+            _id: mongoose.Types.ObjectId(id)
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    // 资源分页查询
+    authorityFindRresourceByPage(page, pageSteep, select) {
+        let regexp = new RegExp(select, 'i');
+        let sec = {
+            $or: [{
+                    name: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    code: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    kind: {
+                        $regex: regexp
+                    }
+                },
+            ],
+        };
+        return new Promise((res, rej) =>
+            schemaModel.ResourceModel.find(sec).countDocuments((err, content) => {
+                schemaModel.ResourceModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
+                    error ? rej(error) : res({
+                        resourceSum: content,
+                        resources: result
+                    });
+                })
+            }))
+    },
+    // 角色通过id 更新
+    AuthorityRoleUpdateById(id, params) {
+        return new Promise((res, rej) => schemaModel.RoleModel.updateOne({
+            _id: mongoose.Types.ObjectId(id)
+        }, {
+            $set: params
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    AuthorityResourceUpdateById(id, params) {
+        return new Promise((res, rej) => schemaModel.ResourceModel.updateOne({
+            _id: mongoose.Types.ObjectId(id)
+        }, {
+            $set: params
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    // 角色授权码查重
+    AuthorityRoleFindByCode(code) {
+        return new Promise((res, rej) => schemaModel.RoleModel.find({
+            code
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    AuthorityResourceFindByCode(code) {
+        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+            code
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    // 角色授权码查重不包括自己
+    AuthorityRoleFindByCodeNotYourself(code, id) {
+        return new Promise((res, rej) => schemaModel.RoleModel.find({
+            code,
+            _id: {
+                $ne: mongoose.Types.ObjectId(id)
+            },
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    AuthorityResourceFindByCodeNotYourself(code, id) {
+        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+            code,
+            _id: {
+                $ne: mongoose.Types.ObjectId(id)
+            },
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
+    // 角色删除通过id
+    AuthorityRoleDeleteById(id) {
+        return new Promise((res, rej) =>
+            schemaModel.RoleModel.deleteOne({
+                _id: mongoose.Types.ObjectId(id)
+            }, (error) => {
+                error ? rej(error) : res({
+                    flag: true
+                });
+            })
+        )
+    },
+    AuthorityResourceDeleteById(id) {
+        return new Promise((res, rej) =>
+            schemaModel.ResourceModel.deleteOne({
+                _id: mongoose.Types.ObjectId(id)
+            }, (error) => {
+                error ? rej(error) : res({
+                    flag: true
+                });
+            })
+        )
+    },
+    AuthorityFindRootMenu() {
+        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+            kind: authorityEnum.menu.code,
+            // parentId: "-1",
+        }, (error, result) => {
+            error ? rej(error) : res(result.filter(val=>val.parentId=="-1"));
         }))
     },
 }

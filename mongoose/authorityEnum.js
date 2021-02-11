@@ -1,4 +1,10 @@
 module.exports = {
-    menu: "Menu", // 菜单
-    other: "Other", // 非菜单
+    menu: {
+        code: "Menu",
+        name: "菜单"
+    }, // 菜单
+    other: {
+        code: "Other",
+        name: "接口"
+    }, // 非菜单
 }

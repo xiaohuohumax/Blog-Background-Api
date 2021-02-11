@@ -21,7 +21,10 @@ async function deleteFile(id, result) {
     result.data.sum++;
 }
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]),async (req, res) => {
 
     let $result = req.$result(true, "删除成功");
 
@@ -30,4 +33,4 @@ module.exports = async (req, res) => {
     // 判断文件类型
 
     res.json($result)
-}
+}]

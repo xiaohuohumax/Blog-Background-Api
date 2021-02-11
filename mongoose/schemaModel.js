@@ -328,7 +328,7 @@ module.exports = {
         code: String, // 唯一标记
         kind: { // 类型 菜单 子目录 其他部分
             type: String,
-            default: authorityEnum.other // 默认非菜单
+            default: authorityEnum.other.code // 默认非菜单
         },
     })),
 }

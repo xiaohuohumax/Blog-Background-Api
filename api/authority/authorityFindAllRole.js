@@ -5,6 +5,6 @@ const {
 } = require("../../model/authorizeAdmin");
 module.exports = [authAdminByResource([""]),async (req, res) => {
     let $result = req.$result();
-    $result.data = await link.AdminUserUpdateById(req.body.id, req.body.params);
+    $result.data = await link.AuthorityFindAllRole();
     res.json($result)
 }]

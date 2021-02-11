@@ -6,7 +6,10 @@ let fs = require('fs');
 let getNoRepeatName = require('./getNoRepeatName');
 let copyDirOrFileById = require('./copyDirOrFileById');
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]),async (req, res) => {
 
     let $result = req.$result(false, "未实现!");
 
@@ -33,4 +36,4 @@ module.exports = async (req, res) => {
     // }
     // console.log(result)
     res.json($result);
-}
+}]

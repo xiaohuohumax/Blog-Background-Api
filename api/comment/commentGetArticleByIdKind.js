@@ -1,7 +1,10 @@
 let link = require('../../mongoose/link');
 let articleEnum = require('../../mongoose/articleEnum');
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]),async (req, res) => {
     let {
         id,
         kind
@@ -18,4 +21,4 @@ module.exports = async (req, res) => {
     }
     $result.data = result;
     res.json($result)
-}
+}]

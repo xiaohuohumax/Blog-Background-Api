@@ -14,8 +14,6 @@ router.post('/webUserAdd', ...api.webUserAdd);
 router.get('/checkCode', ...api.createCheckCode);
 // 修改用户设置
 router.post('/api/WebUserUpdateById', ...api.WebUserUpdateById);
-// 文章全部查询
-router.post('/api/articlefind', ...api.articleFind);
 // 后台用户分页查询
 router.post('/api/adminUserFindByPage', ...api.adminUserFindByPage);
 // 文章查找 通过id

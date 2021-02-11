@@ -5,7 +5,10 @@ let deleteDir = require('../../tools/deleteDir');
 let path = require('path');
 let fs = require('fs');
 
-module.exports = async (req, res) => {
+const {
+    authAdminByResource
+} = require("../../model/authorizeAdmin");
+module.exports = [authAdminByResource([""]),async (req, res) => {
     // 解压缓存路径
     let gameCache = path.resolve('./static/tools');
 
@@ -53,4 +56,4 @@ module.exports = async (req, res) => {
     // let fileCacheName = path.basename(tempPath);
     // 解压
     res.json($result);
-}
+}]

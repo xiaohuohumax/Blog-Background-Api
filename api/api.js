@@ -13,8 +13,6 @@ let api = {
     adminUserUpdate: require('./adminUser/adminUserUpdate'),
     // 文章修改
     articleUpdate: require('./article/articleUpdate'),
-    // 文章全部查询
-    articleFind: require('./article/articleFind'),
     // 文章分页查询
     articleFindByPage: require('./article/articleFindByPage'),
     // 文章查找 通过id
@@ -26,7 +24,7 @@ let api = {
     // 后台用户删除账号
     adminUserDeleteById: require('./adminUser/adminUserDeleteById'),
     // 后台注册
-    adminUserAdd: require('./adminUser/adminUserAdd'),
+    adminUserInsert: require('./adminUser/adminUserInsert'),
     // 视频音乐
     videoMusicInsert: require('./videoMusic/videoMusicInsert'),
     // 音乐视频修改
@@ -98,7 +96,7 @@ let api = {
     // 通过名字查询 
     virtualFileFindByName: require('./virtualFile/virtualFileFindByName'),
     // 文件移动
-    virtualFileRemove: require('./virtualFile/virtualFileRemove'),
+    virtualFileMove: require('./virtualFile/virtualFileMove'),
     // 文件复制
     virtualFileCopy: require('./virtualFile/virtualFileCopy'),
     // 修改设置
@@ -152,7 +150,33 @@ let api = {
     // 静态文件解析
     staticFile: require('./virtualFile/staticFile'),
     // 网站状态查询
-    webSetFindOnly: require('./webSet/webSetFindOnly')
+    webSetFindOnly: require('./webSet/webSetFindOnly'),
+    // 查询全部角色
+    authorityFindAllRole: require('./authority/authorityFindAllRole'),
+    // 角色分页
+    authorityFindRoleByPage: require('./authority/authorityFindRoleByPage'),
+    // 角色通过id查询
+    authorityFindRoleById: require('./authority/authorityFindRoleById'),
+    // 通过id数组获取资源列表
+    authorityFindRresourceByIds: require('./authority/authorityFindRresourceByIds'),
+    // 资源分页查询
+    authorityFindRresourceByPage: require('./authority/authorityFindRresourceByPage'),
+    // 更新角色通过id
+    authorityRoleUpdateById: require('./authority/authorityRoleUpdateById'),
+    // 创建角色
+    authorityRoleInsert: require('./authority/authorityRoleInsert'),
+    // 删除角色
+    authorityRoleDeleteById: require('./authority/authorityRoleDeleteById'),
+    // 获取资源通过id
+    authorityFindRresourceById: require('./authority/authorityFindRresourceById'),
+    // 获取顶级菜单目录包括原来的自己
+    authorityFindRootMenu: require('./authority/authorityFindRootMenu'),
+    // 创建资源
+    authorityResourceInsert: require('./authority/authorityResourceInsert'),
+    // 删除资源
+    authorityResourceDeleteById: require('./authority/authorityResourceDeleteById'),
+    // 更新资源
+    authorityResourceUpdateById: require('./authority/authorityResourceUpdateById'),
 }
 
 // 若为单一函数则转为路由数组,若为数组则不管 ()=>{} ==> [()=>{}]
