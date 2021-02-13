@@ -8,7 +8,7 @@
 + [Blog-Background-Api 后台管理API](https://github.com/xiaohuohumax/Blog-Background-Api)
 + [Blog-Admin-App 后台管理APP(PC端)](https://github.com/xiaohuohumax/Blog-Admin-App)
 
-## `大致功能`
+## 大致功能
 
 ### 前端网站:
 
@@ -28,7 +28,6 @@
 
 1. 想到了再做.... (*^▽^*)
 
-
 ## 项目技术说明
 
 1. `Blog-Main-Web 前端界面模块` : nuxt + iview + bootstrap + axios
@@ -40,19 +39,19 @@
 
 1. `下载依赖`
 
-cnpm install
+    cnpm install
 
 2. `初始化mongodb 数据库`
 
-目录 mongosql 下有全部必须的原始数据,请自行拷贝到数据库执行即可.
+    目录 mongosql 下有全部必须的原始数据,请自行拷贝到数据库执行即可.
 
 3. `修改配置文件 数据库连接配置`
 
-在 config.js 中
+    在 config.js 中
 
 3. `执行命令`
 
-npm run serve
+    npm run serve
 
 
 ## 配置
@@ -63,32 +62,31 @@ npm run serve
 
 1. 数据库配置请查看`/config.js` 的 `database` 属性 自行创建数据库
 
-2. `辅助表`则不用创建,项目运行时会自动创建 表参数详见项目下 `mongoose`下`schemaModel.js`
-
+2. `其他表`则不用创建,项目运行时会自动创建 表参数详见项目下 /mongoose/schemaModel.js
 
 ## 配置
 
-
-请自行查看 `config.js` 文件
-
+请自行查看 `/config.js` 文件
 
 ## 路由配置方式
 
 1. `在 /api 文件夹中 创建控制器`
+
     控制器可以对外抛出格式: 任何普通函数都将转换为Promise 函数
+    
         + function
         + async function
         + [ [async] function, ... , async function]
-    若抛出的是数组 则为 express 的链式调用(顺序不变)
-        例如: app.post(...[func, ... , func])
+        
+    若抛出的是数组 则为 express 的链式调用(顺序不变) 例如: app.post(...[func, ... , func])
 
 2. `将控制器注册到 /api/api.js 中`
 
 3. `将 /api/api.js 的控制器绑定到 /routrt 文件中`
+
     + routerAdmin 后台路由
     + routerApp 网站路由
     + raouterWeb 前端路由
-
 
 ## 权限管理
 
@@ -128,6 +126,7 @@ module.exports = [
 ### 程序运行时自动创建 websocket实例,并绑定在 `req.$websocketModel` 中
 
 ### websocket简单使用 ,在控制器中
+
 ```js
 module.exports = Aasync (req, res) => {
     // 向链接者发送消息 参数 (识别码, 内容)
