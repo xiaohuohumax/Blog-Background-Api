@@ -8,7 +8,7 @@ let fs = require('fs');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_toolupdate"]),async (req, res) => {
     let gameCache = path.resolve('./static/tools');
 
     let $result = req.$result(true,"修改成功");

@@ -318,17 +318,14 @@ module.exports = {
     // 资源大纲
     ResourceModel: mogoose.model('rseources', mogoose.Schema({
         name: String, // 资源名称
-        index: { // 所排顺序
-            type: Number,
-            default: 0
-        },
+        index: String, // 菜单顺序
         path: String, // 资源对应路径
         icon: String, // 菜单时的图标
         parentId: String, // 父菜单
         code: String, // 唯一标记
         kind: { // 类型 菜单 子目录 其他部分
             type: String,
-            default: authorityEnum.other.code // 默认非菜单
+            default: authorityEnum.api.code // 默认非菜单
         },
     })),
 }

@@ -129,9 +129,9 @@ router.post('/api/authorityFindRoleByPage', ...api.authorityFindRoleByPage);
 // 角色通过id查询详细
 router.post('/api/authorityFindRoleById', ...api.authorityFindRoleById);
 // 通过id数组获取资源列表
-router.post('/api/authorityFindRresourceByIds', ...api.authorityFindRresourceByIds);
+router.post('/api/authorityFindResourceByIds', ...api.authorityFindResourceByIds);
 // 资源分页查询
-router.post('/api/authorityFindRresourceByPage', ...api.authorityFindRresourceByPage);
+router.post('/api/authorityFindResourceByPage', ...api.authorityFindResourceByPage);
 // 更新角色通过id
 router.post('/api/authorityRoleUpdateById', ...api.authorityRoleUpdateById);
 // 创建角色
@@ -139,13 +139,18 @@ router.post('/api/authorityRoleInsert', ...api.authorityRoleInsert);
 // 删除角色
 router.post('/api/authorityRoleDeleteById', ...api.authorityRoleDeleteById);
 // 获取资源通过id
-router.post('/api/authorityFindRresourceById', ...api.authorityFindRresourceById);
- // 获取顶级菜单目录包括原来的自己
+router.post('/api/authorityFindResourceById', ...api.authorityFindResourceById);
+// 获取顶级菜单目录包括原来的自己
 router.post('/api/authorityFindRootMenu', ...api.authorityFindRootMenu);
 // 创建资源
 router.post('/api/authorityResourceInsert', ...api.authorityResourceInsert);
- // 删除资源
+// 删除资源
 router.post('/api/authorityResourceDeleteById', ...api.authorityResourceDeleteById);
 // 更新资源
 router.post('/api/authorityResourceUpdateById', ...api.authorityResourceUpdateById);
+// 通过ids 获取资源列表
+router.post('/api/authorityFindResourceByPageAndIds', ...api.authorityFindResourceByPageAndIds);
+// 通过ids获取角色信息
+router.post('/api/authorityFindRoleByIds', ...api.authorityFindRoleByIds);
+
 module.exports = router;

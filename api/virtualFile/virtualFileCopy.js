@@ -9,7 +9,7 @@ let copyDirOrFileById = require('./copyDirOrFileById');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_virtualfilecopy"]),async (req, res) => {
 
     let $result = req.$result(false, "未实现!");
 

@@ -9,7 +9,7 @@ let getNoRepeatName = require('./getNoRepeatName');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_virtualfilemove"]),async (req, res) => {
 
     let $result = req.$result(true, "移动成功!");
     let ids = req.body.ids; // ["21312123"]

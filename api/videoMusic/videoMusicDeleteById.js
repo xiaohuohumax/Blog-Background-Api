@@ -5,7 +5,7 @@ let articleEnum = require('../../mongoose/articleEnum');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_videomusicdeletebyid"]),async (req, res) => {
     let $result = req.$result();
 
     $result.data = await link.VideoMusicDeleteById(req.body.id);

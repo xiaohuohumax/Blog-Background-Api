@@ -8,7 +8,7 @@ let fs = require('fs');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_toolinsert"]),async (req, res) => {
     // 解压缓存路径
     let gameCache = path.resolve('./static/tools');
 

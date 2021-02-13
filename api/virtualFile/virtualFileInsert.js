@@ -7,7 +7,7 @@ let getNoRepeatName = require('./getNoRepeatName');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_virtualfileinsert"]),async (req, res) => {
     // 解压缓存路径
     let fileCache = path.resolve('./static/files');
 

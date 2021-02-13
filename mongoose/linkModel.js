@@ -19,7 +19,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
-    
+
     // 文章查询通过 id
     ArticleFindById(id) {
         return new Promise((res, rej) => schemaModel.ArticleModel.find({
@@ -1187,10 +1187,58 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 通过ids获取全部角色信息
+    authorityFindRoleByIds(ids) {
+        let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
+
+        return new Promise((res, rej) => schemaModel.RoleModel.find({
+            _id: {
+                $in: ObjectIds
+            }
+        }, (error, result) => {
+            error ? rej(error) : res(result);
+        }))
+    },
     // 资源分页查询
     authorityFindRresourceByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
+            $or: [{
+                    name: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    code: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    kind: {
+                        $regex: regexp
+                    }
+                },
+            ],
+        };
+        return new Promise((res, rej) =>
+            schemaModel.ResourceModel.find(sec).countDocuments((err, content) => {
+                schemaModel.ResourceModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
+                    error ? rej(error) : res({
+                        resourceSum: content,
+                        resources: result
+                    });
+                })
+            }))
+    },
+    authorityFindResourceByPageAndIds(page, pageSteep, select, ids) {
+        let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
+
+        let regexp = new RegExp(select, 'i');
+
+        let sec = {
+            _id: {
+                $in: ObjectIds
+            },
             $or: [{
                     name: {
                         $regex: regexp
@@ -1301,7 +1349,7 @@ module.exports = {
             kind: authorityEnum.menu.code,
             // parentId: "-1",
         }, (error, result) => {
-            error ? rej(error) : res(result.filter(val=>val.parentId=="-1"));
+            error ? rej(error) : res(result.filter(val => val.parentId == "-1"));
         }))
     },
 }

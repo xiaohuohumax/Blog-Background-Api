@@ -3,7 +3,7 @@ let link = require('../../mongoose/link');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_virtualfilefind"]),async (req, res) => {
 
     let $result = req.$result();
     let {

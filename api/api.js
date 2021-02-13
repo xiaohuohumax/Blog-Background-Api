@@ -158,9 +158,9 @@ let api = {
     // 角色通过id查询
     authorityFindRoleById: require('./authority/authorityFindRoleById'),
     // 通过id数组获取资源列表
-    authorityFindRresourceByIds: require('./authority/authorityFindRresourceByIds'),
+    authorityFindResourceByIds: require('./authority/authorityFindResourceByIds'),
     // 资源分页查询
-    authorityFindRresourceByPage: require('./authority/authorityFindRresourceByPage'),
+    authorityFindResourceByPage: require('./authority/authorityFindResourceByPage'),
     // 更新角色通过id
     authorityRoleUpdateById: require('./authority/authorityRoleUpdateById'),
     // 创建角色
@@ -168,7 +168,7 @@ let api = {
     // 删除角色
     authorityRoleDeleteById: require('./authority/authorityRoleDeleteById'),
     // 获取资源通过id
-    authorityFindRresourceById: require('./authority/authorityFindRresourceById'),
+    authorityFindResourceById: require('./authority/authorityFindResourceById'),
     // 获取顶级菜单目录包括原来的自己
     authorityFindRootMenu: require('./authority/authorityFindRootMenu'),
     // 创建资源
@@ -177,6 +177,10 @@ let api = {
     authorityResourceDeleteById: require('./authority/authorityResourceDeleteById'),
     // 更新资源
     authorityResourceUpdateById: require('./authority/authorityResourceUpdateById'),
+    // 通过ids 获取资源列表
+    authorityFindResourceByPageAndIds: require('./authority/authorityFindResourceByPageAndIds'),
+    // 通过ids获取角色信息
+    authorityFindRoleByIds: require('./authority/authorityFindRoleByIds'),
 }
 
 // 若为单一函数则转为路由数组,若为数组则不管 ()=>{} ==> [()=>{}]

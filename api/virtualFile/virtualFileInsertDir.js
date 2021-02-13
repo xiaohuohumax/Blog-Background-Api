@@ -4,7 +4,7 @@ let getNoRepeatName = require('./getNoRepeatName');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_virtualfileinsertdir"]),async (req, res) => {
     let $result = req.$result();
     let name = await getNoRepeatName(req.body.name,req.body.parentId);
     $result.data = await link.VirtualFileInsert({

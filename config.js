@@ -44,6 +44,5 @@ module.exports = {
         userDefIcon: [],
         bannerIcon: [],
         copyRight: "",
-        // ['light', 'dark', 'color']
     }
 }

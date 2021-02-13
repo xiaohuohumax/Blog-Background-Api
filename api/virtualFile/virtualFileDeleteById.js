@@ -24,7 +24,7 @@ async function deleteFile(id, result) {
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_virtualfiledeletebyid"]),async (req, res) => {
 
     let $result = req.$result(true, "删除成功");
 

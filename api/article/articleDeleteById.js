@@ -5,7 +5,7 @@ let articleEnum = require('../../mongoose/articleEnum');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_articledeletebyid"]),async (req, res) => {
     let $result = req.$result();
     // 删除文章
     $result.data = await link.ArticleDeleteById(req.body.id);

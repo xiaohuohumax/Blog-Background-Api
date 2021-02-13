@@ -4,7 +4,7 @@ let articleEnum = require('../../mongoose/articleEnum');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_commentgetarticlebyidkind"]),async (req, res) => {
     let {
         id,
         kind

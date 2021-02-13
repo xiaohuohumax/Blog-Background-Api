@@ -3,7 +3,7 @@ let link = require('../../mongoose/link');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource([""]),async (req, res) => {
+module.exports = [authAdminByResource(["api_adminuserinsert"]),async (req, res) => {
     let $result = req.$result();
     if (!req.body.params) {
         throw new Error("参数错误!");
