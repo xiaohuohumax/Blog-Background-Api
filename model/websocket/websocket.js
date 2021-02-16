@@ -25,6 +25,10 @@ class WebsocketModel {
             conn.sendText(JSON.stringify(json));
         });
     }
+    // 原生connections
+    connections() {
+        return this.websocketServer.connections;
+    }
     // 发送信息
     sendJsonToAllUser(code, json) {
         this._sendJson({

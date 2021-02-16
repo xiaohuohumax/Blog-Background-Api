@@ -109,6 +109,10 @@ let api = {
     webUserCheck: require('./webUser/webUserCheck'),
     // 用户注册
     webUserAdd: require('./webUser/webUserAdd'),
+    // 用户获取信息
+    webUserFindBySession: require('./webUser/webUserFindBySession'),
+    // 更新用户信息
+    WebUserUpdateBySession: require('./webUser/WebUserUpdateBySession'),
     // 删除前端用户
     webUserDeleteById: require('./webUser/webUserDeleteById'),
     // 验证码生成

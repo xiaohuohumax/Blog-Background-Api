@@ -29,9 +29,13 @@ link.webSetFindOnly().then(res => {
 })
 
 // 使用中间件
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+    limit: '50mb'
+}));
 app.use(bodyParser.urlencoded({
-    extended: true
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000
 }));
 // cookie
 app.use(cookice());

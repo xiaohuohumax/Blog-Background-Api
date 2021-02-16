@@ -12,8 +12,10 @@ router.post('/webUserLogin', ...api.webUserLogin);
 router.post('/webUserAdd', ...api.webUserAdd);
 // 验证码生成
 router.get('/checkCode', ...api.createCheckCode);
+// 用户获取信息
+router.post('/api/webUserFindBySession', ...api.webUserFindBySession);
 // 修改用户设置
-router.post('/api/WebUserUpdateById', ...api.WebUserUpdateById);
+router.post('/api/WebUserUpdateBySession', ...api.WebUserUpdateBySession);
 // 后台用户分页查询
 router.post('/api/adminUserFindByPage', ...api.adminUserFindByPage);
 // 文章查找 通过id

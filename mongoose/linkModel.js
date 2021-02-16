@@ -63,7 +63,7 @@ module.exports = {
         };
         return new Promise((res, rej) =>
             schemaModel.ArticleModel.find(sec).countDocuments((err, content) => {
-                schemaModel.ArticleModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
+                schemaModel.ArticleModel.find(sec).sort({_id: -1}).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
                     error ? rej(error) : res({
                         articleSum: content,
                         articles: result
@@ -421,6 +421,15 @@ module.exports = {
         }, (error, result) => {
             error ? rej(error) : res(result);
         }))
+    },
+    // 前端用户查询 通过 id 全部信息
+    WebUserFindAllById(id) {
+        return new Promise((res, rej) => schemaModel.WebUserModel.find({
+                _id: mongoose.Types.ObjectId(id)
+            },
+            (error, result) => {
+                error ? rej(error) : res(result);
+            }))
     },
     // 前端用户 查询通过 name
     WebUserFindByName(name) {
