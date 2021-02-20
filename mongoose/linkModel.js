@@ -5,9 +5,6 @@ let virtualFileUrl = require('../tools/virtualFileUrl');
 
 let authorityEnum = require('./authorityEnum');
 
-const {
-    ObjectID
-} = require('mongodb');
 module.exports = {
     // 文章添加
     ArticleInsert(params) {
@@ -19,7 +16,6 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
-
     // 文章查询通过 id
     ArticleFindById(id) {
         return new Promise((res, rej) => schemaModel.ArticleModel.find({
@@ -63,7 +59,9 @@ module.exports = {
         };
         return new Promise((res, rej) =>
             schemaModel.ArticleModel.find(sec).countDocuments((err, content) => {
-                schemaModel.ArticleModel.find(sec).sort({_id: -1}).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
+                schemaModel.ArticleModel.find(sec).sort({
+                    _id: -1
+                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
                     error ? rej(error) : res({
                         articleSum: content,
                         articles: result
@@ -216,6 +214,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 音乐视频浏览数增加
     VideoMusicWatchById(id) {
         return new Promise((res, rej) => schemaModel.VideoMusicModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
@@ -227,12 +226,6 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
-    // // 音乐视频查询
-    // VideoMusicFind(params) {
-    //     return new Promise((res, rej) => schemaModel.VideoMusicModel.find(params, (error, result) => {
-    //         error ? rej(error) : res(result);
-    //     }))
-    // },
     // 文章查询通过 分页
     VideoMusicFindByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
@@ -251,7 +244,9 @@ module.exports = {
         };
         return new Promise((res, rej) =>
             schemaModel.VideoMusicModel.find(sec).countDocuments((err, content) => {
-                schemaModel.VideoMusicModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
+                schemaModel.VideoMusicModel.find(sec).sort({
+                    _id: -1
+                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
                     error ? rej(error) : res({
                         videoMusicSum: content,
                         videoMusics: result
@@ -299,6 +294,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 图包浏览数增加
     ImageWatchById(id) {
         return new Promise((res, rej) => schemaModel.ImageModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
@@ -328,7 +324,9 @@ module.exports = {
         };
         return new Promise((res, rej) =>
             schemaModel.ImageModel.find(sec).countDocuments((err, content) => {
-                schemaModel.ImageModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
+                schemaModel.ImageModel.find(sec).sort({
+                    _id: -1
+                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
                     error ? rej(error) : res({
                         imageSum: content,
                         images: result
@@ -451,6 +449,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 通过id删除前端用户
     WebUserDeleteById(id) {
         return new Promise((res, rej) =>
             schemaModel.WebUserModel.deleteOne({
@@ -462,6 +461,7 @@ module.exports = {
             })
         )
     },
+    // 通过id删除管理用户
     adminUserDeleteById(id) {
         return new Promise((res, rej) =>
             schemaModel.AdminUserModel.deleteOne({
@@ -521,6 +521,18 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 根据管理用户删除站内消息
+    AdminMessageDeleteByUserId(id) {
+        return new Promise((res, rej) =>
+            schemaModel.AdminMessageModel.deleteMany({
+                adminId: mongoose.Types.ObjectId(id)
+            }, (error) => {
+                error ? rej(error) : res({
+                    flag: true
+                });
+            })
+        )
+    },
     // 公告添加
     NoticeInsert(params) {
         let pramasChange = {
@@ -577,7 +589,6 @@ module.exports = {
             })
         )
     },
-    // 统计
     // 前台用户等级组成
     StatsWebUserLevel() {
         return new Promise((res, rej) => schemaModel.WebUserModel.aggregate([{
@@ -659,6 +670,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 评论点赞
     CommentNiceById(id, inc) {
         return new Promise((res, rej) => schemaModel.CommentModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
@@ -702,6 +714,7 @@ module.exports = {
                 })
             }))
     },
+    // 通过id查询评论
     CommentFindById(id) {
         return new Promise((res, rej) => schemaModel.CommentModel.find({
             _id: mongoose.Types.ObjectId(id)
@@ -718,7 +731,6 @@ module.exports = {
         select,
         selectTime) {
         let regexp = new RegExp(select, 'i');
-
 
         let sec = [{
             $lookup: {
@@ -791,6 +803,18 @@ module.exports = {
             })
         )
     },
+    // 通过用户id删除评论
+    CommentDeleteByUser(id) {
+        return new Promise((res, rej) =>
+            schemaModel.CommentModel.deleteMany({
+                userId: mongoose.Types.ObjectId(id)
+            }, (error) => {
+                error ? rej(error) : res({
+                    flag: true
+                });
+            })
+        )
+    },
     // 随机 查询 10条 评论
     commentRandom(sum = 10) {
         let sec = [{
@@ -828,6 +852,18 @@ module.exports = {
         return new Promise((res, rej) => new schemaModel.DanMuModel(pramasChange).save((error, result) => {
             error ? rej(error) : res(result);
         }))
+    },
+    // 通过用户id删除弹幕
+    DanMuDeleteByUser(id) {
+        return new Promise((res, rej) =>
+            schemaModel.DanMuModel.deleteMany({
+                userId: mongoose.Types.ObjectId(id)
+            }, (error) => {
+                error ? rej(error) : res({
+                    flag: true
+                });
+            })
+        )
     },
     // 查询弹幕 0-2000
     danmuFindRandomByVideoId(videoId) {
@@ -988,10 +1024,6 @@ module.exports = {
     },
     // 文件添加
     VirtualFileInsert(params) {
-        // let pramasChange = {
-        //     ...params,
-        //     adminId: mongoose.Types.ObjectId(params.adminId)
-        // }
         return new Promise((res, rej) => new schemaModel.VirtualModel(params).save((error, result) => {
             error ? rej(error) : res(result);
         }))
@@ -1078,9 +1110,6 @@ module.exports = {
     },
     // 文件查询通过 name 模糊查询
     VirtualFileFindByName(name) {
-        // return new Promise((res, rej) => schemaModel.VirtualModel.find(params, (error, result) => {
-        //     error ? rej(error) : res(result);
-        // }))
         let regexp = new RegExp(name, 'i');
 
         let sec = {
@@ -1122,13 +1151,6 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
-
-    // authorityResourceInsert(params) {
-    //     return new Promise((res, rej) => new schemaModel.ResourceModel(params).save((error, result) => {
-    //         error ? rej(error) : res(result);
-    //     }))
-    // },
-
     // 通过资源数组查询对应资源
     ResourceFindByIds(ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
@@ -1141,6 +1163,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 通过id查询资源
     ResourceFindById(id) {
         return new Promise((res, rej) => schemaModel.ResourceModel.find({
             _id: mongoose.Types.ObjectId(id)
@@ -1154,7 +1177,6 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
-
     // 查询所有角色
     AuthorityFindAllRole() {
         return new Promise((res, rej) => schemaModel.RoleModel.find({}).exec((error, result) => {
@@ -1239,6 +1261,7 @@ module.exports = {
                 })
             }))
     },
+    // 通过ids 和关键字分页查询资源
     authorityFindResourceByPageAndIds(page, pageSteep, select, ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
 
@@ -1285,6 +1308,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 通过id更新资源
     AuthorityResourceUpdateById(id, params) {
         return new Promise((res, rej) => schemaModel.ResourceModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
@@ -1302,6 +1326,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 通过授权码查询资源
     AuthorityResourceFindByCode(code) {
         return new Promise((res, rej) => schemaModel.ResourceModel.find({
             code
@@ -1320,6 +1345,7 @@ module.exports = {
             error ? rej(error) : res(result);
         }))
     },
+    // 角色授权码查询不包括自己
     AuthorityResourceFindByCodeNotYourself(code, id) {
         return new Promise((res, rej) => schemaModel.ResourceModel.find({
             code,
@@ -1342,6 +1368,7 @@ module.exports = {
             })
         )
     },
+    // 资源删除通过id
     AuthorityResourceDeleteById(id) {
         return new Promise((res, rej) =>
             schemaModel.ResourceModel.deleteOne({
@@ -1353,10 +1380,10 @@ module.exports = {
             })
         )
     },
+    // 查询 管理菜单
     AuthorityFindRootMenu() {
         return new Promise((res, rej) => schemaModel.ResourceModel.find({
             kind: authorityEnum.menu.code,
-            // parentId: "-1",
         }, (error, result) => {
             error ? rej(error) : res(result.filter(val => val.parentId == "-1"));
         }))
