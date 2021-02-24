@@ -1,6 +1,6 @@
 let link = require('../../mongoose/link');
 let endecode = require('../../tools/endecode');
-let ip = require('../../tools/ipByReq');
+let ipFormat = require('../../tools/ipFormat');
 
 module.exports = async (req, res) => {
     let {
@@ -41,7 +41,7 @@ module.exports = async (req, res) => {
 
         // 更新信息
         link.WebUserUpdateById(inf._id, {
-            loginIp: ip(req),
+            loginIp: ipFormat(req.ip),
             loginTime: new Date()
         });
     }

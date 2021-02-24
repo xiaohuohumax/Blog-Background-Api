@@ -1,8 +1,5 @@
 let fs = require('fs');
-
 let crypto = require('crypto');
-
-let url = require('url');
 
 module.exports = function getMD5(path) {
     return new Promise((resolve) => {

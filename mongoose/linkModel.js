@@ -1,43 +1,29 @@
 let schemaModel = require('./schemaModel');
 let mongoose = require('mongoose');
-let toolsUrl = require('../tools/toolsUrl');
-let virtualFileUrl = require('../tools/virtualFileUrl');
-
 let authorityEnum = require('./authorityEnum');
 
 module.exports = {
     // 文章添加
-    ArticleInsert(params) {
-        let pramasChange = {
-            ...params,
-            adminId: mongoose.Types.ObjectId(params.adminId)
-        }
-        return new Promise((res, rej) => new schemaModel.ArticleModel(pramasChange).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async ArticleInsert(params) {
+        return new schemaModel.ArticleModel(params).save()
     },
     // 文章查询通过 id
-    ArticleFindById(id) {
-        return new Promise((res, rej) => schemaModel.ArticleModel.find({
+    async ArticleFindById(id) {
+        return schemaModel.ArticleModel.find({
             _id: mongoose.Types.ObjectId(id)
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
-    // 
-    ArticleWatchById(id) {
-        return new Promise((res, rej) => schemaModel.ArticleModel.updateOne({
+    async ArticleWatchById(id) {
+        return await schemaModel.ArticleModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $inc: {
                 watch: 1
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 文章查询通过 分页
-    ArticleFindByPage(page, pageSteep, select) {
+    async ArticleFindByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
             $or: [{
@@ -57,102 +43,80 @@ module.exports = {
                 }
             ],
         };
-        return new Promise((res, rej) =>
-            schemaModel.ArticleModel.find(sec).countDocuments((err, content) => {
-                schemaModel.ArticleModel.find(sec).sort({
-                    _id: -1
-                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        articleSum: content,
-                        articles: result
-                    });
-                })
-            }))
+        const content = await schemaModel.ArticleModel.find(sec).countDocuments()
+        const result = await schemaModel.ArticleModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec();
+        return {
+            articleSum: content,
+            articles: result
+        }
     },
     // 通过id 修改文章
-    ArticleUpdateById(id, params) {
-        return new Promise((res, rej) => schemaModel.ArticleModel.updateOne({
+    async ArticleUpdateById(id, params) {
+        return await schemaModel.ArticleModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        });
     },
-    ArticleNiceById(id, inc) {
-        return new Promise((res, rej) => schemaModel.ArticleModel.updateOne({
+    async ArticleNiceById(id, inc) {
+        return await schemaModel.ArticleModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $inc: {
                 nice: inc
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
-    ImageNiceById(id, inc) {
-        return new Promise((res, rej) => schemaModel.ImageModel.updateOne({
+    async ImageNiceById(id, inc) {
+        return await schemaModel.ImageModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $inc: {
                 nice: inc
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
-    VideoMusicNiceById(id, inc) {
-        return new Promise((res, rej) => schemaModel.VideoMusicModel.updateOne({
+    async VideoMusicNiceById(id, inc) {
+        return await schemaModel.VideoMusicModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $inc: {
                 nice: inc
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 文章删除 通过 id
-    ArticleDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.ArticleModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async ArticleDeleteById(id) {
+        return await schemaModel.ArticleModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
+
     },
     // 后台用户 登录
-    AdminUserLogin(name, pass) {
-        return new Promise((res, rej) => schemaModel.AdminUserModel.find({
+    async AdminUserLogin(name, pass) {
+        return await schemaModel.AdminUserModel.find({
             name,
             pass,
         }, {
             pass: 0
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 通过名字获取头像
-    AdminUserByNameFindIcon(name) {
-        return new Promise((res, rej) => schemaModel.AdminUserModel.find({
+    async AdminUserByNameFindIcon(name) {
+        return await schemaModel.AdminUserModel.findOne({
             name
         }, {
             icon: 1
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 后台用户 注册
-    AdminUserAdd(params) {
-        return new Promise((res, rej) => new schemaModel.AdminUserModel(params).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async AdminUserAdd(params) {
+        return await new schemaModel.AdminUserModel(params).save()
     },
     // 后台用户查询通过 分页
-    AdminUserFindByPage(page, pageSteep, select) {
+    async AdminUserFindByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
             $or: [{
@@ -167,67 +131,52 @@ module.exports = {
                 },
             ],
         };
-        return new Promise((res, rej) =>
-            schemaModel.AdminUserModel.find(sec).countDocuments((err, content) => {
-                schemaModel.AdminUserModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        adminUserSum: content,
-                        adminUsers: result
-                    });
-                })
-            }))
+        const content = await schemaModel.AdminUserModel.find(sec).countDocuments()
+        const result = await schemaModel.AdminUserModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+
+        return {
+            adminUserSum: content,
+            adminUsers: result
+        }
     },
     // 后台用户查询通过 id
-    AdminUserFindById(id) {
-        return new Promise((res, rej) => schemaModel.AdminUserModel.find({
+    async AdminUserFindById(id) {
+        return await schemaModel.AdminUserModel.find({
             _id: mongoose.Types.ObjectId(id)
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     }, // 后台用户查询通过 name
-    AdminUserFindByName(name) {
-        return new Promise((res, rej) => schemaModel.AdminUserModel.find({
+    async AdminUserFindByName(name) {
+        const content = await schemaModel.AdminUserModel.find({
             name: name
-        }, {
-            name: 1
-        }, (error, result) => {
-            error ? rej(false) : res(result.length > 0);
-        }))
+        }).countDocuments()
+        return content > 0
     },
     // 后台用户更新通过 id
-    AdminUserUpdateById(id, params) {
-        return new Promise((res, rej) => schemaModel.AdminUserModel.updateOne({
+    async AdminUserUpdateById(id, params) {
+        return await schemaModel.AdminUserModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 音乐视频 添加
-    VideoMusicInsert(params) {
-        let pramasChange = {
-            ...params,
-            adminId: mongoose.Types.ObjectId(params.adminId)
-        }
-        return new Promise((res, rej) => new schemaModel.VideoMusicModel(pramasChange).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async VideoMusicInsert(params) {
+        return await new schemaModel.VideoMusicModel(params).save()
     },
     // 音乐视频浏览数增加
-    VideoMusicWatchById(id) {
-        return new Promise((res, rej) => schemaModel.VideoMusicModel.updateOne({
+    async VideoMusicWatchById(id) {
+        return await schemaModel.VideoMusicModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $inc: {
                 watch: 1
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 文章查询通过 分页
-    VideoMusicFindByPage(page, pageSteep, select) {
+    async VideoMusicFindByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
             $or: [{
@@ -242,72 +191,52 @@ module.exports = {
                 }
             ],
         };
-        return new Promise((res, rej) =>
-            schemaModel.VideoMusicModel.find(sec).countDocuments((err, content) => {
-                schemaModel.VideoMusicModel.find(sec).sort({
-                    _id: -1
-                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        videoMusicSum: content,
-                        videoMusics: result
-                    });
-                })
-            }))
+        const content = await schemaModel.VideoMusicModel.find(sec).countDocuments()
+        const result = await schemaModel.VideoMusicModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+
+        return {
+            videoMusicSum: content,
+            videoMusics: result
+        }
     },
     // 音乐视频查询通过 id
-    VideoMusicFindById(id) {
-        return new Promise((res, rej) => schemaModel.VideoMusicModel.find({
+    async VideoMusicFindById(id) {
+        return await schemaModel.VideoMusicModel.find({
             _id: mongoose.Types.ObjectId(id)
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 通过id 修改音乐视频
-    VideoMusicUpdateById(id, params) {
-        return new Promise((res, rej) => schemaModel.VideoMusicModel.updateOne({
+    async VideoMusicUpdateById(id, params) {
+        return await schemaModel.VideoMusicModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 音视频 删除 通过 id
-    VideoMusicDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.VideoMusicModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async VideoMusicDeleteById(id) {
+        return await schemaModel.VideoMusicModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
     },
     // 图包添加
-    ImageInsert(params) {
-        let pramasChange = {
-            ...params,
-            adminId: mongoose.Types.ObjectId(params.adminId)
-        }
-        return new Promise((res, rej) => new schemaModel.ImageModel(pramasChange).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async ImageInsert(params) {
+        return await new schemaModel.ImageModel(params).save()
     },
     // 图包浏览数增加
-    ImageWatchById(id) {
-        return new Promise((res, rej) => schemaModel.ImageModel.updateOne({
+    async ImageWatchById(id) {
+        return await schemaModel.ImageModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $inc: {
                 watch: 1
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 图包查询通过 分页
-    ImageFindByPage(page, pageSteep, select) {
+    async ImageFindByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
             $or: [{
@@ -322,70 +251,54 @@ module.exports = {
                 }
             ],
         };
-        return new Promise((res, rej) =>
-            schemaModel.ImageModel.find(sec).countDocuments((err, content) => {
-                schemaModel.ImageModel.find(sec).sort({
-                    _id: -1
-                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        imageSum: content,
-                        images: result
-                    });
-                })
-            }))
+        const content = await schemaModel.ImageModel.find(sec).countDocuments()
+        const result = await schemaModel.ImageModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+
+        return {
+            imageSum: content,
+            images: result
+        }
     },
     // 图包查询通过 id
-    ImageFindById(id) {
-        return new Promise((res, rej) => schemaModel.ImageModel.find({
+    async ImageFindById(id) {
+        return await schemaModel.ImageModel.find({
             _id: mongoose.Types.ObjectId(id)
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 通过id 修改图包
-    ImageUpdateById(id, params) {
-        return new Promise((res, rej) => schemaModel.ImageModel.updateOne({
+    async ImageUpdateById(id, params) {
+        return await schemaModel.ImageModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 图包 删除 通过 id
-    ImageDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.ImageModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async ImageDeleteById(id) {
+        return await schemaModel.ImageModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
     },
     // 前台用户 登录
-    WebUserLogin(name, pass) {
-        return new Promise((res, rej) => schemaModel.WebUserModel.find({
+    async WebUserLogin(name, pass) {
+        return await schemaModel.WebUserModel.find({
             name,
             pass,
         }, {
             pass: 0
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 后台用户 注册
-    WebUserAdd(name, pass) {
-        return new Promise((res, rej) => new schemaModel.WebUserModel({
+    async WebUserAdd(name, pass) {
+        return await new schemaModel.WebUserModel({
             name,
             pass
-        }).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).save()
     },
     // 后台用户查询通过 分页
-    WebUserFindByPage(page, pageSteep, select) {
+    async WebUserFindByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
             $or: [{
@@ -400,91 +313,69 @@ module.exports = {
                 },
             ],
         };
-        return new Promise((res, rej) =>
-            schemaModel.WebUserModel.find(sec).countDocuments((err, content) => {
-                schemaModel.WebUserModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        webUserSum: content,
-                        webUsers: result
-                    });
-                })
-            }))
+        const content = await schemaModel.WebUserModel.find(sec).countDocuments()
+        const result = await schemaModel.WebUserModel.find(sec).
+        skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+
+        return {
+            webUserSum: content,
+            webUsers: result
+        }
     },
     // 前端用户查询 通过 id
-    WebUserFindById(id) {
-        return new Promise((res, rej) => schemaModel.WebUserModel.find({
+    async WebUserFindById(id) {
+        return await schemaModel.WebUserModel.find({
             _id: mongoose.Types.ObjectId(id)
         }, {
             pass: 0
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 前端用户查询 通过 id 全部信息
-    WebUserFindAllById(id) {
-        return new Promise((res, rej) => schemaModel.WebUserModel.find({
-                _id: mongoose.Types.ObjectId(id)
-            },
-            (error, result) => {
-                error ? rej(error) : res(result);
-            }))
+    async WebUserFindAllById(id) {
+        return await schemaModel.WebUserModel.find({
+            _id: mongoose.Types.ObjectId(id)
+        }).exec()
     },
     // 前端用户 查询通过 name
-    WebUserFindByName(name) {
-        return new Promise((res, rej) => schemaModel.WebUserModel.find({
+    async WebUserFindByName(name) {
+        const content = await schemaModel.WebUserModel.find({
             name: name
         }, {
             name: 1
-        }, (error, result) => {
-            error ? rej(false) : res(result.length > 0);
-        }))
+        }).countDocuments()
+        return content > 0
     },
     // 前端用户 更新 通过 id
-    WebUserUpdateById(id, params) {
-        return new Promise((res, rej) => schemaModel.WebUserModel.updateOne({
+    async WebUserUpdateById(id, params) {
+        return await schemaModel.WebUserModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 通过id删除前端用户
-    WebUserDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.WebUserModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async WebUserDeleteById(id) {
+        return await
+        schemaModel.WebUserModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
     },
     // 通过id删除管理用户
-    adminUserDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.AdminUserModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async adminUserDeleteById(id) {
+        return await
+        schemaModel.AdminUserModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
     },
     // 站内留言 分页查询 number number obj{start,end}
-    AdminMessageFindByPage(page, pageSteep, select) {
+    async AdminMessageFindByPage(page, pageSteep, select) {
         let sec = [{
-                $lookup: {
-                    from: "adminusers", //需要连接的表名
-                    localField: "adminId", //本表需要关联的字段
-                    foreignField: "_id", //被连接表需要关联的字段
-                    as: "admin" //查询出的结果集别名
-                },
-            },
-
-        ];
+            $match: {
+                message: {
+                    $regex: new RegExp("", 'i')
+                }
+            }
+        }];
         if (select.length > 2 && select[0] != "" && select[1] != "") {
             sec.push({
                 $match: {
@@ -493,58 +384,41 @@ module.exports = {
                         "$lte": new Date(select[1])
                     }
                 }
-            });
+            })
         }
-        return new Promise((res, rej) =>
-            schemaModel.AdminMessageModel.aggregate(sec).exec((err, content) => {
-                schemaModel.AdminMessageModel.aggregate(sec).sort({
-                    _id: -1
-                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
+        const content = await schemaModel.AdminMessageModel.aggregate(sec).exec()
+        const result = await schemaModel.AdminMessageModel.aggregate(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
 
-                    error ? rej(error) : res({
-                        webMessageSum: content.length,
-                        webMessages: result.map(value => {
-                            value.admin = value.admin[0];
-                            return value;
-                        })
-                    });
-                })
-            }))
+        for (const item of result) {
+            item.admin = await schemaModel.AdminUserModel.findOne({
+                _id: mongoose.Types.ObjectId(item.adminId)
+            }).exec()
+        }
+
+        return {
+            webMessageSum: content.length,
+            webMessages: result
+        }
     },
     // 站内留言添加
-    AdminMessageInsert(adminId, message) {
-        let pramasChange = {
-            message,
-            adminId: mongoose.Types.ObjectId(adminId)
-        }
-        return new Promise((res, rej) => new schemaModel.AdminMessageModel(pramasChange).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async AdminMessageInsert(params) {
+        return await new schemaModel.AdminMessageModel(params).save()
     },
     // 根据管理用户删除站内消息
-    AdminMessageDeleteByUserId(id) {
-        return new Promise((res, rej) =>
-            schemaModel.AdminMessageModel.deleteMany({
-                adminId: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async AdminMessageDeleteByUserId(id) {
+        return await
+        schemaModel.AdminMessageModel.deleteMany({
+            adminId: mongoose.Types.ObjectId(id)
+        })
     },
     // 公告添加
-    NoticeInsert(params) {
-        let pramasChange = {
-            ...params,
-            adminId: mongoose.Types.ObjectId(params.adminId)
-        }
-        return new Promise((res, rej) => new schemaModel.WebNoticeModel(pramasChange).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async NoticeInsert(params) {
+        return await new schemaModel.WebNoticeModel(params).save()
     },
     // 公共分页查询
-    NoticeFindByPage(page, pageSteep, select) {
+    async NoticeFindByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
             $or: [{
@@ -553,97 +427,74 @@ module.exports = {
                 }
             }],
         };
-        return new Promise((res, rej) =>
-            schemaModel.WebNoticeModel.find(sec).countDocuments((err, content) => {
-                schemaModel.WebNoticeModel.find(sec).sort({
-                    _id: -1
-                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        noticeSum: content,
-                        notices: result
-                    });
-                })
-            }))
+        const content = await schemaModel.WebNoticeModel.find(sec).countDocuments()
+        const result = await schemaModel.WebNoticeModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            noticeSum: content,
+            notices: result
+        }
     },
     // 查询前 记甜品 公告
-    NoticeFindTop() {
-        return new Promise((res, rej) =>
-            schemaModel.WebNoticeModel.find({}).sort({
-                _id: -1
-            }).limit(1).exec((error, result) => {
-                error ? rej(error) : res({
-                    notices: result
-                });
-            })
-        )
+    async NoticeFindTop() {
+        return await schemaModel.WebNoticeModel.findOne({}).sort({
+            _id: -1
+        }).exec()
     },
     // 公告删除 通过id
-    NoticeDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.WebNoticeModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async NoticeDeleteById(id) {
+        return await schemaModel.WebNoticeModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
     },
     // 前台用户等级组成
-    StatsWebUserLevel() {
-        return new Promise((res, rej) => schemaModel.WebUserModel.aggregate([{
+    async StatsWebUserLevel() {
+        return await schemaModel.WebUserModel.aggregate([{
             $group: {
                 _id: "$level",
                 count: {
                     $sum: 1
                 }
             },
-        }, ]).exec((error, result) => {
-            error ? rej(error) : res(result);
-        }));
+        }]).exec();
     },
     // 统计 后台用户 等级信息
-    StatsAdminUserLevel() {
-        return new Promise((res, rej) => schemaModel.AdminUserModel.aggregate([{
+    async StatsAdminUserLevel() {
+        return await schemaModel.AdminUserModel.aggregate([{
             $group: {
                 _id: "$level",
                 count: {
                     $sum: 1
                 }
             },
-        }, ]).exec((error, result) => {
-            error ? rej(error) : res(result);
-        }));
+        }]).exec();
     },
     // 统计用户性别组成
-    StatsWebUserGender() {
-        return new Promise((res, rej) => schemaModel.WebUserModel.aggregate([{
+    async StatsWebUserGender() {
+        return await schemaModel.WebUserModel.aggregate([{
             $group: {
                 _id: "$genger",
                 count: {
                     $sum: 1
                 }
             },
-        }, ]).exec((error, result) => {
-            error ? rej(error) : res(result);
-        }));
+        }]).exec();
     },
     // 统计用户性别组成
-    StatsAdminUserGender() {
-        return new Promise((res, rej) => schemaModel.AdminUserModel.aggregate([{
+    async StatsAdminUserGender() {
+        return await schemaModel.AdminUserModel.aggregate([{
             $group: {
                 _id: "$genger",
                 count: {
                     $sum: 1
                 }
             },
-        }, ]).exec((error, result) => {
-            error ? rej(error) : res(result);
-        }));
+        }]).exec()
     },
     // 统计 前端 用户 注册信息
-    StatsWebUserLogon() {
-        return new Promise((res, rej) => schemaModel.WebUserModel.aggregate([{
+    async StatsWebUserLogon() {
+        return await schemaModel.WebUserModel.aggregate([{
             $group: {
                 _id: {
                     "$dateToString": {
@@ -655,77 +506,55 @@ module.exports = {
                     $sum: 1
                 }
             },
-        }, ]).exec((error, result) => {
-            error ? rej(error) : res(result);
-        }));
+        }]).exec();
     },
     // 添加评论
-    CommentInsert(params) {
-        let pramasChange = {
-            ...params,
-            userId: mongoose.Types.ObjectId(params.userId),
-            articleId: mongoose.Types.ObjectId(params.articleId),
-        }
-        return new Promise((res, rej) => new schemaModel.CommentModel(pramasChange).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async CommentInsert(params) {
+        return await new schemaModel.CommentModel(params).save()
     },
     // 评论点赞
-    CommentNiceById(id, inc) {
-        return new Promise((res, rej) => schemaModel.CommentModel.updateOne({
+    async CommentNiceById(id, inc) {
+        return await schemaModel.CommentModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $inc: {
                 nice: inc
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 评论查询
-    CommentFindByPage(page, pageSteep, articleId, kind) {
+    async CommentFindByPage(page, pageSteep, articleId, kind) {
         let sec = [{
-                $lookup: {
-                    from: "webusers", //需要连接的表名
-                    localField: "userId", //本表需要关联的字段
-                    foreignField: "_id", //被连接表需要关联的字段
-                    as: "user" //查询出的结果集别名
-                },
-            },
-            {
-                $match: {
-                    articleId: mongoose.Types.ObjectId(articleId),
-                    kind
-                }
+            $match: {
+                articleId: mongoose.Types.ObjectId(articleId),
+                kind
             }
-        ];
-        return new Promise((res, rej) =>
-            schemaModel.CommentModel.aggregate(sec).exec((err, content) => {
-                schemaModel.CommentModel.aggregate(sec).sort({
-                    _id: -1
-                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        commentSum: content.length,
-                        comments: result.map(value => {
-                            value.user = value.user[0];
-                            return value;
-                        })
-                    });
-                })
-            }))
+        }];
+        const content = await schemaModel.CommentModel.aggregate(sec).exec()
+        const result = await schemaModel.CommentModel.aggregate(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+
+        for (const item of result) {
+            item.user = await schemaModel.CommentModel.findOne({
+                _id: mongoose.Types.ObjectId(item.userId)
+            }).exec()
+        }
+        return {
+            commentSum: content.length,
+            comments: result
+        }
     },
     // 通过id查询评论
-    CommentFindById(id) {
-        return new Promise((res, rej) => schemaModel.CommentModel.find({
+    async CommentFindById(id) {
+        return await schemaModel.CommentModel.find({
             _id: mongoose.Types.ObjectId(id)
         }, {
             pass: 0
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 评论详细查询
-    CommentFindByPageMore(page,
+    async CommentFindByPageMore(page,
         pageSteep,
         kind,
         select,
@@ -733,15 +562,6 @@ module.exports = {
         let regexp = new RegExp(select, 'i');
 
         let sec = [{
-            $lookup: {
-                from: "webusers", //需要连接的表名
-                localField: "userId", //本表需要关联的字段
-                foreignField: "_id", //被连接表需要关联的字段
-                as: "user" //查询出的结果集别名
-            },
-        }, {
-            $unwind: "$user"
-        }, {
             $match: {
                 message: {
                     $regex: regexp
@@ -766,108 +586,71 @@ module.exports = {
                 }
             });
         }
-        return new Promise((res, rej) =>
-            schemaModel.CommentModel.aggregate(sec).exec((err, content) => {
-                schemaModel.CommentModel.aggregate(sec).sort({
-                    _id: -1
-                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        commentSum: content.length,
-                        comments: result
-                    });
-                })
-            }))
+        let content = await schemaModel.CommentModel.aggregate(sec).exec()
+        let result = await schemaModel.CommentModel.aggregate(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+
+        for (const item of result) {
+            item.user = await schemaModel.WebUserModel.findOne({
+                _id: mongoose.Types.ObjectId(item.userId)
+            }).sort()
+        }
+
+        return {
+            commentSum: content.length,
+            comments: result
+        }
     },
     // 删除评论
-    commentDeleteByIdKind(kind, articleId) {
-        return new Promise((res, rej) =>
-            schemaModel.CommentModel.deleteOne({
-                kind,
-                articleId
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async commentDeleteByIdKind(kind, articleId) {
+        return await schemaModel.CommentModel.deleteOne({
+            kind,
+            articleId
+        })
     },
     // 删除评论通过id
-    commentDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.CommentModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async commentDeleteById(id) {
+        return await schemaModel.CommentModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
     },
     // 通过用户id删除评论
-    CommentDeleteByUser(id) {
-        return new Promise((res, rej) =>
-            schemaModel.CommentModel.deleteMany({
-                userId: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async CommentDeleteByUser(id) {
+        return await schemaModel.CommentModel.deleteMany({
+            userId: mongoose.Types.ObjectId(id)
+        })
     },
     // 随机 查询 10条 评论
-    commentRandom(sum = 10) {
-        let sec = [{
-            $lookup: {
-                from: "webusers", //需要连接的表名
-                localField: "userId", //本表需要关联的字段
-                foreignField: "_id", //被连接表需要关联的字段
-                as: "user" //查询出的结果集别名
-            },
-        }, {
-            $unwind: "$user"
-        }, {
+    async commentRandom(sum = 10) {
+        let result = await schemaModel.CommentModel.aggregate([{
             $sample: {
                 size: sum
             }
-        }];
-
-        return new Promise((res, rej) =>
-            schemaModel.CommentModel.aggregate(sec).sort({
-                _id: -1
-            }).exec((error, result) => {
-
-                error ? rej(error) : res({
-                    comments: result
-                });
+        }]).sort({
+            _id: -1
+        })
+        for (let item of result) {
+            item.user = await schemaModel.WebUserModel.findOne({
+                _id: mongoose.Types.ObjectId(item.userId)
             })
-        )
+        }
+        return result;
     },
     // 添加弹幕
-    DanMuInsert(params) {
-        let pramasChange = {
-            ...params,
-            userId: mongoose.Types.ObjectId(params.userId)
-        }
-        return new Promise((res, rej) => new schemaModel.DanMuModel(pramasChange).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async DanMuInsert(params) {
+        return await new schemaModel.DanMuModel(params).save()
     },
     // 通过用户id删除弹幕
-    DanMuDeleteByUser(id) {
-        return new Promise((res, rej) =>
-            schemaModel.DanMuModel.deleteMany({
-                userId: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async DanMuDeleteByUser(id) {
+        return await
+        schemaModel.DanMuModel.deleteMany({
+            userId: mongoose.Types.ObjectId(id)
+        })
     },
     // 查询弹幕 0-2000
-    danmuFindRandomByVideoId(videoId) {
-        return new Promise((res, rej) => schemaModel.DanMuModel.find({
+    async danmuFindRandomByVideoId(videoId) {
+        return await schemaModel.DanMuModel.find({
             videoId: mongoose.Types.ObjectId(videoId)
         }, {
             content: 1,
@@ -877,59 +660,42 @@ module.exports = {
             uploadTime: 1,
         }, ).sort({
             uploadTime: -1
-        }).limit(2000).exec((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).limit(2000).exec()
     },
     // 设置网站设置
-    webSetInsert(params) {
+    async webSetInsert(params) {
         // 删除网站设置 并添加新的 设置
-        return new Promise((res, rej) => schemaModel.WebSetsModel.deleteMany({}, () => {
-            new schemaModel.WebSetsModel(params).save((error, result) => {
-                error ? rej(error) : res(result);
-            })
-        }))
+        await schemaModel.WebSetsModel.deleteMany({})
+        return await new schemaModel.WebSetsModel(params).save()
     },
     // 获取网站设置
-    webSetFindOnly() {
-        return new Promise((res, rej) => schemaModel.WebSetsModel.findOne({}).limit(1).exec((error, result) => {
-            error ? res({}) : res(result);
-        }))
+    async webSetFindOnly() {
+        return await schemaModel.WebSetsModel.findOne({}).limit(1).exec()
     },
     // 修改网站设置
-    webUpdate(params) {
-        return new Promise((res, rej) => schemaModel.WebSetsModel.updateOne({
+    async webUpdate(params) {
+        return await schemaModel.WebSetsModel.updateOne({
             _id: mongoose.Types.ObjectId(params._id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 添加工具
-    ToolInsert(params) {
-        let pramasChange = {
-            ...params,
-            adminId: mongoose.Types.ObjectId(params.adminId)
-        }
+    async ToolInsert(params) {
         // 删除网站设置 并添加新的 设置
-        return new Promise((res, rej) => new schemaModel.ToolModel(pramasChange).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        return await new schemaModel.ToolModel(params).save()
     },
-    TooleWatchById(id) {
-        return new Promise((res, rej) => schemaModel.ToolModel.updateOne({
+    async TooleWatchById(id) {
+        return await schemaModel.ToolModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $inc: {
                 watch: 1
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 分页查询工具
-    ToolFindByPage(page, pageSteep, select) {
+    async ToolFindByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
             $or: [{
@@ -949,58 +715,40 @@ module.exports = {
                 }
             ],
         };
-        return new Promise((res, rej) =>
-            schemaModel.ToolModel.find(sec).countDocuments((err, content) => {
-                schemaModel.ToolModel.find(sec).sort({
-                    _id: -1
-                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        toolSum: content,
-                        tools: result.map(val => {
-                            val._doc.toolUrl = toolsUrl(`/tools/${val.md5}`)
-                            return val;
-                        })
-                    });
-                })
-            }))
+        const content = await schemaModel.ToolModel.find(sec).countDocuments()
+        const result = await schemaModel.ToolModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec();
+        return {
+            tools: result,
+            toolSum: content
+        }
     },
     // 工具详细查询
-    ToolFindById(id) {
-        return new Promise((res, rej) => schemaModel.ToolModel.find({
+    async ToolFindById(id) {
+        return await schemaModel.ToolModel.find({
             _id: mongoose.Types.ObjectId(id)
         }, {
             pass: 0
-        }, (error, result) => {
-            error ? rej(error) : res(result.map(val => {
-                val._doc.toolUrl = toolsUrl(`/tools/${val.md5}`)
-                return val;
-            }));
-        }))
+        }).exec()
     },
     // 删除工具
-    ToolDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.ToolModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async ToolDeleteById(id) {
+        return await
+        schemaModel.ToolModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
     },
     // 工具更新通过id
-    ToolUpdateById(id, params) {
-        return new Promise((res, rej) => schemaModel.ToolModel.updateOne({
+    async ToolUpdateById(id, params) {
+        return await schemaModel.ToolModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 工具查看全部类型
-    ToolFindKind(select) {
+    async ToolFindKind(select) {
         let regexp = new RegExp(select, 'i');
 
         let sec = [{
@@ -1014,102 +762,73 @@ module.exports = {
                 "_id": "$kind",
             }
         }, ];
-        return new Promise((res, rej) =>
-            schemaModel.ToolModel.aggregate(sec).sort({
-                _id: -1
-            }).limit(20).exec((error, result) => {
-                error ? rej(error) : res(result.map(val => val._id));
-            })
-        )
+        const result = await schemaModel.ToolModel.aggregate(sec).sort({
+            _id: -1
+        }).limit(20).exec()
+        return result.map(val => val._id)
     },
     // 文件添加
-    VirtualFileInsert(params) {
-        return new Promise((res, rej) => new schemaModel.VirtualModel(params).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async VirtualFileInsert(params) {
+        return await new schemaModel.VirtualModel(params).save()
     },
     // 文件列表查询
-    VirtualFileFind(params) {
-        return new Promise((res, rej) => schemaModel.VirtualModel.find(params, (error, result) => {
-            error ? rej(error) : res(result.map(val => {
-                val.kind == "file" ? val._doc.virtualUrl = virtualFileUrl(`/${val._id}`) : "";
-                return val;
-            }));
-        }))
+    async VirtualFileFind(params) {
+        return await schemaModel.VirtualModel.find(params).exec()
     },
     // 文件列表分页
-    VirtualFileFindByPage(page, pageSteep, parentId, selectWord) {
+    async VirtualFileFindByPage(page, pageSteep, parentId, selectWord) {
         let sec = {
             parentId,
             name: {
                 $regex: new RegExp(selectWord, 'i')
             }
         };
-        return new Promise((res, rej) =>
-            schemaModel.VirtualModel.find(sec).countDocuments((err, content) => {
-                schemaModel.VirtualModel.find(sec).sort({
-                    uploadTime: -1,
-                    kind: 1
-                }).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        fileSum: content,
-                        files: result.map(val => {
-                            val._doc.virtualUrl = virtualFileUrl(`/${val.md5}`)
-                            return val;
-                        })
-                    });
-                })
-            }))
+        const content = await schemaModel.VirtualModel.find(sec).countDocuments()
+        const result = await schemaModel.VirtualModel.find(sec).sort({
+            uploadTime: -1,
+            kind: 1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            fileSum: content,
+            files: result
+        }
     },
     // 文件查询 通过id
-    VirtualFileFindById(id) {
-        return new Promise((res, rej) => schemaModel.VirtualModel.findOne({
+    async VirtualFileFindById(id) {
+        return await schemaModel.VirtualModel.findOne({
             _id: mongoose.Types.ObjectId(id)
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 文件查询 通过id 但结果不包含 id
-    VirtualFileFindByIdNotId(id) {
-        return new Promise((res, rej) => schemaModel.VirtualModel.findOne({
+    async VirtualFileFindByIdNotId(id) {
+        return await schemaModel.VirtualModel.findOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             _id: 0
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 文件夹下的文件查询
-    VirtualFileFindItemById(id) {
-        return new Promise((res, rej) => schemaModel.VirtualModel.find({
+    async VirtualFileFindItemById(id) {
+        return await schemaModel.VirtualModel.find({
             parentId: mongoose.Types.ObjectId(id)
-        }, (error, result) => {
-            error ? rej(error) : res(result.map(val => {
-                val.kind == "file" ? val._doc.virtualUrl = virtualFileUrl(`/${val._id}`) : "";
-                return val;
-            }));
-        }))
+        }).exec()
     },
     // 文件删除 通过 id
-    VirtualFileDeleteById(id) {
-        return new Promise((res, rej) => schemaModel.VirtualModel.deleteOne({
+    async VirtualFileDeleteById(id) {
+        return await schemaModel.VirtualModel.deleteOne({
             _id: mongoose.Types.ObjectId(id)
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 文件更新 通过id
-    VirtualFileUpdateById(id, params) {
-        return new Promise((res, rej) => schemaModel.VirtualModel.updateOne({
+    async VirtualFileUpdateById(id, params) {
+        return await schemaModel.VirtualModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 文件查询通过 name 模糊查询
-    VirtualFileFindByName(name) {
+    async VirtualFileFindByName(name) {
         let regexp = new RegExp(name, 'i');
 
         let sec = {
@@ -1123,68 +842,50 @@ module.exports = {
                 }
             }]
         };
-        return new Promise((res, rej) => schemaModel.VirtualModel.find(sec).sort({
+        return await schemaModel.VirtualModel.find(sec).sort({
             _id: -1
-        }).limit(40).exec((error, result) => {
-            error ? rej(error) : res(result.map(val => {
-                val.kind == "file" ? val._doc.virtualUrl = virtualFileUrl(`/${val._id
-                }`) : "";
-                return val;
-            }));
-        }))
+        }).limit(40).exec()
     },
     // 通过角色数组查询对应角色
-    RoleFindByIds(ids) {
+    async RoleFindByIds(ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
 
-        return new Promise((res, rej) => schemaModel.RoleModel.find({
+        return await schemaModel.RoleModel.find({
             _id: {
                 $in: ObjectIds
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 添加角色
-    RoleInsert(params) {
-        return new Promise((res, rej) => new schemaModel.RoleModel(params).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async RoleInsert(params) {
+        return await new schemaModel.RoleModel(params).save()
     },
     // 通过资源数组查询对应资源
-    ResourceFindByIds(ids) {
+    async ResourceFindByIds(ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
 
-        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+        return await schemaModel.ResourceModel.find({
             _id: {
                 $in: ObjectIds
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 通过id查询资源
-    ResourceFindById(id) {
-        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+    async ResourceFindById(id) {
+        return await schemaModel.ResourceModel.find({
             _id: mongoose.Types.ObjectId(id)
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 添加资源
-    ResourceInsert(params) {
-        return new Promise((res, rej) => new schemaModel.ResourceModel(params).save((error, result) => {
-            error ? rej(error) : res(result);
-        }))
+    async ResourceInsert(params) {
+        return await new schemaModel.ResourceModel(params).save()
     },
     // 查询所有角色
-    AuthorityFindAllRole() {
-        return new Promise((res, rej) => schemaModel.RoleModel.find({}).exec((error, result) => {
-            error ? res({}) : res(result);
-        }))
+    async AuthorityFindAllRole() {
+        return await schemaModel.RoleModel.find({}).exec()
     },
     // 角色分页查询
-    AuthorityFindRoleByPage(page, pageSteep, select) {
+    async AuthorityFindRoleByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
             $or: [{
@@ -1200,38 +901,33 @@ module.exports = {
 
             ],
         };
-        return new Promise((res, rej) =>
-            schemaModel.RoleModel.find(sec).countDocuments((err, content) => {
-                schemaModel.RoleModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        roleSum: content,
-                        roles: result
-                    });
-                })
-            }))
+        const content = await schemaModel.RoleModel.find(sec).countDocuments()
+        const result = await schemaModel.RoleModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            roleSum: content,
+            roles: result
+        }
     },
     // 角色通过id查询
-    AuthorityFindRoleById(id) {
-        return new Promise((res, rej) => schemaModel.RoleModel.find({
+    async AuthorityFindRoleById(id) {
+        return await schemaModel.RoleModel.find({
             _id: mongoose.Types.ObjectId(id)
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 通过ids获取全部角色信息
-    authorityFindRoleByIds(ids) {
+    async authorityFindRoleByIds(ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
 
-        return new Promise((res, rej) => schemaModel.RoleModel.find({
+        return await schemaModel.RoleModel.find({
             _id: {
                 $in: ObjectIds
             }
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 资源分页查询
-    authorityFindRresourceByPage(page, pageSteep, select) {
+    async authorityFindRresourceByPage(page, pageSteep, select) {
         let regexp = new RegExp(select, 'i');
         let sec = {
             $or: [{
@@ -1251,18 +947,17 @@ module.exports = {
                 },
             ],
         };
-        return new Promise((res, rej) =>
-            schemaModel.ResourceModel.find(sec).countDocuments((err, content) => {
-                schemaModel.ResourceModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        resourceSum: content,
-                        resources: result
-                    });
-                })
-            }))
+        const content = await schemaModel.ResourceModel.find(sec).countDocuments()
+        const result = await schemaModel.ResourceModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            resourceSum: content,
+            resources: result
+        }
     },
     // 通过ids 和关键字分页查询资源
-    authorityFindResourceByPageAndIds(page, pageSteep, select, ids) {
+    async authorityFindResourceByPageAndIds(page, pageSteep, select, ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
 
         let regexp = new RegExp(select, 'i');
@@ -1288,104 +983,206 @@ module.exports = {
                 },
             ],
         };
-        return new Promise((res, rej) =>
-            schemaModel.ResourceModel.find(sec).countDocuments((err, content) => {
-                schemaModel.ResourceModel.find(sec).skip((page - 1) * pageSteep).limit(+pageSteep).exec((error, result) => {
-                    error ? rej(error) : res({
-                        resourceSum: content,
-                        resources: result
-                    });
-                })
-            }))
+        const content = await schemaModel.ResourceModel.find(sec).countDocuments()
+        const result = await schemaModel.ResourceModel.find(sec)
+            .skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            resourceSum: content,
+            resources: result
+        }
     },
     // 角色通过id 更新
-    AuthorityRoleUpdateById(id, params) {
-        return new Promise((res, rej) => schemaModel.RoleModel.updateOne({
+    async AuthorityRoleUpdateById(id, params) {
+        return await schemaModel.RoleModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 通过id更新资源
-    AuthorityResourceUpdateById(id, params) {
-        return new Promise((res, rej) => schemaModel.ResourceModel.updateOne({
+    async AuthorityResourceUpdateById(id, params) {
+        return await schemaModel.ResourceModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        })
     },
     // 角色授权码查重
-    AuthorityRoleFindByCode(code) {
-        return new Promise((res, rej) => schemaModel.RoleModel.find({
+    async AuthorityRoleFindByCode(code) {
+        return await schemaModel.RoleModel.find({
             code
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 通过授权码查询资源
-    AuthorityResourceFindByCode(code) {
-        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+    async AuthorityResourceFindByCode(code) {
+        return await schemaModel.ResourceModel.find({
             code
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 角色授权码查重不包括自己
-    AuthorityRoleFindByCodeNotYourself(code, id) {
-        return new Promise((res, rej) => schemaModel.RoleModel.find({
+    async AuthorityRoleFindByCodeNotYourself(code, id) {
+        return await schemaModel.RoleModel.find({
             code,
             _id: {
                 $ne: mongoose.Types.ObjectId(id)
             },
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 角色授权码查询不包括自己
-    AuthorityResourceFindByCodeNotYourself(code, id) {
-        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+    async AuthorityResourceFindByCodeNotYourself(code, id) {
+        return await schemaModel.ResourceModel.find({
             code,
             _id: {
                 $ne: mongoose.Types.ObjectId(id)
             },
-        }, (error, result) => {
-            error ? rej(error) : res(result);
-        }))
+        }).exec()
     },
     // 角色删除通过id
-    AuthorityRoleDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.RoleModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async AuthorityRoleDeleteById(id) {
+        return await schemaModel.RoleModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
     },
     // 资源删除通过id
-    AuthorityResourceDeleteById(id) {
-        return new Promise((res, rej) =>
-            schemaModel.ResourceModel.deleteOne({
-                _id: mongoose.Types.ObjectId(id)
-            }, (error) => {
-                error ? rej(error) : res({
-                    flag: true
-                });
-            })
-        )
+    async AuthorityResourceDeleteById(id) {
+        return await schemaModel.ResourceModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
     },
     // 查询 管理菜单
-    AuthorityFindRootMenu() {
-        return new Promise((res, rej) => schemaModel.ResourceModel.find({
+    async AuthorityFindRootMenu() {
+        const result = await schemaModel.ResourceModel.find({
             kind: authorityEnum.menu.code,
-        }, (error, result) => {
-            error ? rej(error) : res(result.filter(val => val.parentId == "-1"));
-        }))
+        }).exec()
+        return result.filter(val => val.parentId == "-1")
+    },
+    // 歌曲添加
+    async SongInsert(params) {
+        return await new schemaModel.SongModel(params).save()
+    },
+    async SongFindByPage(page, pageSteep, select) {
+        let regexp = new RegExp(select, 'i');
+        let sec = {
+            $or: [{
+                name: {
+                    $regex: regexp
+                }
+            }, ],
+        };
+        const content = await schemaModel.SongModel.find(sec).countDocuments()
+        const result = await schemaModel.SongModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            songSum: content,
+            songs: result
+        }
+    },
+
+    async SongFindById(id) {
+        return await schemaModel.SongModel.find({
+            _id: mongoose.Types.ObjectId(id)
+        }).exec()
+    },
+    async SongFindByIds(ids) {
+        let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
+
+        return await schemaModel.SongModel.find({
+            _id: {
+                $in: ObjectIds
+            }
+        }).exec()
+    },
+    async SongUpdateById(id, params) {
+        return await schemaModel.SongModel.updateOne({
+            _id: mongoose.Types.ObjectId(id)
+        }, {
+            $set: params
+        })
+    },
+    async SongDeleteById(id) {
+        return await
+        schemaModel.SongModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
+    },
+
+    async PlayListInsert(params) {
+        return await new schemaModel.PlayListModel(params).save()
+    },
+    async PlayListFindByPage(page, pageSteep, select) {
+        let regexp = new RegExp(select, 'i');
+        let sec = {
+            $or: [{
+                title: {
+                    $regex: regexp
+                },
+            }, {
+                subTitle: {
+                    $regex: regexp
+                },
+            }, ],
+        };
+        const content = await schemaModel.PlayListModel.find(sec).countDocuments()
+        const result = await schemaModel.PlayListModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            playlistSum: content,
+            playlists: result
+        }
+    },
+
+    async PlayListFindById(id) {
+        return await schemaModel.PlayListModel.find({
+            _id: mongoose.Types.ObjectId(id)
+        }).exec()
+    },
+
+    async playListRandomFindOne() {
+        return await schemaModel.PlayListModel.aggregate([{
+            $sample: {
+                size: 1
+            }
+        }]).exec()
+    },
+
+    async PlayListUpdateById(id, params) {
+        return await schemaModel.PlayListModel.updateOne({
+            _id: mongoose.Types.ObjectId(id)
+        }, {
+            $set: params
+        })
+    },
+    async PlayListDeleteById(id) {
+        return await
+        schemaModel.PlayListModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
+    },
+
+    async SongFindByPageAndIds(page, pageSteep, select, ids) {
+        let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
+
+        let regexp = new RegExp(select, 'i');
+
+        let sec = {
+            _id: {
+                $in: ObjectIds
+            },
+            $or: [{
+                name: {
+                    $regex: regexp
+                }
+            }],
+        };
+        const content = await schemaModel.SongModel.find(sec).countDocuments()
+        const result = await schemaModel.SongModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            songSum: content,
+            songs: result
+        }
     },
 }

@@ -1,6 +1,6 @@
 let link = require('../../mongoose/link');
 let endecode = require('../../tools/endecode');
-let ip = require('../../tools/ipByReq');
+let ipFormat = require('../../tools/ipFormat');
 
 let authorityEnum = require('../../mongoose/authorityEnum');
 
@@ -83,7 +83,7 @@ module.exports = async (req, res) => {
         $result.data.menu = menu;
         // 更新信息
         await link.AdminUserUpdateById(user._id, {
-            loginIp: ip(req),
+            loginIp: ipFormat(req.ip),
             loginTime: new Date()
         });
     }

@@ -152,5 +152,26 @@ router.post('/api/authorityResourceUpdateById', ...api.authorityResourceUpdateBy
 router.post('/api/authorityFindResourceByPageAndIds', ...api.authorityFindResourceByPageAndIds);
 // 通过ids获取角色信息
 router.post('/api/authorityFindRoleByIds', ...api.authorityFindRoleByIds);
-
+// 歌曲添加
+router.post('/api/songInsert', ...api.songInsert);
+// 歌曲分页
+router.post('/api/songFindPage', ...api.songFindPage);
+// 通过id获取歌曲
+router.post('/api/songFindById', ...api.songFindById);
+// 通过id更新歌曲
+router.post('/api/songUpdate', ...api.songUpdate);
+// 通过id删除各区域
+router.post('/api/songDeleteById', ...api.songDeleteById);
+// 通过 id 列表分页查询歌曲
+router.post('/api/songFindByPageAndIds', ...api.songFindByPageAndIds);
+  // 歌单添加
+router.post('/api/playListInsert', ...api.playListInsert);
+  // 歌单分页查询
+router.post('/api/playListFindPage', ...api.playListFindPage);
+  // 通过id获取歌单
+router.post('/api/playListFindById', ...api.playListFindById);
+  // 通过id更新歌单
+router.post('/api/playListUpdate', ...api.playListUpdate);
+  // 通过id删除歌单
+router.post('/api/playListDeleteById', ...api.playListDeleteById);
 module.exports = router;

@@ -62,5 +62,7 @@ router.post('/api/toolFindbyid', ...api.toolFindById);
 router.post('/api/toolFindByPage', ...api.toolFindByPage);
 // 查询类型
 router.post('/api/toolFindKind', ...api.toolFindKind);
+// 随机获取一个歌单
+router.post('/api/playListRandomFindOne', ...api.playListRandomFindOne);
 
 module.exports = router;

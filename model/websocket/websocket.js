@@ -1,6 +1,6 @@
 let ws = require("nodejs-websocket");
 
-let ip = require('../../tools/ip');
+let serverOrigin = require('../../tools/serverOrigin');
 
 const config = require('../../config.js');
 
@@ -17,7 +17,7 @@ class WebsocketModel {
             conn.on("error", function (code, reason) {
                 console.log("websocket error close");
             });
-        }).listen(config.websocketListening);
+        }).listen(config.websocket.port);
     }
     // 发送json 文件
     _sendJson(json) {
@@ -38,7 +38,7 @@ class WebsocketModel {
     }
 }
 const websocketModel = new WebsocketModel();
-console.log(`websocket listening at http://${ip}:${config.websocketListening}`);
+console.log(`websocket listening at ${serverOrigin.websocketOrigin}`);
 module.exports = (req, res, next) => {
     req.$websocketModel = websocketModel;
     next();

@@ -185,6 +185,31 @@ let api = {
     authorityFindResourceByPageAndIds: require('./authority/authorityFindResourceByPageAndIds'),
     // 通过ids获取角色信息
     authorityFindRoleByIds: require('./authority/authorityFindRoleByIds'),
+    // 歌曲添加
+    songInsert: require('./song/songInsert'),
+    // 歌曲分页查询
+    songFindPage: require('./song/songFindPage'),
+    // 通过id获取歌曲
+    songFindById: require('./song/songFindById'),
+    // 通过id更新歌曲
+    songUpdate: require('./song/songUpdate'),
+    // 通过id删除歌曲
+    songDeleteById: require('./song/songDeleteById'),
+    // 通过 id 列表分页查询歌曲
+    songFindByPageAndIds: require('./song/songFindByPageAndIds'),
+
+    // 歌单添加
+    playListInsert: require('./playList/playListInsert'),
+    // 歌单分页查询
+    playListFindPage: require('./playList/playListFindPage'),
+    // 通过id获取歌单
+    playListFindById: require('./playList/playListFindById'),
+    // 通过id更新歌单
+    playListUpdate: require('./playList/playListUpdate'),
+    // 通过id删除歌单
+    playListDeleteById: require('./playList/playListDeleteById'),
+    // 随机获取一个歌单
+    playListRandomFindOne: require('./playList/playListRandomFindOne'),
 }
 
 // 若为单一函数则转为路由数组,若为数组则不管 ()=>{} ==> [()=>{}]

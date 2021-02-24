@@ -14,9 +14,14 @@ module.exports = {
         name: "接口",
         help: "全网站的接口操作"
     },
-    form: { // 接口
+    form: { // 表单
         code: "From",
         name: "表单",
         help: "表单详细操作"
+    },
+    router: { // 表单
+        code: "Router",
+        name: "路由",
+        help: "用于后台管理的路由"
     },
 }

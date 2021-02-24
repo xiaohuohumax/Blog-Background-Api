@@ -4,7 +4,7 @@ module.exports = {
     // 解密
     decode: function (dataStr) {
         let cipherChunks = [];
-        let decipher = crypto.createDecipheriv('aes-128-cbc', config.encodeDecodeKey, config.encodeDecodeiv);
+        let decipher = crypto.createDecipheriv('aes-128-cbc', config.encode.decodeKey, config.encode.decodeiv);
         decipher.setAutoPadding(true);
         cipherChunks.push(decipher.update(dataStr, 'base64', 'utf8'));
         cipherChunks.push(decipher.final('utf8'));
@@ -13,7 +13,7 @@ module.exports = {
     // 加密
     encode: function (dataStr) {
         let cipherChunks = [];
-        let cipher = crypto.createCipheriv('aes-128-cbc', config.encodeDecodeKey, config.encodeDecodeiv);
+        let cipher = crypto.createCipheriv('aes-128-cbc', config.encode.decodeKey, config.encode.decodeiv);
         cipher.setAutoPadding(true);
         cipherChunks.push(cipher.update(dataStr, 'utf8', 'base64'));
         cipherChunks.push(cipher.final('base64'));

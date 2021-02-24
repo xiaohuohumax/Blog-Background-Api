@@ -1,4 +1,4 @@
-// 获取不重复文件名
+// 获取名字与后缀名
 module.exports = function getNameAndSuffix(name) {
     let index = name.lastIndexOf(".");
     let suffix = name.substring(index);

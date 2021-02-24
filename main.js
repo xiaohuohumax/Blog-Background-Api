@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 
 const config = require('./config.js');
 const link = require('./mongoose/link');
-const ip = require('./tools/ip');
+const serverOrigin = require('./tools/serverOrigin');
 // 路由
 const routerAdmin = require("./router/routerAdmin");
 const routerWeb = require("./router/routerWeb");
@@ -56,6 +56,6 @@ app.use("/user", routerWeb);
 app.use(errorCallback);
 
 //配置服务端口
-app.listen(config.listening, () => {
-    console.log(`api listening at http://${ip}:${config.listening}`);
+app.listen(config.server.port, () => {
+    console.log(`api listening at ${serverOrigin.expressOrigin}`);
 })
