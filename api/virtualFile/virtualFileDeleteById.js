@@ -1,7 +1,7 @@
 let link = require('../../mongoose/link');
 
 
-async function deleteFile(id, result) {
+async function deleteFile(id, result = 0) {
     // 查询文件
     let file = await link.VirtualFileFindById(id);
 
@@ -14,23 +14,20 @@ async function deleteFile(id, result) {
         let item = await link.VirtualFileFindItemById(file._id); // 子文件夹
 
         for (let val of item) {
-            await deleteFile(val._id, result); // 递归删除
+            result = await deleteFile(val._id, result); // 递归删除
         }
     }
     await link.VirtualFileDeleteById(file._id); // 删除文件或文件夹
-    result.data.sum++;
+    return result + 1;
 }
 
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource(["api_virtualfiledeletebyid"]),async (req, res) => {
+module.exports = [authAdminByResource(["api_virtualfiledeletebyid"]), async (req, res) => {
 
     let $result = req.$result(true, "删除成功");
 
-    $result.data.sum = 0;
-    await deleteFile(req.body.id, $result);
-    // 判断文件类型
-
+    $result.data.sum = await deleteFile(req.body.id);
     res.json($result)
 }]

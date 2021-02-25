@@ -5,49 +5,61 @@ let fs = require('fs');
 let getNoRepeatName = require('./getNoRepeatName');
 
 const {
+    fileMulter
+} = require('../../tools/multers');
+
+
+const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource(["api_virtualfileinsert"]),async (req, res) => {
-    // 解压缓存路径
-    let fileCache = path.resolve('./static/files');
 
-    let $result = req.$result(true,"上传成功!");
 
-    var file = req.file; // 上传的文件
-    let name = file.originalname; // 源文件名字
-    let size = file.size; // 文件大小
-    let tempPath = file.path; // 缓存位置(绝对路径)
-    let md5 = await getMD5(tempPath); // 获取md5
-    let suffix = path.extname(name)
-    md5 = `${md5}${suffix}`
-    let filePath = path.join(fileCache, md5); // 游戏存储路径
+module.exports = [
+    authAdminByResource(["api_virtualfileinsert"]),
+    fileMulter.single("file"),
+    async (req, res) => {
 
-    // 文件转移改名
-    try {
-        fs.renameSync(tempPath, filePath);
-    } catch (error) {
-        console.log(error)
-        $result.flag = false;
-        $result.msg = "转移失败!";
-    }
+        // 解压缓存路径
+        let fileCache = path.resolve('./static/files');
 
-    try {
-        if (fs.existsSync(tempPath)) {
-            fs.unlinkSync(tempPath);
+        let $result = req.$result(true, "上传成功!");
+
+        var file = req.file; // 上传的文件
+        let name = file.originalname; // 源文件名字
+        let size = file.size; // 文件大小
+        let tempPath = file.path; // 缓存位置(绝对路径)
+        let md5 = await getMD5(tempPath); // 获取md5
+        let suffix = path.extname(name)
+        md5 = `${md5}${suffix}`
+        let filePath = path.join(fileCache, md5); // 游戏存储路径
+
+        // 文件转移改名
+        try {
+            fs.renameSync(tempPath, filePath);
+        } catch (error) {
+            console.log(error)
+            $result.flag = false;
+            $result.msg = "转移失败!";
         }
-    } catch (error) {
-        console.log(error)
-    }
-    name = await getNoRepeatName(name, req.body.parentId);
-    $result.flag ? await link.VirtualFileInsert({
-        adminId: req.body.adminId, // 用户id
-        parentId: req.body.parentId, // 父目录
-        name, // 文件名
-        md5, // 文件保存md5
-        size,
-        kind: "file" // dir 文件夹 file 文件
-    }) : '';
 
-    // 解压
-    res.json($result);
-}]
+        try {
+            if (fs.existsSync(tempPath)) {
+                fs.unlinkSync(tempPath);
+            }
+        } catch (error) {
+            console.log(error)
+        }
+        name = await getNoRepeatName(name, req.body.parentId);
+        $result.flag ? await link.VirtualFileInsert({
+            adminId: req.body.adminId, // 用户id
+            parentId: req.body.parentId, // 父目录
+            name, // 文件名
+            md5, // 文件保存md5
+            size,
+            kind: "file" // dir 文件夹 file 文件
+        }) : '';
+
+        // 解压
+        res.json($result);
+    }
+]

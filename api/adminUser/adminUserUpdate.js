@@ -7,7 +7,7 @@ module.exports = [authAdminByResource(["api_adminuserupdate"]), async (req, res)
     let $result = req.$result();
 
     // 依据资源信息查询角色列表
-    const findrolesByids = await link.authorityFindRoleByIds(req.body.params.roles);
+    const findrolesByids = await link.RoleFindByIds(req.body.params.roles);
     const findrolIds = findrolesByids.map(val => val._id.toString());
 
     // 去除以及删除的资源

@@ -10,8 +10,8 @@ function isInArray(resArray = [], res = []) {
 // 资源或角色
 function authAdmin(roles = [], resources = []) {
     return async (req, res, next) => {
-        const rolesSession = req.session.roles;
-        const resourcesSession = req.session.resources;
+        const rolesSession = req.session.$roles;
+        const resourcesSession = req.session.$resources;
 
         if (!rolesSession || !resourcesSession) {
             return res.sendStatus(401);
@@ -28,7 +28,7 @@ function authAdmin(roles = [], resources = []) {
 // 角色
 function authAdminByRole(roles = []) {
     return async (req, res, next) => {
-        const rolesSession = req.session.roles;
+        const rolesSession = req.session.$roles;
 
         if (!rolesSession) {
             return res.sendStatus(401);
@@ -45,7 +45,7 @@ function authAdminByRole(roles = []) {
 // 资源
 function authAdminByResource(resources = []) {
     return async (req, res, next) => {
-        const resourcesSession = req.session.resources;
+        const resourcesSession = req.session.$resources;
 
         if (!resourcesSession) {
             return res.sendStatus(401);
@@ -59,7 +59,14 @@ function authAdminByResource(resources = []) {
     };
 }
 
+// 认证
+function authenAdmin(req, roles = [], resources = []) {
+    req.session.$resources = resources;
+    req.session.$roles = roles;
+}
+
 module.exports = {
+    authenAdmin,
     authAdmin,
     authAdminByRole,
     authAdminByResource

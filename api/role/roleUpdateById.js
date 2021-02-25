@@ -3,9 +3,9 @@ let link = require('../../mongoose/link');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource(["api_authorityroleupdatebyid"]), async (req, res) => {
+module.exports = [authAdminByResource(["api_roleupdatebyid"]), async (req, res) => {
     let $result = req.$result(false, "授权码重复,更新失败!");
-    let code = await link.AuthorityRoleFindByCodeNotYourself(req.body.params.code, req.body.params._id);
+    let code = await link.RoleFindByCodeNotYourself(req.body.params.code, req.body.params._id);
     if (code.length == 0) {
         $result.flag = true;
         $result.msg = "角色更新成功!";
@@ -20,7 +20,7 @@ module.exports = [authAdminByResource(["api_authorityroleupdatebyid"]), async (r
             resources: findresIds
         };
 
-        $result.data = await link.AuthorityRoleUpdateById(req.body.id, params);
+        $result.data = await link.RoleUpdateById(req.body.id, params);
     }
     res.json($result)
 }]

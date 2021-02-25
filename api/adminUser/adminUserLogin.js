@@ -4,6 +4,9 @@ let ipFormat = require('../../tools/ipFormat');
 
 let authorityEnum = require('../../mongoose/authorityEnum');
 
+const {
+    authenAdmin
+} = require("../../model/authorizeAdmin");
 
 module.exports = async (req, res) => {
     let {
@@ -33,38 +36,34 @@ module.exports = async (req, res) => {
         // 保存session 用户信息
         req.session.admininf = user;
         // 查询角色
-        // await link.RoleInsert({
-        //     name: "其他", // 角色名称
-        //     code:"user_code"
-        // })
         const roles = await link.RoleFindByIds(user.roles);
         const rolesCode = roles.map(val => val.code);
-        req.session.roles = rolesCode;
+
         $result.data.roles = roles;
         // 查询资源
-        // await link.ResourceInsert({
-        //     name: "后台接口", // 资源名称
-        //     index:1,
-        //     path: "/", // 资源对应路径
-        //     icon: "****", // 菜单时的图标
-        //     parentId: "-1", // 父菜单
-        //     kind: "Other",
-        //     code:"resource_code"
-        // })
-
         const resourcesId = Array.from(new Set(roles.map(val => val.resources).flat()));
         const resources = await link.ResourceFindByIds(resourcesId);
         const resourcesCode = resources.map(val => val.code);
 
-        req.session.resources = resourcesCode;
         $result.data.resources = resources;
+
+        // 认证
+        authenAdmin(req, rolesCode, resourcesCode);
 
         // 产生菜单栏
         const resourceKind = authorityEnum.menu.code;
 
-        const rootMenu = resources.filter(val => val.kind == resourceKind && val.parentId == "-1");
+        const rootMenu = []
 
-        const itemMenu = resources.filter(val => val.kind == resourceKind && val.parentId != "-1");
+        const itemMenu = []
+
+        resources.forEach(val => {
+            if (val.kind == resourceKind && val.parentId == "-1") {
+                rootMenu.push(val);
+            } else {
+                itemMenu.push(val);
+            }
+        })
 
         // 菜单显示
         const menu = [];

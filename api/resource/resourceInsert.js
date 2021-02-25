@@ -3,7 +3,7 @@ let link = require('../../mongoose/link');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource(["api_authorityinsert"]),async (req, res) => {
+module.exports = [authAdminByResource(["api_resourceinsert"]),async (req, res) => {
 
     let $result = req.$result(false, "授权码重复!");
     if (!req.body.params) {

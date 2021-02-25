@@ -1,8 +1,4 @@
 let link = require('../../mongoose/link');
-let getMD5 = require('../../tools/md5');
-let path = require('path');
-let fs = require('fs');
-
 
 let getNoRepeatName = require('./getNoRepeatName');
 

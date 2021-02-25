@@ -1,10 +1,5 @@
 const api = require('../api/api');
 
-const {
-    toolMulter,
-    fileMulter
-} = require('../tools/multers');
-
 const express = require('express');
 
 const router = express.Router();
@@ -97,13 +92,13 @@ router.post('/api/toolFindbyid', ...api.toolFindById);
 // 删除工具
 router.post('/api/toolDeleteById', ...api.toolDeleteById);
 // 上传工具
-router.post('/api/uploadTool', toolMulter.single("file"), ...api.toolInsert);
+router.post('/api/uploadTool', ...api.toolInsert);
 // 修改工具
-router.post('/api/toolUpdate', toolMulter.single("file"), ...api.toolUpdate);
+router.post('/api/toolUpdate', ...api.toolUpdate);
 // 查询类型
 router.post('/api/toolFindKind', ...api.toolFindKind);
 // 文件上传
-router.post('/api/virtualFileInsert', fileMulter.single("file"), ...api.virtualFileInsert);
+router.post('/api/virtualFileInsert', ...api.virtualFileInsert);
 // 文件目录显示
 // router.post('/api/virtualFileFind', ...api.virtualFileFind);
 // 文件分页查询
@@ -118,40 +113,40 @@ router.post('/api/virtualFileUpdateName', ...api.virtualFileUpdateName);
 // router.post('/api/virtualFileFindByName', ...api.virtualFileFindByName);
 // 文件移动
 router.post('/api/virtualFileMove', ...api.virtualFileMove);
-// 文件复制
-router.post('/api/virtualFileCopy', ...api.virtualFileCopy);
+// // 文件复制
+// router.post('/api/virtualFileCopy', ...api.virtualFileCopy);
 // 修改设置
 router.post('/api/webSetUpdate', ...api.webSetUpdate);
 // 查询全部角色
-router.post('/api/authorityFindAllRole', ...api.authorityFindAllRole);
+router.post('/api/roleFindAll', ...api.roleFindAll);
 // 角色分页
-router.post('/api/authorityFindRoleByPage', ...api.authorityFindRoleByPage);
+router.post('/api/roleFindByPage', ...api.roleFindByPage);
 // 角色通过id查询详细
-router.post('/api/authorityFindRoleById', ...api.authorityFindRoleById);
-// 通过id数组获取资源列表
-router.post('/api/authorityFindResourceByIds', ...api.authorityFindResourceByIds);
+router.post('/api/roleFindById', ...api.roleFindById);
+// // // // 通过id数组获取资源列表
+// router.post('/api/resourceFindByIds', ...api.resourceFindByIds);
 // 资源分页查询
-router.post('/api/authorityFindResourceByPage', ...api.authorityFindResourceByPage);
+router.post('/api/resourceFindByPage', ...api.resourceFindByPage);
 // 更新角色通过id
-router.post('/api/authorityRoleUpdateById', ...api.authorityRoleUpdateById);
+router.post('/api/roleUpdateById', ...api.roleUpdateById);
 // 创建角色
-router.post('/api/authorityRoleInsert', ...api.authorityRoleInsert);
+router.post('/api/roleInsert', ...api.roleInsert);
 // 删除角色
-router.post('/api/authorityRoleDeleteById', ...api.authorityRoleDeleteById);
+router.post('/api/roleDeleteById', ...api.roleDeleteById);
 // 获取资源通过id
-router.post('/api/authorityFindResourceById', ...api.authorityFindResourceById);
+router.post('/api/resourceFindById', ...api.resourceFindById);
 // 获取顶级菜单目录包括原来的自己
-router.post('/api/authorityFindRootMenu', ...api.authorityFindRootMenu);
+router.post('/api/resourceFindRootMenu', ...api.resourceFindRootMenu);
 // 创建资源
-router.post('/api/authorityResourceInsert', ...api.authorityResourceInsert);
+router.post('/api/resourceInsert', ...api.resourceInsert);
 // 删除资源
-router.post('/api/authorityResourceDeleteById', ...api.authorityResourceDeleteById);
+router.post('/api/resourceDeleteById', ...api.resourceDeleteById);
 // 更新资源
-router.post('/api/authorityResourceUpdateById', ...api.authorityResourceUpdateById);
+router.post('/api/resourceUpdateById', ...api.resourceUpdateById);
 // 通过ids 获取资源列表
-router.post('/api/authorityFindResourceByPageAndIds', ...api.authorityFindResourceByPageAndIds);
-// 通过ids获取角色信息
-router.post('/api/authorityFindRoleByIds', ...api.authorityFindRoleByIds);
+router.post('/api/resourceFindByPageAndIds', ...api.resourceFindByPageAndIds);
+// // // 通过ids获取角色信息
+// router.post('/api/authorityFindRoleByIds', ...api.roleFindByIds);
 // 歌曲添加
 router.post('/api/songInsert', ...api.songInsert);
 // 歌曲分页
@@ -164,14 +159,14 @@ router.post('/api/songUpdate', ...api.songUpdate);
 router.post('/api/songDeleteById', ...api.songDeleteById);
 // 通过 id 列表分页查询歌曲
 router.post('/api/songFindByPageAndIds', ...api.songFindByPageAndIds);
-  // 歌单添加
+// 歌单添加
 router.post('/api/playListInsert', ...api.playListInsert);
-  // 歌单分页查询
+// 歌单分页查询
 router.post('/api/playListFindPage', ...api.playListFindPage);
-  // 通过id获取歌单
+// 通过id获取歌单
 router.post('/api/playListFindById', ...api.playListFindById);
-  // 通过id更新歌单
+// 通过id更新歌单
 router.post('/api/playListUpdate', ...api.playListUpdate);
-  // 通过id删除歌单
+// 通过id删除歌单
 router.post('/api/playListDeleteById', ...api.playListDeleteById);
 module.exports = router;

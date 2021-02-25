@@ -97,8 +97,8 @@ let api = {
     virtualFileFindByName: require('./virtualFile/virtualFileFindByName'),
     // 文件移动
     virtualFileMove: require('./virtualFile/virtualFileMove'),
-    // 文件复制
-    virtualFileCopy: require('./virtualFile/virtualFileCopy'),
+    // // 文件复制
+    // virtualFileCopy: require('./virtualFile/virtualFileCopy'),
     // 修改设置
     webSetUpdate: require('./webSet/webSetUpdate'),
     // 网站用户检测
@@ -156,35 +156,35 @@ let api = {
     // 网站状态查询
     webSetFindOnly: require('./webSet/webSetFindOnly'),
     // 查询全部角色
-    authorityFindAllRole: require('./authority/authorityFindAllRole'),
+    roleFindAll: require('./role/roleFindAll'),
     // 角色分页
-    authorityFindRoleByPage: require('./authority/authorityFindRoleByPage'),
+    roleFindByPage: require('./role/roleFindByPage'),
     // 角色通过id查询
-    authorityFindRoleById: require('./authority/authorityFindRoleById'),
-    // 通过id数组获取资源列表
-    authorityFindResourceByIds: require('./authority/authorityFindResourceByIds'),
+    roleFindById: require('./role/roleFindById'),
+    // // 通过id数组获取资源列表
+    // resourceFindByIds: require('./resource/resourceFindByIds'),
     // 资源分页查询
-    authorityFindResourceByPage: require('./authority/authorityFindResourceByPage'),
+    resourceFindByPage: require('./resource/resourceFindByPage'),
     // 更新角色通过id
-    authorityRoleUpdateById: require('./authority/authorityRoleUpdateById'),
+    roleUpdateById: require('./role/roleUpdateById'),
     // 创建角色
-    authorityRoleInsert: require('./authority/authorityRoleInsert'),
+    roleInsert: require('./role/roleInsert'),
     // 删除角色
-    authorityRoleDeleteById: require('./authority/authorityRoleDeleteById'),
+    roleDeleteById: require('./role/roleDeleteById'),
     // 获取资源通过id
-    authorityFindResourceById: require('./authority/authorityFindResourceById'),
+    resourceFindById: require('./resource/resourceFindById'),
     // 获取顶级菜单目录包括原来的自己
-    authorityFindRootMenu: require('./authority/authorityFindRootMenu'),
+    resourceFindRootMenu: require('./resource/resourceFindRootMenu'),
     // 创建资源
-    authorityResourceInsert: require('./authority/authorityResourceInsert'),
+    resourceInsert: require('./resource/resourceInsert'),
     // 删除资源
-    authorityResourceDeleteById: require('./authority/authorityResourceDeleteById'),
+    resourceDeleteById: require('./resource/resourceDeleteById'),
     // 更新资源
-    authorityResourceUpdateById: require('./authority/authorityResourceUpdateById'),
+    resourceUpdateById: require('./resource/resourceUpdateById'),
     // 通过ids 获取资源列表
-    authorityFindResourceByPageAndIds: require('./authority/authorityFindResourceByPageAndIds'),
-    // 通过ids获取角色信息
-    authorityFindRoleByIds: require('./authority/authorityFindRoleByIds'),
+    resourceFindByPageAndIds: require('./resource/resourceFindByPageAndIds'),
+    // // 通过ids获取角色信息
+    // roleFindByIds: require('./role/roleFindByIds'),
     // 歌曲添加
     songInsert: require('./song/songInsert'),
     // 歌曲分页查询

@@ -10,7 +10,7 @@ module.exports = {
         database: 'web', // 数据库名称
     },
     server: { // 服务器设置
-        host: "192.168.31.158",
+        host: "localhost",
         port: 8888,
     },
 

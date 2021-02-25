@@ -23,7 +23,7 @@ const app = express();
 // 设置数据库 网站设置初始化
 link.webSetFindOnly().then(res => {
     if (!res) {
-        console.log("加载配置文件")
+        console.log("loading webset ok")
         link.webSetInsert(config.webSet).then((res) => {});
     }
 })
