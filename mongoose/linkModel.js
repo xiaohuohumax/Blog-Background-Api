@@ -629,7 +629,7 @@ module.exports = {
             }
         }]).sort({
             _id: -1
-        })
+        }).exec();
         for (let item of result) {
             item.user = await schemaModel.WebUserModel.findOne({
                 _id: mongoose.Types.ObjectId(item.userId)

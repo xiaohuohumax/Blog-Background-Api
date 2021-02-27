@@ -169,4 +169,9 @@ router.post('/api/playListFindById', ...api.playListFindById);
 router.post('/api/playListUpdate', ...api.playListUpdate);
 // 通过id删除歌单
 router.post('/api/playListDeleteById', ...api.playListDeleteById);
+// 发送通知
+router.post('/api/informSendMessage', ...api.informSendMessage);
+// 通过会话获取用户信息
+router.post('/api/adminUserFindBySession', ...api.adminUserFindBySession);
+
 module.exports = router;

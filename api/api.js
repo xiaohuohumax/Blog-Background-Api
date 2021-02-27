@@ -210,6 +210,10 @@ let api = {
     playListDeleteById: require('./playList/playListDeleteById'),
     // 随机获取一个歌单
     playListRandomFindOne: require('./playList/playListRandomFindOne'),
+    // 发送通知
+    informSendMessage: require('./inform/informSendMessage'),
+    // 通过会话获取用户信息
+    adminUserFindBySession: require('./adminUser/adminUserFindBySession'),
 }
 
 // 若为单一函数则转为路由数组,若为数组则不管 ()=>{} ==> [()=>{}]
