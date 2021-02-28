@@ -28,9 +28,9 @@ module.exports = {
     VirtualModel: mongoose.model('virtualFiles', schemas.VirtualSchema),
     // 权限部分
     // 角色大纲
-    RoleModel: mongoose.model('roles', schemas.RoleSchema),
+    AdminRoleModel: mongoose.model('adminroles', schemas.AdminRoleSchema),
     // 资源大纲
-    ResourceModel: mongoose.model('rseources', schemas.ResourceSchema),
+    AdminResourceModel: mongoose.model('adminrseources', schemas.AdminResourceSchema),
     // 歌曲大纲
     SongModel: mongoose.model('songs', schemas.SongSchema),
     // 歌单大纲

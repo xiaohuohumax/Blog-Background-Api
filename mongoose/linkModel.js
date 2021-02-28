@@ -850,7 +850,7 @@ module.exports = {
     async RoleFindByIds(ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
 
-        return await schemaModel.RoleModel.find({
+        return await schemaModel.AdminRoleModel.find({
             _id: {
                 $in: ObjectIds
             }
@@ -858,13 +858,13 @@ module.exports = {
     },
     // 添加角色
     async RoleInsert(params) {
-        return await new schemaModel.RoleModel(params).save()
+        return await new schemaModel.AdminRoleModel(params).save()
     },
     // 通过资源数组查询对应资源
     async ResourceFindByIds(ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
 
-        return await schemaModel.ResourceModel.find({
+        return await schemaModel.AdminResourceModel.find({
             _id: {
                 $in: ObjectIds
             }
@@ -873,7 +873,7 @@ module.exports = {
     async ResourceFindByIds(ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
 
-        return await schemaModel.ResourceModel.find({
+        return await schemaModel.AdminResourceModel.find({
             _id: {
                 $in: ObjectIds
             }
@@ -881,22 +881,22 @@ module.exports = {
     },
     // 通过id查询资源
     async ResourceFindById(id) {
-        return await schemaModel.ResourceModel.find({
+        return await schemaModel.AdminResourceModel.find({
             _id: mongoose.Types.ObjectId(id)
         }).exec()
     },
     async ResourceFindById(id) {
-        return await schemaModel.ResourceModel.find({
+        return await schemaModel.AdminResourceModel.find({
             _id: mongoose.Types.ObjectId(id)
         }).exec()
     },
     // 添加资源
     async ResourceInsert(params) {
-        return await new schemaModel.ResourceModel(params).save()
+        return await new schemaModel.AdminResourceModel(params).save()
     },
     // 查询所有角色
     async RoleFindAll() {
-        return await schemaModel.RoleModel.find({}).exec()
+        return await schemaModel.AdminRoleModel.find({}).exec()
     },
     // 角色分页查询
     async RoleFindByPage(page, pageSteep, select) {
@@ -915,8 +915,8 @@ module.exports = {
 
             ],
         };
-        const content = await schemaModel.RoleModel.find(sec).countDocuments()
-        const result = await schemaModel.RoleModel.find(sec).sort({
+        const content = await schemaModel.AdminRoleModel.find(sec).countDocuments()
+        const result = await schemaModel.AdminRoleModel.find(sec).sort({
             _id: -1
         }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
         return {
@@ -926,7 +926,7 @@ module.exports = {
     },
     // 角色通过id查询
     async RoleFindById(id) {
-        return await schemaModel.RoleModel.find({
+        return await schemaModel.AdminRoleModel.find({
             _id: mongoose.Types.ObjectId(id)
         }).exec()
     },
@@ -934,7 +934,7 @@ module.exports = {
     async RoleFindByIds(ids) {
         let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
 
-        return await schemaModel.RoleModel.find({
+        return await schemaModel.AdminRoleModel.find({
             _id: {
                 $in: ObjectIds
             }
@@ -961,8 +961,8 @@ module.exports = {
                 },
             ],
         };
-        const content = await schemaModel.ResourceModel.find(sec).countDocuments()
-        const result = await schemaModel.ResourceModel.find(sec).sort({
+        const content = await schemaModel.AdminResourceModel.find(sec).countDocuments()
+        const result = await schemaModel.AdminResourceModel.find(sec).sort({
             _id: -1
         }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
         return {
@@ -997,8 +997,8 @@ module.exports = {
                 },
             ],
         };
-        const content = await schemaModel.ResourceModel.find(sec).countDocuments()
-        const result = await schemaModel.ResourceModel.find(sec)
+        const content = await schemaModel.AdminResourceModel.find(sec).countDocuments()
+        const result = await schemaModel.AdminResourceModel.find(sec)
             .skip((page - 1) * pageSteep).limit(+pageSteep).exec()
         return {
             resourceSum: content,
@@ -1007,7 +1007,7 @@ module.exports = {
     },
     // 角色通过id 更新
     async RoleUpdateById(id, params) {
-        return await schemaModel.RoleModel.updateOne({
+        return await schemaModel.AdminRoleModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
@@ -1015,7 +1015,7 @@ module.exports = {
     },
     // 通过id更新资源
     async ResourceUpdateById(id, params) {
-        return await schemaModel.ResourceModel.updateOne({
+        return await schemaModel.AdminResourceModel.updateOne({
             _id: mongoose.Types.ObjectId(id)
         }, {
             $set: params
@@ -1023,19 +1023,19 @@ module.exports = {
     },
     // 角色授权码查重
     async RoleFindByCode(code) {
-        return await schemaModel.RoleModel.find({
+        return await schemaModel.AdminRoleModel.find({
             code
         }).exec()
     },
     // 通过授权码查询资源
     async AuthorityResourceFindByCode(code) {
-        return await schemaModel.ResourceModel.find({
+        return await schemaModel.AdminResourceModel.find({
             code
         }).exec()
     },
     // 角色授权码查重不包括自己
     async RoleFindByCodeNotYourself(code, id) {
-        return await schemaModel.RoleModel.find({
+        return await schemaModel.AdminRoleModel.find({
             code,
             _id: {
                 $ne: mongoose.Types.ObjectId(id)
@@ -1044,7 +1044,7 @@ module.exports = {
     },
     // 角色授权码查询不包括自己
     async ResourceFindByCodeNotYourself(code, id) {
-        return await schemaModel.ResourceModel.find({
+        return await schemaModel.AdminResourceModel.find({
             code,
             _id: {
                 $ne: mongoose.Types.ObjectId(id)
@@ -1053,24 +1053,24 @@ module.exports = {
     },
     // 角色删除通过id
     async RoleDeleteById(id) {
-        return await schemaModel.RoleModel.deleteOne({
+        return await schemaModel.AdminRoleModel.deleteOne({
             _id: mongoose.Types.ObjectId(id)
         })
     },
     // 资源删除通过id
     async AuthorityResourceDeleteById(id) {
-        return await schemaModel.ResourceModel.deleteOne({
+        return await schemaModel.AdminResourceModel.deleteOne({
             _id: mongoose.Types.ObjectId(id)
         })
     },
     async ResourceDeleteById(id) {
-        return await schemaModel.ResourceModel.deleteOne({
+        return await schemaModel.AdminResourceModel.deleteOne({
             _id: mongoose.Types.ObjectId(id)
         })
     },
     // 查询 管理菜单
     async ResourceFindRootMenu() {
-        const result = await schemaModel.ResourceModel.find({
+        const result = await schemaModel.AdminResourceModel.find({
             kind: authorityEnum.menu.code,
         }).exec()
         return result.filter(val => val.parentId == "-1")

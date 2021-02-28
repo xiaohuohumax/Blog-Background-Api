@@ -434,7 +434,7 @@ VirtualSchema.virtual("virtualUrl").get(function () {
 })
 // 权限部分
 // 角色
-const RoleSchema = new Schema({
+const AdminRoleSchema = new Schema({
     name: String, // 角色名称
     code: String, // 唯一标记
     resources: { // 拥有的资源
@@ -443,7 +443,7 @@ const RoleSchema = new Schema({
     },
 }, schemaOptions);
 // 资源
-const ResourceSchema = new Schema({
+const AdminResourceSchema = new Schema({
     name: String, // 资源名称
     index: String, // 菜单顺序
     path: String, // 资源对应路径
@@ -487,15 +487,29 @@ const PlayListSchema = new Schema({
     },
 }, schemaOptions);
 
-
-
-// ===================================================
-
-
-
-
-
-
+// 前端权限部分
+// 角色
+const WebRoleSchema = new Schema({
+    name: String, // 角色名称
+    code: String, // 唯一标记
+    resources: { // 拥有的资源
+        type: Array,
+        default: []
+    },
+}, schemaOptions);
+// 资源
+const WebResourceSchema = new Schema({
+    name: String, // 资源名称
+    index: String, // 菜单顺序
+    path: String, // 资源对应路径
+    icon: String, // 菜单时的图标
+    parentId: String, // 父菜单
+    code: String, // 唯一标记
+    kind: { // 类型 菜单 子目录 其他部分
+        type: String,
+        default: authorityEnum.api.code // 默认非菜单
+    },
+}, schemaOptions);
 
 module.exports = {
     // 文章
@@ -522,13 +536,13 @@ module.exports = {
     DanMuSchema,
     // 虚拟文件
     VirtualSchema,
-    // 权限部分
-    // 角色
-    RoleSchema,
-    // 资源
-    ResourceSchema,
     // 歌曲
     SongSchema,
     // 歌单
     PlayListSchema,
+    // 后端权限部分
+    // 角色
+    AdminRoleSchema,
+    // 资源
+    AdminResourceSchema,
 }

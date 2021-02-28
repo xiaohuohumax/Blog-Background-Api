@@ -214,6 +214,9 @@ let api = {
     informSendMessage: require('./inform/informSendMessage'),
     // 通过会话获取用户信息
     adminUserFindBySession: require('./adminUser/adminUserFindBySession'),
+    // 第三方api
+    // 天气查询
+    weather: require('./thirdPartyAPI/weather'),
 }
 
 // 若为单一函数则转为路由数组,若为数组则不管 ()=>{} ==> [()=>{}]

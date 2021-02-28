@@ -65,4 +65,5 @@ router.post('/api/toolFindKind', ...api.toolFindKind);
 // 随机获取一个歌单
 router.post('/api/playListRandomFindOne', ...api.playListRandomFindOne);
 
+
 module.exports = router;

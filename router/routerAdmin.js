@@ -173,5 +173,8 @@ router.post('/api/playListDeleteById', ...api.playListDeleteById);
 router.post('/api/informSendMessage', ...api.informSendMessage);
 // 通过会话获取用户信息
 router.post('/api/adminUserFindBySession', ...api.adminUserFindBySession);
+// 第三方api
+// 天气查询
+router.post('/api/weather', ...api.weather);
 
 module.exports = router;

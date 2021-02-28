@@ -2,6 +2,8 @@ const {
     resolve
 } = require('path');
 
+const amipKey = "0b6b548a429124177495882c5ac579b7";
+
 module.exports = {
     database: { // 数据库
         host: 'localhost', // 主机
@@ -10,7 +12,7 @@ module.exports = {
         database: 'web', // 数据库名称
     },
     server: { // 服务器设置
-        host: "localhost",
+        host: "192.168.31.158",
         port: 8888,
     },
 
@@ -57,5 +59,33 @@ module.exports = {
         userDefIcon: [],
         bannerIcon: [],
         copyRight: "",
+    },
+
+    thirdPartyAPI: {
+
+        axois: { // axios 配置
+            // 高德天气接口
+            weather: (city, extensions = "all") => ({
+                method: "get",
+                url: 'https://restapi.amap.com/v3/weather/weatherInfo',
+                params: {
+                    // 开发key
+                    key: amipKey,
+                    // 城市id
+                    city,
+                    // 气象类型 all 返回预报天气 base 返回实况天气
+                    extensions
+                }
+            }),
+            ip: (ip) => ({
+                method: "get",
+                url: 'https://restapi.amap.com/v3/ip',
+                params: {
+                    // 开发key
+                    key: amipKey,
+                    ip
+                }
+            })
+        }
     }
 }

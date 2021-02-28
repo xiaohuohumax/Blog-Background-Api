@@ -12,10 +12,10 @@ class WebsocketModel {
                 conn.sendText("My name is Web Xiu!");
             })
             conn.on("close", function (code, reason) {
-                console.log("websocket close");
+                console.log("websocket close", code, reason);
             });
             conn.on("error", function (code, reason) {
-                console.log("websocket error close");
+                console.log("websocket error close", code, reason);
             });
         }).listen(config.websocket.port);
     }

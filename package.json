@@ -12,6 +12,7 @@
   "author": "xiaohuohu",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "compressing": "^1.5.1",
     "connect-history-api-fallback": "^1.6.0",
