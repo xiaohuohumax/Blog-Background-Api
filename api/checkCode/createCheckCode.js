@@ -1,6 +1,6 @@
 const svgCaptcha = require('svg-captcha');
 
-const config = require('../../config.js');
+const config = require('../../config');
 
 module.exports = async (req, res) => {
     try {
@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
 
     let captcha = svgCaptcha[kind](config.svgCaptcha);
-    
+
     req.session.captcha = captcha.text;
 
     res.type('svg');

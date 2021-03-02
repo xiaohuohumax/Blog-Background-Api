@@ -1,6 +1,7 @@
 let fs = require('fs');
 let path = require('path');
 
+// 删除文件夹及其子目录
 module.exports = function deleteFolder(url) {
     if (fs.existsSync(url)) {
         let files = fs.readdirSync(url);

@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+// axios 封装
 const http = params => {
   return new Promise((resolve, reject) => {
     axios(params).then(res => {

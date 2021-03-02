@@ -4,7 +4,6 @@ const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
 module.exports = [authAdminByResource(["api_virtualfilefind"]),async (req, res) => {
-
     let $result = req.$result();
     let {
         parentId

@@ -2,6 +2,9 @@ const express = require('express');
 const cookice = require('cookie-parser');
 const bodyParser = require('body-parser');
 
+// log 重写
+require("./model/consoleFilter");
+
 const config = require('./config.js');
 const link = require('./mongoose/link');
 const serverOrigin = require('./tools/serverOrigin');

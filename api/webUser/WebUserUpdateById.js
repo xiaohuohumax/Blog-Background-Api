@@ -7,12 +7,8 @@ const {
 } = require("../../model/authorizeAdmin");
 module.exports = [authAdminByResource(["api_webuserupdatebyid"]), async (req, res) => {
     let $result = req.$result();
-    try {
-        await link.WebUserUpdateById(req.body.id, req.body.params);
-    } catch (error) {}
+    await link.WebUserUpdateById(req.body.id, req.body.params);
     // 提示信息更新
-    req.$websocketModel.sendJsonToAllUser(websocketCode.FLUSH_YOURSELF, {
-        msg: ""
-    })
+    req.$websocketModel.sendJsonToAllUser(websocketCode.FLUSH_YOURSELF, {})
     res.json($result);
 }]

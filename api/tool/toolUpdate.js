@@ -24,6 +24,7 @@ module.exports = [
         let newdata = {
             ...req.body
         };
+        console.log(newdata)
         if (file) {
             let tempPath = file.path; // 缓存位置(绝对路径)
             let md5 = await getMD5(tempPath); // 获取md5

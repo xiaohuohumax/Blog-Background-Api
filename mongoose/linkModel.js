@@ -536,7 +536,7 @@ module.exports = {
         }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
 
         for (const item of result) {
-            item.user = await schemaModel.CommentModel.findOne({
+            item.user = await schemaModel.WebUserModel.findOne({
                 _id: mongoose.Types.ObjectId(item.userId)
             }).exec()
         }
@@ -1028,7 +1028,7 @@ module.exports = {
         }).exec()
     },
     // 通过授权码查询资源
-    async AuthorityResourceFindByCode(code) {
+    async ResourceFindByCode(code) {
         return await schemaModel.AdminResourceModel.find({
             code
         }).exec()
@@ -1058,11 +1058,6 @@ module.exports = {
         })
     },
     // 资源删除通过id
-    async AuthorityResourceDeleteById(id) {
-        return await schemaModel.AdminResourceModel.deleteOne({
-            _id: mongoose.Types.ObjectId(id)
-        })
-    },
     async ResourceDeleteById(id) {
         return await schemaModel.AdminResourceModel.deleteOne({
             _id: mongoose.Types.ObjectId(id)
@@ -1075,6 +1070,228 @@ module.exports = {
         }).exec()
         return result.filter(val => val.parentId == "-1")
     },
+
+
+    // 角色分页查询
+    async WebRoleFindByPage(page, pageSteep, select) {
+        let regexp = new RegExp(select, 'i');
+        let sec = {
+            $or: [{
+                    name: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    code: {
+                        $regex: regexp
+                    }
+                },
+
+            ],
+        };
+        const content = await schemaModel.WebRoleModel.find(sec).countDocuments()
+        const result = await schemaModel.WebRoleModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            roleSum: content,
+            roles: result
+        }
+    },
+
+    // 角色授权码查重
+    async WebRoleFindByCode(code) {
+        return await schemaModel.WebRoleModel.find({
+            code
+        }).exec()
+    },
+
+    // 添加角色
+    async WebRoleInsert(params) {
+        return await new schemaModel.WebRoleModel(params).save()
+    },
+
+    // 角色通过id查询
+    async WebRoleFindById(id) {
+        return await schemaModel.WebRoleModel.find({
+            _id: mongoose.Types.ObjectId(id)
+        }).exec()
+    },
+
+    // 角色授权码查重不包括自己
+    async WebRoleFindByCodeNotYourself(code, id) {
+        return await schemaModel.WebRoleModel.find({
+            code,
+            _id: {
+                $ne: mongoose.Types.ObjectId(id)
+            },
+        }).exec()
+    },
+    // 通过资源数组查询对应资源
+    async WebResourceFindByIds(ids) {
+        let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
+
+        return await schemaModel.WebResourceModel.find({
+            _id: {
+                $in: ObjectIds
+            }
+        }).exec()
+    },
+    // 角色通过id 更新
+    async WebRoleUpdateById(id, params) {
+        return await schemaModel.WebRoleModel.updateOne({
+            _id: mongoose.Types.ObjectId(id)
+        }, {
+            $set: params
+        })
+    },
+
+    // 角色删除通过id
+    async WebRoleDeleteById(id) {
+        return await schemaModel.WebRoleModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
+    },
+    // 资源分页查询
+    async WebResourceFindByPage(page, pageSteep, select) {
+        let regexp = new RegExp(select, 'i');
+        let sec = {
+            $or: [{
+                    name: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    code: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    kind: {
+                        $regex: regexp
+                    }
+                },
+            ],
+        };
+        const content = await schemaModel.WebResourceModel.find(sec).countDocuments()
+        const result = await schemaModel.WebResourceModel.find(sec).sort({
+            _id: -1
+        }).skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            resourceSum: content,
+            resources: result
+        }
+    },
+    // 通过ids 和关键字分页查询资源
+    async WebResourceFindByPageAndIds(page, pageSteep, select, ids) {
+        let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
+
+        let regexp = new RegExp(select, 'i');
+
+        let sec = {
+            _id: {
+                $in: ObjectIds
+            },
+            $or: [{
+                    name: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    code: {
+                        $regex: regexp
+                    }
+                },
+                {
+                    kind: {
+                        $regex: regexp
+                    }
+                },
+            ],
+        };
+        const content = await schemaModel.WebResourceModel.find(sec).countDocuments()
+        const result = await schemaModel.WebResourceModel.find(sec)
+            .skip((page - 1) * pageSteep).limit(+pageSteep).exec()
+        return {
+            resourceSum: content,
+            resources: result
+        }
+    },
+
+
+    // 查询 管理菜单
+    async WebResourceFindRootMenu() {
+        const result = await schemaModel.WebResourceModel.find({
+            kind: authorityEnum.menu.code,
+        }).exec()
+        return result.filter(val => val.parentId == "-1")
+    },
+
+    // 通过授权码查询资源
+    async WebResourceFindByCode(code) {
+        return await schemaModel.WebResourceModel.find({
+            code
+        }).exec()
+    },
+
+    // 添加资源
+    async WebResourceInsert(params) {
+        return await new schemaModel.WebResourceModel(params).save()
+    },
+    // 通过id查询资源
+    async WebResourceFindById(id) {
+        return await schemaModel.WebResourceModel.find({
+            _id: mongoose.Types.ObjectId(id)
+        }).exec()
+    },
+
+    // 通过角色数组查询对应角色
+    async WebRoleFindByIds(ids) {
+        let ObjectIds = ids.filter(val => val && val != "").map(val => mongoose.Types.ObjectId(val));
+
+        return await schemaModel.WebRoleModel.find({
+            _id: {
+                $in: ObjectIds
+            }
+        }).exec()
+    },
+
+
+
+    // 资源删除通过id
+    async WebResourceDeleteById(id) {
+        return await schemaModel.WebResourceModel.deleteOne({
+            _id: mongoose.Types.ObjectId(id)
+        })
+    },
+
+    // 角色授权码查询不包括自己
+    async WebResourceFindByCodeNotYourself(code, id) {
+        return await schemaModel.WebResourceModel.find({
+            code,
+            _id: {
+                $ne: mongoose.Types.ObjectId(id)
+            },
+        }).exec()
+    },
+
+    // 通过id更新资源
+    async WebResourceUpdateById(id, params) {
+        return await schemaModel.WebResourceModel.updateOne({
+            _id: mongoose.Types.ObjectId(id)
+        }, {
+            $set: params
+        })
+    },
+    // 查询所有角色
+    async WebRoleFindAll() {
+        return await schemaModel.WebRoleModel.find({}).exec()
+    },
+
+
+
+
+
     // 歌曲添加
     async SongInsert(params) {
         return await new schemaModel.SongModel(params).save()

@@ -35,4 +35,8 @@ module.exports = {
     SongModel: mongoose.model('songs', schemas.SongSchema),
     // 歌单大纲
     PlayListModel: mongoose.model('playlists', schemas.PlayListSchema),
+    // 前端角色大纲
+    WebRoleModel: mongoose.model('webroles', schemas.WebRoleSchema),
+    // 前端资源大纲
+    WebResourceModel: mongoose.model('webrseources', schemas.WebResourceSchema),
 }

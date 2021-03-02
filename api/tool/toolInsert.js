@@ -22,13 +22,9 @@ module.exports = [
         let $result = req.$result(true, "上传成功");
 
         var file = req.file; // 上传的文件
-        // let path = req.body.path; // 上传路径位置
 
-        let name = file.originalname; // 源文件名字
-        let size = file.size; // 文件大小
         let tempPath = file.path; // 缓存位置(绝对路径)
         let md5 = await getMD5(tempPath); // 获取md5
-        // let suffix = path.extname(name); // 文件扩展名
         let gamePath = path.join(gameCache, md5); // 游戏存储路径
 
         if (!fs.existsSync(gamePath)) { // 不存在则解压
@@ -60,8 +56,6 @@ module.exports = [
             ...req.body
         }) : "";
 
-        // let fileCacheName = path.basename(tempPath);
-        // 解压
         res.json($result);
     }
 ]

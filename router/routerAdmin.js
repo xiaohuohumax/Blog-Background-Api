@@ -99,8 +99,6 @@ router.post('/api/toolUpdate', ...api.toolUpdate);
 router.post('/api/toolFindKind', ...api.toolFindKind);
 // 文件上传
 router.post('/api/virtualFileInsert', ...api.virtualFileInsert);
-// 文件目录显示
-// router.post('/api/virtualFileFind', ...api.virtualFileFind);
 // 文件分页查询
 router.post('/api/virtualFileFindByPage', ...api.virtualFileFindByPage);
 // 删除文件夹/文件
@@ -109,12 +107,8 @@ router.post('/api/virtualFileDeleteById', ...api.virtualFileDeleteById);
 router.post('/api/virtualFileInsertDir', ...api.virtualFileInsertDir);
 // 修改名字
 router.post('/api/virtualFileUpdateName', ...api.virtualFileUpdateName);
-// 通过名字查询 
-// router.post('/api/virtualFileFindByName', ...api.virtualFileFindByName);
 // 文件移动
 router.post('/api/virtualFileMove', ...api.virtualFileMove);
-// // 文件复制
-// router.post('/api/virtualFileCopy', ...api.virtualFileCopy);
 // 修改设置
 router.post('/api/webSetUpdate', ...api.webSetUpdate);
 // 查询全部角色
@@ -123,8 +117,6 @@ router.post('/api/roleFindAll', ...api.roleFindAll);
 router.post('/api/roleFindByPage', ...api.roleFindByPage);
 // 角色通过id查询详细
 router.post('/api/roleFindById', ...api.roleFindById);
-// // // // 通过id数组获取资源列表
-// router.post('/api/resourceFindByIds', ...api.resourceFindByIds);
 // 资源分页查询
 router.post('/api/resourceFindByPage', ...api.resourceFindByPage);
 // 更新角色通过id
@@ -145,8 +137,6 @@ router.post('/api/resourceDeleteById', ...api.resourceDeleteById);
 router.post('/api/resourceUpdateById', ...api.resourceUpdateById);
 // 通过ids 获取资源列表
 router.post('/api/resourceFindByPageAndIds', ...api.resourceFindByPageAndIds);
-// // // 通过ids获取角色信息
-// router.post('/api/authorityFindRoleByIds', ...api.roleFindByIds);
 // 歌曲添加
 router.post('/api/songInsert', ...api.songInsert);
 // 歌曲分页
@@ -173,6 +163,35 @@ router.post('/api/playListDeleteById', ...api.playListDeleteById);
 router.post('/api/informSendMessage', ...api.informSendMessage);
 // 通过会话获取用户信息
 router.post('/api/adminUserFindBySession', ...api.adminUserFindBySession);
+// 前端
+// 角色分页
+router.post('/api/webRoleFindByPage', ...api.webRoleFindByPage);
+// 角色通过id查询详细
+router.post('/api/webRoleFindById', ...api.webRoleFindById);
+// 更新角色通过id
+router.post('/api/webRoleUpdateById', ...api.webRoleUpdateById);
+// 创建角色
+router.post('/api/webRoleInsert', ...api.webRoleInsert);
+// 删除角色
+router.post('/api/webRoleDeleteById', ...api.webRoleDeleteById);
+// 查询全部角色
+router.post('/api/webRoleFindAll', ...api.webRoleFindAll);
+// 通过ids 获取资源列表
+router.post('/api/webResourceFindByPageAndIds', ...api.webResourceFindByPageAndIds);
+// 资源分页查询
+router.post('/api/webResourceFindByPage', ...api.webResourceFindByPage);
+// 获取资源通过id
+router.post('/api/webResourceFindById', ...api.webResourceFindById);
+// 获取顶级菜单目录包括原来的自己
+router.post('/api/webResourceFindRootMenu', ...api.webResourceFindRootMenu);
+// 创建资源
+router.post('/api/webResourceInsert', ...api.webResourceInsert);
+// 删除资源
+router.post('/api/webResourceDeleteById', ...api.webResourceDeleteById);
+// 更新资源
+router.post('/api/webResourceUpdateById', ...api.webResourceUpdateById);
+// 操控
+router.post('/api/baseControl', ...api.baseControl);
 // 第三方api
 // 天气查询
 router.post('/api/weather', ...api.weather);

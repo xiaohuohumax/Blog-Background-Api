@@ -1,0 +1,2765 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : MongoDB
+ Source Server Type    : MongoDB
+ Source Server Version : 40210
+ Source Host           : localhost:27017
+ Source Schema         : web
+
+ Target Server Type    : MongoDB
+ Target Server Version : 40210
+ File Encoding         : 65001
+
+ Date: 02/03/2021 23:27:38
+*/
+
+
+// ----------------------------
+// Collection structure for adminrseources
+// ----------------------------
+db.getCollection("adminrseources").drop();
+db.createCollection("adminrseources");
+
+// ----------------------------
+// Documents of adminrseources
+// ----------------------------
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023d24ccf5700003e002223"),
+    kind: "Menu",
+    name: "内容管理",
+    icon: "ios-paper",
+    parentId: -1,
+    code: "menu_article",
+    index: 1
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023d31ccf5700003e002224"),
+    kind: "Menu",
+    name: "发表文章",
+    code: "menu_firearticle",
+    parentId: "6023d24ccf5700003e002223",
+    path: "/FireArticleManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023d38bcf5700003e002225"),
+    kind: "Menu",
+    name: "文章管理",
+    code: "menu_articlemanager",
+    parentId: "6023d24ccf5700003e002223",
+    path: "/ArticleManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023d468cf5700003e002226"),
+    kind: "Menu",
+    name: "账号管理",
+    icon: "ios-people",
+    code: "menu_account",
+    parentId: -1,
+    index: 2
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023d4bccf5700003e002227"),
+    kind: "Menu",
+    name: "网站用户",
+    path: "/WebUserManager",
+    code: "menu_webusermanager",
+    parentId: "6023d468cf5700003e002226"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023d686c720000048007232"),
+    kind: "Menu",
+    name: "管理用户",
+    code: "menu_adminusermanager",
+    parentId: "6023e120c720000048007247",
+    path: "/AdminUserManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023db71c720000048007233"),
+    kind: "Menu",
+    name: "信息管理",
+    icon: "ios-paper",
+    parentId: -1,
+    code: "menu_info",
+    index: 4
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023db83c720000048007234"),
+    kind: "Menu",
+    name: "站内信息",
+    code: "menu_messagemanaager",
+    parentId: "6023db71c720000048007233",
+    path: "/MessageManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023dbb7c720000048007235"),
+    kind: "Menu",
+    code: "menu_noticemanager",
+    name: "发布公告",
+    parentId: "6023db71c720000048007233",
+    path: "/NoticeManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023dbf6c720000048007236"),
+    code: "menu_commentmanager",
+    kind: "Menu",
+    name: "评论管理",
+    parentId: "6023db71c720000048007233",
+    path: "/CommentManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023dc31c720000048007237"),
+    kind: "Menu",
+    code: "menu_playmusic",
+    icon: "md-images",
+    name: "娱乐影音",
+    parentId: -1,
+    path: "",
+    index: 5
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023dd4ec72000004800723b"),
+    kind: "Menu",
+    name: "视频音乐管理",
+    parentId: "6023dc31c720000048007237",
+    code: "menu_musicvideomanager",
+    path: "/MusicVideoManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023dd77c72000004800723c"),
+    kind: "Menu",
+    name: "图包分享管理",
+    parentId: "6023dc31c720000048007237",
+    code: "menu_imagemanager",
+    path: "/ImageManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023de25c72000004800723e"),
+    kind: "Menu",
+    name: "文件管理",
+    icon: "md-folder-open",
+    parentId: -1,
+    code: "menu_file",
+    index: 6
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023de3bc72000004800723f"),
+    kind: "Menu",
+    name: "虚拟文件",
+    code: "menu_virtualfilemanager",
+    parentId: "6023de25c72000004800723e",
+    path: "/VirtualFileManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023de9ec720000048007240"),
+    kind: "Menu",
+    name: "网站设置",
+    icon: "ios-cog",
+    parentId: -1,
+    code: "menu_set",
+    index: 7
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023deaec720000048007241"),
+    kind: "Menu",
+    name: "样式设置",
+    code: "menu_stylesetmanager",
+    parentId: "6023de9ec720000048007240",
+    path: "/StyleSetManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023deedc720000048007242"),
+    kind: "Menu",
+    name: "基础设置",
+    parentId: "6023de9ec720000048007240",
+    code: "menu_basesictmanager",
+    path: "/BasicSetManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023df1dc720000048007243"),
+    kind: "Menu",
+    name: "其他设置",
+    parentId: "6023de9ec720000048007240",
+    code: "menu_othersetmanager",
+    path: "/OtherSetManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023dfc6c720000048007244"),
+    kind: "Menu",
+    name: "统计分析",
+    icon: "ios-stats",
+    parentId: -1,
+    code: "menu_stats",
+    index: 8
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023dfddc720000048007245"),
+    parentId: "6023dfc6c720000048007244",
+    code: "menu_webstatmanager",
+    kind: "Menu",
+    name: "前端统计",
+    path: "/WebStatManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023e029c720000048007246"),
+    parentId: "6023dfc6c720000048007244",
+    kind: "Menu",
+    name: "网站统计",
+    code: "menu_adminstatmanager",
+    path: "/AdminStatManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023e120c720000048007247"),
+    kind: "Menu",
+    name: "权限管理",
+    icon: "ios-cog",
+    parentId: -1,
+    code: "menu_authority",
+    index: 3
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023e17fc720000048007249"),
+    kind: "Menu",
+    name: "角色管理",
+    parentId: "6023e120c720000048007247",
+    code: "menu_rolemanager",
+    path: "/RoleManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6023e1aac72000004800724a"),
+    kind: "Menu",
+    name: "资源管理",
+    parentId: "6023e120c720000048007247",
+    code: "menu_resourcemanager",
+    path: "/ResourceManager"
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6025565ae0c73e3e709536c9"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]站内消息分页",
+    code: "api_adminmessagefindbypage",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602556aa8b901b3914b10c67"),
+    index: NumberInt("10"),
+    kind: "Api",
+    parentId: "",
+    name: "[接口]站内消息添加",
+    code: "api_adminmessageinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602557d8cbfca72d487e1215"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]管理用户通过ID删除",
+    code: "api_adminuserdeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6025580acbfca72d487e1216"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]管理用户通过ID查询详细信息",
+    code: "api_adminuserfindbyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255825cbfca72d487e1217"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]管理用户添加",
+    code: "api_adminuserinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6025585ecbfca72d487e1218"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]管理用户通过ID更新信息",
+    code: "api_adminuserupdate",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6025588bcbfca72d487e1219"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]文章通过ID删除",
+    code: "api_articledeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255a2459c89f09ac574c52"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]文章添加",
+    code: "api_articleinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255a4459c89f09ac574c53"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]文章通过ID更新",
+    code: "api_articleupdate",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255a8e59c89f09ac574c54"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限全部角色查询",
+    code: "api_rolefindall",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255aee59c89f09ac574c55"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限通过ID查询角色信息",
+    code: "api_rolefindbyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255b1259c89f09ac574c56"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限角色分页查询",
+    code: "api_rolefindbypage",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255b3959c89f09ac574c57"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限查询全部菜单根目录",
+    code: "api_resourcefindrootmenu",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255b6f59c89f09ac574c58"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限通过ID查询资源信息",
+    code: "api_resourcefindbyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255bce59c89f09ac574c5a"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限资源分页查询",
+    code: "api_resourcefindbypage",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255bfd59c89f09ac574c5b"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限通过ID删除资源",
+    code: "api_resourcedeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255c2659c89f09ac574c5c"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限资源添加",
+    code: "api_resourceinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255c4659c89f09ac574c5d"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限通过ID更新资源",
+    code: "api_resourceupdatebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255c6859c89f09ac574c5e"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限通过ID删除角色",
+    code: "api_roledeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255c8559c89f09ac574c5f"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限角色添加",
+    code: "api_roleinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255cb259c89f09ac574c60"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]权限通过ID更新角色信息",
+    code: "api_roleupdatebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255ce359c89f09ac574c61"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID删除评论",
+    code: "api_commentdeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255d0259c89f09ac574c62"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID查询评论信息",
+    code: "api_commentfindbyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255d6859c89f09ac574c63"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]评论联合用户分页查询",
+    code: "api_commentfindbypagemore",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255ddb59c89f09ac574c64"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID与KIND查询文章视频图包评论",
+    code: "api_commentgetarticlebyidkind",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255dfe59c89f09ac574c65"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID删除图包",
+    code: "api_imagedeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255e1159c89f09ac574c66"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]图包添加",
+    code: "api_imageinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255e2e59c89f09ac574c67"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID更新图包信息",
+    code: "api_imageupdate",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255e5759c89f09ac574c68"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID删除公告",
+    code: "api_noticedeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255e7159c89f09ac574c69"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]公告添加",
+    code: "api_noticeinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255e9f59c89f09ac574c6a"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]统计管理用户性别",
+    code: "api_statsadminusergender",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255ebd59c89f09ac574c6b"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]统计管理用户等级",
+    code: "api_statsadminuserlevel",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255ee659c89f09ac574c6c"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]统计前端用户性别",
+    code: "api_statswebusergender",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255f0559c89f09ac574c6d"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]统计前端用户等级",
+    code: "api_statswebuserlevel",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255f2b59c89f09ac574c6e"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]统计前端用户注册",
+    code: "api_statswebuserlogon",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255f4959c89f09ac574c6f"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID删除工具",
+    code: "api_tooldeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255f6159c89f09ac574c70"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]工具添加",
+    code: "api_toolinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255f7a59c89f09ac574c71"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID更新工具信息",
+    code: "api_toolupdate",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60255fa159c89f09ac574c72"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID删除视频音乐",
+    code: "api_videomusicdeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602560046ecccd18dc480dff"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]视频音乐添加",
+    code: "api_videomusicinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602560236ecccd18dc480e00"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID更新视频音乐信息",
+    code: "api_videomusicupdate",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6025605b6ecccd18dc480e01"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件文件或文件夹复制",
+    code: "api_vitualfilecopy",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602560876ecccd18dc480e02"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件通过ID删除文件或文件夹",
+    code: "api_virtualfiledeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602560cf6ecccd18dc480e03"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件同父ID查询文件夹内容",
+    code: "api_virtualfilefind",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602561096ecccd18dc480e04"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件通过NAME查询文件或文件夹",
+    code: "api_virtualfilefindbyname",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6025612b6ecccd18dc480e05"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件分页查询",
+    code: "api_virtualfilefindbypage",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6025614e6ecccd18dc480e06"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件文件上传",
+    code: "api_virtualfileinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602561716ecccd18dc480e07"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件新建文件夹",
+    code: "api_virtualfileinsertdir",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602561ae6ecccd18dc480e08"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件文件或文件夹移动",
+    code: "api_virtualfilemove",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602562cd6b54601354d30689"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件通过ID修改文件或文件夹名字",
+    code: "api_virtualfileupdatename",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602562f56b54601354d3068a"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]网站设置更新",
+    code: "api_websetupdate",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602563176b54601354d3068b"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]通过ID删除前端用户",
+    code: "api_webuserdeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6025ff3c8e22152a48bfc8b3"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]虚拟文件文件或文件夹复制",
+    code: "api_virtualfilecopy",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260aaa43383e060c0f430a"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]新建/修改管理用户[更新]按钮",
+    code: "view_fireadminusermanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260adb43383e060c0f430b"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]新建/修改管理用户[删除]按钮",
+    code: "view_fireadminusermanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260b6743383e060c0f430c"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]文章详细[修改文章]按钮",
+    code: "view_articlemore_modifybutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260b8143383e060c0f430d"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]文章详细[删除文章]按钮",
+    code: "view_articlemore_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260da043383e060c0f430e"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改文章[发布]按钮",
+    code: "view_firearticlemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260e0143383e060c0f430f"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改文章[更新]按钮",
+    code: "view_firearticlemanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260e3043383e060c0f4310"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改文章[删除]按钮",
+    code: "view_firearticlemanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260e9043383e060c0f4311"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改图包[发布]按钮",
+    code: "view_fireimagemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260eaa43383e060c0f4312"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改图包[更新]按钮",
+    code: "view_fireimagemanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260eca43383e060c0f4313"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改图包[删除]按钮",
+    code: "view_fireimagemanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260eff43383e060c0f4314"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]图包详细[修改图包]按钮",
+    code: "view_imagemore_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260f1343383e060c0f4315"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]图包详细[删除图包]按钮",
+    code: "view_imagemore_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260f6043383e060c0f4316"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]站内信息[发送]按钮",
+    code: "view_messagemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260f9a43383e060c0f4317"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改视频音乐[发布]按钮",
+    code: "view_firemusicvideomanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260fb943383e060c0f4318"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改视频音乐[更新]按钮",
+    code: "view_firemusicvideomanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60260fd043383e060c0f4319"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改视频音乐[删除]按钮",
+    code: "view_firemusicvideomanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026102443383e060c0f431a"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]视频音乐详细[修改]按钮",
+    code: "view_musicvideomore_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026103943383e060c0f431b"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]视频音乐详细[删除]按钮",
+    code: "view_musicvideomore_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026107a43383e060c0f431c"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]公告管理[发布]按钮",
+    code: "view_firenoticemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602610d943383e060c0f431d"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]创建/管理资源[创建]按钮",
+    code: "view_fireresourcemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602610f043383e060c0f431e"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]创建/管理资源[更新]按钮",
+    code: "view_fireresourcemanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026111043383e060c0f431f"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]创建/管理资源[删除]按钮",
+    code: "view_fireresourcemanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026113f43383e060c0f4320"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]资源管理[新建资源]按钮",
+    code: "view_resourcemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602611fa43383e060c0f4321"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]创建/修改角色[创建]按钮",
+    code: "view_firerolemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026121f43383e060c0f4322"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]创建/修改角色[更新]按钮",
+    code: "view_firerolemanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026123a43383e060c0f4323"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]创建/修改角色[删除]按钮",
+    code: "view_firerolemanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026125e43383e060c0f4324"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]角色管理[创建]按钮",
+    code: "view_rolemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026128943383e060c0f4325"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]基础设置[保存设置]按钮",
+    code: "view_basesetmanager_savebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602612a943383e060c0f4326"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]其他设置[保存设置]按钮",
+    code: "view_othersetmanager_savebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602612c343383e060c0f4327"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]样式设置[保存设置]按钮",
+    code: "view_stylesetmanager_savebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026138943383e060c0f4328"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]在线工具[创建]按钮",
+    code: "view_firetoolmanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602613a343383e060c0f4329"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]在线工具[更新]按钮",
+    code: "view_firetoolmanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602613b843383e060c0f432a"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]在线工具[删除]按钮",
+    code: "view_firetoolmanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602613ea43383e060c0f432b"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]在线工具详细[修改]按钮",
+    code: "view_toolmanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602613fd43383e060c0f432c"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]在线工具详细[删除]按钮",
+    code: "view_toolmanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026145a43383e060c0f432d"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]网站用户详细[更新]按钮",
+    code: "view_webusermore_modifybutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026147043383e060c0f432e"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]网站用户详细[删除]按钮",
+    code: "view_webusermore_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026368743383e060c0f433a"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]评论管理[删除]按钮",
+    code: "view_commentitem_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60263a1743383e060c0f4341"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]右侧工具[文件上传列表]",
+    code: "view_righttool_uploadlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60263a6443383e060c0f4342"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]右侧工具[虚拟文件mini]",
+    code: "view_righttool_uploadfilemini",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602642f543383e060c0f4343"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]管理用户[新建账号]按钮",
+    code: "view_adminusermanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026438c43383e060c0f4344"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]创建/修改管理用户[创建]按钮",
+    code: "view_fireadminusermanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268033e573bd2a84a4f74b"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]新建/修改管理用户[返回列表]按钮",
+    code: "view_fireadminusermanager_backlistbutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268128e573bd2a84a4f74c"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]管理用户[搜索组件]",
+    code: "view_adminusermanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268c8cf0c5ec23f48b3e19"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]文章管理[搜索组件]",
+    code: "view_articlemanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268d29f0c5ec23f48b3e1a"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]文章详细[返回列表]按钮",
+    code: "view_articlemore_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268d91f0c5ec23f48b3e1b"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改文章[返回列表]按钮",
+    code: "view_firearticlemanager_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268da2f0c5ec23f48b3e1c"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改文章[返回详细]按钮",
+    code: "view_firearticlemanager_backinf",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268e48f0c5ec23f48b3e1d"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]评论管理[搜索组件]",
+    code: "view_commentmanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268ed2f0c5ec23f48b3e1e"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改图包[返回列表]按钮",
+    code: "view_fireimagemanager_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268ee9f0c5ec23f48b3e1f"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改图包[返回详细]按钮",
+    code: "view_fireimagemanager_backinf",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268f58f0c5ec23f48b3e20"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]图包管理[搜索组件]",
+    code: "view_imagemanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60268fa0f0c5ec23f48b3e21"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]图包详细[返回列表]按钮",
+    code: "view_imagemore_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026900bf0c5ec23f48b3e22"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]站内消息[搜索组件]",
+    code: "view_messagemanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026906ff0c5ec23f48b3e23"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改音视频[返回列表]按钮",
+    code: "view_firemusicvidemanager_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269085f0c5ec23f48b3e24"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改音视频[返回详细]按钮",
+    code: "view_firemusicvidemanager_backinf",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602690def0c5ec23f48b3e25"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]音视频管理[搜索组件]",
+    code: "view_musicvideomanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269140f0c5ec23f48b3e26"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]音视频详细[返回列表]按钮",
+    code: "view_musicvideomore_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602691e9f0c5ec23f48b3e27"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]公告管理[搜索组件]",
+    code: "view_noticemanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6026924ff0c5ec23f48b3e28"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改资源[返回列表]按钮",
+    code: "view_fireresourcemanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602692b8f0c5ec23f48b3e29"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]资源管理[搜索组件]",
+    code: "view_resourcesmanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269350f0c5ec23f48b3e2a"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改角色[返回列表]按钮",
+    code: "view_firerolemanager_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269398f0c5ec23f48b3e2b"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]角色管理[搜索组件]",
+    code: "view_rolemanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602693f9f0c5ec23f48b3e2c"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改工具[返回列表]按钮",
+    code: "view_firetoolmanager_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269408f0c5ec23f48b3e2d"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]发布/修改工具[返回详细]按钮",
+    code: "view_firetoolmanager_backinf",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269457f0c5ec23f48b3e2e"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]工具管理[搜索组件]",
+    code: "view_toolmanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269499f0c5ec23f48b3e2f"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]工具详细[返回列表]按钮",
+    code: "view_toolmanager_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602694e5f0c5ec23f48b3e30"),
+    index: null,
+    kind: "View",
+    parentId: "",
+    name: "[视图]网站用户详细[返回列表]按钮",
+    code: "view_webusermore_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269c7f028b1e36d0f06a90"),
+    index: null,
+    kind: "From",
+    parentId: "",
+    name: "[表单]发表/修改资源[角色修改]允许修改",
+    code: "form_fireresourcemanager_roleundisabled",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269d0a028b1e36d0f06a91"),
+    index: null,
+    kind: "From",
+    parentId: "",
+    name: "[表单]发表/修改资源[允许登录]允许修改",
+    code: "form_fireresourcemanager_allowloginundisabled",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269d35028b1e36d0f06a92"),
+    index: null,
+    kind: "From",
+    parentId: "",
+    name: "[表单]发表/修改资源[允许评论]允许修改",
+    code: "form_fireresourcemanager_allowtalkundisabled",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60269dd7028b1e36d0f06a93"),
+    index: null,
+    kind: "From",
+    parentId: "",
+    name: "[表单]发表/修改资源[修改等级]允许修改",
+    code: "form_fireresourcemanager_levelundisabled",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60274cd9e7eee320a0cf033a"),
+    index: null,
+    kind: "Api",
+    parentId: "",
+    name: "[接口]授权通过资源IDS分页获取资源列表",
+    code: "api_resourcefindbypageandids",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602761a248c15129f4c920a3"),
+    index: NumberInt("10"),
+    kind: "Menu",
+    parentId: "-1",
+    name: "异常页面",
+    code: "menu_errorpage",
+    icon: "ios-bug",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602761c248c15129f4c920a4"),
+    index: null,
+    kind: "Menu",
+    parentId: "602761a248c15129f4c920a3",
+    name: "异常404",
+    code: "menu_errorpage_404",
+    icon: "",
+    path: "/Error404",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602761ed48c15129f4c920a5"),
+    index: null,
+    kind: "Menu",
+    parentId: "602761a248c15129f4c920a3",
+    name: "异常403",
+    code: "menu_errorpage_403",
+    icon: "",
+    path: "/Error403",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6027620748c15129f4c920a6"),
+    index: null,
+    kind: "Menu",
+    parentId: "602761a248c15129f4c920a3",
+    name: "异常500",
+    code: "menu_errorpage_500",
+    icon: "",
+    path: "/Error500",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602775a1f3403f43ecdedafc"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[视图]网站用户[搜索组件]",
+    code: "view_webusermanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("602a3022213f3438e024447c"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]修改前端用户信息",
+    code: "api_webuserupdatebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031d4bb14f58a4924560fa3"),
+    kind: "Menu",
+    parentId: "6031d7a214f58a4924560fa5",
+    index: "",
+    name: "歌单管理",
+    code: "menu_musicplayermanager",
+    icon: "",
+    path: "/MusicPlayerManager",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031de62fb9c982d6cb058e1"),
+    kind: "Menu",
+    parentId: "-1",
+    index: "4",
+    name: "音乐管理",
+    code: "menu_musicplayer",
+    icon: "md-musical-notes",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031de90fb9c982d6cb058e2"),
+    kind: "Menu",
+    parentId: "6031de62fb9c982d6cb058e1",
+    index: "",
+    name: "歌曲管理",
+    code: "menu_songmanager",
+    icon: "",
+    path: "/SongManager",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031debefb9c982d6cb058e3"),
+    kind: "Menu",
+    parentId: "6031de62fb9c982d6cb058e1",
+    index: "",
+    name: "歌单管理",
+    code: "menu_playlistmanager",
+    icon: "",
+    path: "/PlayListManager",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031e515f857dc48eca65dc7"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]添加歌曲",
+    code: "api_songinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031eafd0e65c90f043b5222"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]歌曲更新",
+    code: "api_songupdate",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031ec531957191ba425fa38"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过ID删除歌曲",
+    code: "api_songdeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031ee73bdf80c4594ab5dc1"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过ID删除歌单",
+    code: "api_playlistdeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031ee89bdf80c4594ab5dc2"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]添加歌单",
+    code: "api_playlistinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031ee9abdf80c4594ab5dc3"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过ID修改歌单",
+    code: "api_playlistupdate",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6031f6d06c49753cb02e33f5"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过ID列表分页查询歌曲",
+    code: "api_songFindByPageAndIds",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603200d4dfe4b24c10b547ce"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]歌曲管理[搜索组件]",
+    code: "view_songmanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6032012edfe4b24c10b547cf"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[视图]歌曲管理[新建歌曲]",
+    code: "view_songmanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603201dadfe4b24c10b547d0"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改歌曲[返回列表]按钮",
+    code: "view_firesongmanager_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320200dfe4b24c10b547d1"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改歌曲[创建]按钮",
+    code: "view_firesongmanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6032022cdfe4b24c10b547d2"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改歌曲[更新]按钮",
+    code: "view_firesongmanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320250dfe4b24c10b547d3"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改歌曲[删除]按钮",
+    code: "view_firesongmanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603202e9dfe4b24c10b547d4"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改歌单[返回列表]按钮",
+    code: "view_fireplaylistmanager_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603202fddfe4b24c10b547d5"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改歌单[创建]按钮",
+    code: "view_fireplaylistmanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6032030ddfe4b24c10b547d6"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改歌单[更新]按钮",
+    code: "view_fireplaylistmanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6032031ddfe4b24c10b547d7"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改歌单[删除]按钮",
+    code: "view_fireplaylistmanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320383dfe4b24c10b547d8"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]歌单管理[搜索组件]",
+    code: "view_playlistmanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603203a3dfe4b24c10b547d9"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]歌单管理[新建歌单]按钮",
+    code: "view_playlistmanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d0c9cfdc14b8ccd0a18"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]发布/修改文章",
+    code: "router_firearticlemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d159cfdc14b8ccd0a19"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]文章管理",
+    code: "router_articlemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d1e9cfdc14b8ccd0a1a"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]文章详细",
+    code: "router_articlemore",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d259cfdc14b8ccd0a1b"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]评论管理",
+    code: "router_commentmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d2d9cfdc14b8ccd0a1c"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]网站用户",
+    code: "router_webusermanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d359cfdc14b8ccd0a1d"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]网站用户详细",
+    code: "router_webusermore",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d3e9cfdc14b8ccd0a1e"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]管理用户",
+    code: "router_adminusermanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d489cfdc14b8ccd0a1f"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]新建/修改管理用户",
+    code: "router_fireadminusermanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d509cfdc14b8ccd0a20"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]视频音乐",
+    code: "router_firemusicvideomanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d589cfdc14b8ccd0a21"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]图包分享",
+    code: "router_fireimagemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d609cfdc14b8ccd0a22"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]在线工具",
+    code: "router_firetoolmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d689cfdc14b8ccd0a23"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]视频音乐管理",
+    code: "router_musicvideomanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d709cfdc14b8ccd0a24"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]视频音乐详细",
+    code: "router_musicvideomore",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d789cfdc14b8ccd0a25"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]图包分享管理",
+    code: "router_imagemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d829cfdc14b8ccd0a26"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]图包分享详细",
+    code: "router_imagemore",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d8a9cfdc14b8ccd0a27"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]在线工具管理",
+    code: "router_toolmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d929cfdc14b8ccd0a28"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]在线工具详细",
+    code: "router_toolmore",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320d9b9cfdc14b8ccd0a29"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]虚拟文件",
+    code: "router_virtualfilemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320da29cfdc14b8ccd0a2a"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]样式设置",
+    code: "router_stylesetmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320daa9cfdc14b8ccd0a2b"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]基础设置",
+    code: "router_basicsetmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320db29cfdc14b8ccd0a2c"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]其他设置",
+    code: "router_othersetmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320dc49cfdc14b8ccd0a2d"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]用户统计",
+    code: "router_webstatmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320dcc9cfdc14b8ccd0a2e"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]网站统计",
+    code: "router_adminstatmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320dd49cfdc14b8ccd0a2f"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]站内信息",
+    code: "router_messagemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320ddb9cfdc14b8ccd0a30"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]发布公告",
+    code: "router_noticemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320de29cfdc14b8ccd0a31"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]角色管理",
+    code: "router_rolemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320deb9cfdc14b8ccd0a32"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]资源管理",
+    code: "router_resourcemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320df39cfdc14b8ccd0a33"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]添加/修改角色",
+    code: "router_firerolemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320dfc9cfdc14b8ccd0a34"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]创建/管理资源",
+    code: "router_fireresourcemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320e049cfdc14b8ccd0a35"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]歌曲管理",
+    code: "router_songmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320e0d9cfdc14b8ccd0a36"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]创建/修改歌曲",
+    code: "router_firesongmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320e159cfdc14b8ccd0a37"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]歌单管理",
+    code: "router_playlistmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60320e1d9cfdc14b8ccd0a38"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]创建/修改歌单",
+    code: "router_fireplaylistmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6038aee63bbb6f2cecec9a10"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]发送通知",
+    code: "router_fireinformmanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6038afe03bbb6f2cecec9a11"),
+    kind: "Menu",
+    parentId: "603d0b31b601b219e8a316fa",
+    index: "",
+    name: "发送通知",
+    code: "menu_fireinformmanager",
+    icon: "",
+    path: "/FireInformManager",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("6038b7cdf88f3a52dc568530"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]发送通知",
+    code: "api_informsendmessage",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("60392180f548112f40dc14b6"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过会话获取管理用户信息",
+    code: "api_adminwuserfindbysession",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603c5136aa52fa373c91baa9"),
+    kind: "View",
+    parentId: "6023d468cf5700003e002226",
+    index: "",
+    name: "用户角色",
+    code: "menu_webrolemanager",
+    icon: "",
+    path: "/WebRoleManager",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603c523caa52fa373c91baaa"),
+    kind: "Menu",
+    parentId: "6023d468cf5700003e002226",
+    index: "",
+    name: "用户资源",
+    code: "menu_webresourcemanager",
+    icon: "",
+    path: "/WebResourceManager",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603c53abaa52fa373c91baab"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]视频音乐管理[新建按钮]",
+    code: "view_musicvideomanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603c54d6aa52fa373c91baac"),
+    kind: "Menu",
+    parentId: "",
+    index: "",
+    name: "[视图]图包分享管理[新建按钮]",
+    code: "view_imagemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603c557eaa52fa373c91baad"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]在线工具管理[新建按钮]",
+    code: "view_toolmanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603c5607aa52fa373c91baae"),
+    kind: "Menu",
+    parentId: "6023dc31c720000048007237",
+    index: "",
+    name: "在线工具管理",
+    code: "menu_toolmananger",
+    icon: "",
+    path: "/ToolManager",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf490457c175ec4ac7f3a"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过ID删除用户资源",
+    code: "api_webresourcedeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf4bee364aa5e1027a162"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过ID查询用户资源",
+    code: "api_webresourcefindbyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf4d5e364aa5e1027a163"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]用户资源分页查询",
+    code: "api_webresourcefindbypage",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf4f5e364aa5e1027a164"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过ids分页查询资源",
+    code: "api_webresourcefindbypageandids",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf508e364aa5e1027a165"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]查询用户菜单",
+    code: "api_webresourcefindrootmenu",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf51be364aa5e1027a166"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]用户资源创建",
+    code: "api_webresourceinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf52ae364aa5e1027a167"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]更新用户资源",
+    code: "api_webresourceupdatebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf576e7e4e65794887286"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过ID查询用户角色",
+    code: "api_webroledeletebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf58ce7e4e65794887287"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]查询全部用户角色",
+    code: "api_webrolefindall",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf59fe7e4e65794887288"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]通过ID查询用户角色",
+    code: "api_webrolefindbyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf5b5e7e4e65794887289"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]用户角色分页查询",
+    code: "api_webrolefindbypage",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf5c6e7e4e6579488728a"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]用户角色创建",
+    code: "api_webroleinsert",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf5d6e7e4e6579488728b"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]用户角色更新",
+    code: "api_webroleupdatebyid",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf69a87b22b66100002d4"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改用户资源[返回列表]",
+    code: "view_firewebresourcemanager_backbutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf6ed87b22b66100002d5"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改用户资源[创建按钮]",
+    code: "view_firewebresourcemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf72e87b22b66100002d6"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改用户资源[更新按钮]",
+    code: "view_firewebresourcemanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf74587b22b66100002d7"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改用户资源[删除按钮]",
+    code: "view_firewebresourcemanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf77287b22b66100002d8"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]用户资源管理[搜索组件]",
+    code: "view_webresourcesmanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf78687b22b66100002d9"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]用户资源管理[新建资源按钮]",
+    code: "view_webresourcemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf81487b22b66100002da"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改用户角色[返回列表]",
+    code: "view_firewebrolemanager_backlist",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf82387b22b66100002db"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改用户角色[创建按钮]",
+    code: "view_firewebrolemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf83b87b22b66100002dc"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改用户角色[更新按钮]",
+    code: "view_firewebrolemanager_updatebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf84587b22b66100002dd"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]创建/修改用户角色[删除按钮]",
+    code: "view_firewebrolemanager_deletebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf99287b22b66100002df"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]用户角色管理[搜索组件]",
+    code: "view_webrolemanager_searchgroup",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603cf9a587b22b66100002e0"),
+    kind: "View",
+    parentId: "",
+    index: "",
+    name: "[视图]用户角色管理[新建按钮]",
+    code: "view_webrolemanager_firebutton",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603d0b31b601b219e8a316fa"),
+    kind: "Menu",
+    parentId: "-1",
+    index: "4",
+    name: "操控管理",
+    code: "menu_controlmanager",
+    icon: "ios-construct",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603d8d6b7df1721cac877fe1"),
+    kind: "Router",
+    parentId: "603d0b31b601b219e8a316fa",
+    index: "",
+    name: "基本操控",
+    code: "router_basecontrol",
+    icon: "",
+    path: "/BaseControl",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603da183dfd8ad34547287c1"),
+    kind: "Api",
+    parentId: "",
+    index: "",
+    name: "[接口]基本操控",
+    code: "api_basecontrol",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603dd90781c09369883a341d"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]用户角色管理",
+    code: "router_webrolemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603dd93481c09369883a341e"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]用户资源管理",
+    code: "router_webresourcemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603dd95f81c09369883a341f"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]添加/修改用户角色",
+    code: "router_firewebrolemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);
+db.getCollection("adminrseources").insert([ {
+    _id: ObjectId("603dd97981c09369883a3420"),
+    kind: "Router",
+    parentId: "",
+    index: "",
+    name: "[路由]创建/管理用户资源",
+    code: "router_firewebresourcemanager",
+    icon: "",
+    path: "",
+    __v: NumberInt("0")
+} ]);

@@ -201,7 +201,7 @@ ToolSchema.virtual("toolUrl").get(function () {
 })
 // 图包分享
 const ImageSchema = new Schema({
-    adminId:  {
+    adminId: {
         type: ObjectID,
         ...getterSetter.ObjectIDSetter
     },
@@ -274,12 +274,16 @@ const WebUserSchema = new Schema({
     allowTalk: {
         type: Boolean,
         default: true
+    },
+    roles: {
+        type: Array,
+        default: []
     }
 }, schemaOptions);
 
 // 后台用户留言
 const AdminMessageSchema = new Schema({
-    adminId:  {
+    adminId: {
         type: ObjectID,
         ...getterSetter.ObjectIDSetter
     },
@@ -291,7 +295,7 @@ const AdminMessageSchema = new Schema({
 }, schemaOptions);
 // 网站公共
 const WebNoticeSchema = new Schema({
-    adminId:  {
+    adminId: {
         type: ObjectID,
         ...getterSetter.ObjectIDSetter
     },
@@ -308,11 +312,11 @@ const WebNoticeSchema = new Schema({
 }, schemaOptions);
 // 评论
 const CommentSchema = new Schema({
-    userId:  {
+    userId: {
         type: ObjectID,
         ...getterSetter.ObjectIDSetter
     }, // 用户id
-    articleId:  {
+    articleId: {
         type: ObjectID,
         ...getterSetter.ObjectIDSetter
     }, // 文章id
@@ -386,15 +390,19 @@ const WebSetsSchema = new Schema({
         type: String,
         default: ''
     },
+    touristDefRoles: {
+        type: Array,
+        default: [],
+    },
 }, schemaOptions);
 
 // 弹幕
 const DanMuSchema = new Schema({
-    userId:  {
+    userId: {
         type: ObjectID,
         ...getterSetter.ObjectIDSetter
     }, // 用户id
-    videoId:  {
+    videoId: {
         type: ObjectID,
         ...getterSetter.ObjectIDSetter
     }, // 视频id
@@ -545,4 +553,8 @@ module.exports = {
     AdminRoleSchema,
     // 资源
     AdminResourceSchema,
+    // 前端角色
+    WebRoleSchema,
+    // 前端资源
+    WebResourceSchema
 }

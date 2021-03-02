@@ -3,8 +3,8 @@ let link = require('../../mongoose/link');
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-module.exports = [authAdminByResource(["api_resourcefindbyids"]),async (req, res) => {
+module.exports = [authAdminByResource(["api_webresourcefindrootmenu"]),async (req, res) => {
     let $result = req.$result();
-    $result.data = await link.ResourceFindByIds(req.body.ids);
+    $result.data = await link.WebResourceFindRootMenu();
     res.json($result)
 }]

@@ -8,11 +8,9 @@ const {
     fileMulter
 } = require('../../tools/multers');
 
-
 const {
     authAdminByResource
 } = require("../../model/authorizeAdmin");
-
 
 module.exports = [
     authAdminByResource(["api_virtualfileinsert"]),
@@ -59,7 +57,6 @@ module.exports = [
             kind: "file" // dir 文件夹 file 文件
         }) : '';
 
-        // 解压
         res.json($result);
     }
 ]

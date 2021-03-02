@@ -50,8 +50,6 @@ router.post('/api/commentFindByPage', ...api.commentFindByPage);
 router.post('/api/commentRandom', ...api.commentRandom);
 // 点赞
 router.post('/api/commentNiceById', ...api.commentNiceById);
-// 更新用户信息
-// router.post('/api/webUserFindByKey', ...api.webUserFindByKey);
 // 添加
 router.post('/api/danmuInsert', ...api.danmuInsert);
 // 查询弹幕
@@ -64,6 +62,7 @@ router.post('/api/toolFindByPage', ...api.toolFindByPage);
 router.post('/api/toolFindKind', ...api.toolFindKind);
 // 随机获取一个歌单
 router.post('/api/playListRandomFindOne', ...api.playListRandomFindOne);
-
+// 前端查询默认权限
+router.post('/api/getDefRolesResources', ...api.getDefRolesResources);
 
 module.exports = router;

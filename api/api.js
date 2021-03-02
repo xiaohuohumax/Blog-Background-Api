@@ -97,8 +97,6 @@ let api = {
     virtualFileFindByName: require('./virtualFile/virtualFileFindByName'),
     // 文件移动
     virtualFileMove: require('./virtualFile/virtualFileMove'),
-    // // 文件复制
-    // virtualFileCopy: require('./virtualFile/virtualFileCopy'),
     // 修改设置
     webSetUpdate: require('./webSet/webSetUpdate'),
     // 网站用户检测
@@ -145,8 +143,6 @@ let api = {
     commentRandom: require('./comment/commentRandom'),
     // 点赞
     commentNiceById: require('./comment/commentNiceById'),
-    // 更新用户信息
-    // webUserFindByKey: require('./webUser/webUserFindByKey'),
     // 添加
     danmuInsert: require('./danmu/danmuInsert'),
     // 查询弹幕
@@ -161,8 +157,6 @@ let api = {
     roleFindByPage: require('./role/roleFindByPage'),
     // 角色通过id查询
     roleFindById: require('./role/roleFindById'),
-    // // 通过id数组获取资源列表
-    // resourceFindByIds: require('./resource/resourceFindByIds'),
     // 资源分页查询
     resourceFindByPage: require('./resource/resourceFindByPage'),
     // 更新角色通过id
@@ -183,8 +177,6 @@ let api = {
     resourceUpdateById: require('./resource/resourceUpdateById'),
     // 通过ids 获取资源列表
     resourceFindByPageAndIds: require('./resource/resourceFindByPageAndIds'),
-    // // 通过ids获取角色信息
-    // roleFindByIds: require('./role/roleFindByIds'),
     // 歌曲添加
     songInsert: require('./song/songInsert'),
     // 歌曲分页查询
@@ -197,7 +189,35 @@ let api = {
     songDeleteById: require('./song/songDeleteById'),
     // 通过 id 列表分页查询歌曲
     songFindByPageAndIds: require('./song/songFindByPageAndIds'),
-
+    // 前端
+    // 角色分页
+    webRoleFindByPage: require('./webRole/webRoleFindByPage'),
+    // 查询全部角色
+    webRoleFindAll: require('./webRole/webRoleFindAll'),
+    // 更新角色通过id
+    webRoleUpdateById: require('./webRole/webRoleUpdateById'),
+    // 创建角色
+    webRoleInsert: require('./webRole/webRoleInsert'),
+    // 角色通过id查询
+    webRoleFindById: require('./webRole/webRoleFindById'),
+    // 删除角色
+    webRoleDeleteById: require('./webRole/webRoleDeleteById'),
+    // 通过ids 获取资源列表
+    webResourceFindByPageAndIds: require('./webResource/webResourceFindByPageAndIds'),
+    // 资源分页查询
+    webResourceFindByPage: require('./webResource/webResourceFindByPage'),
+    // 获取资源通过id
+    webResourceFindById: require('./webResource/webResourceFindById'),
+    // 获取顶级菜单目录包括原来的自己
+    webResourceFindRootMenu: require('./webResource/webResourceFindRootMenu'),
+    // 创建资源
+    webResourceInsert: require('./webResource/webResourceInsert'),
+    // 删除资源
+    webResourceDeleteById: require('./webResource/webResourceDeleteById'),
+    // 更新资源
+    webResourceUpdateById: require('./webResource/webResourceUpdateById'),
+    // 操控
+    baseControl: require('./control/baseControl'),
     // 歌单添加
     playListInsert: require('./playList/playListInsert'),
     // 歌单分页查询
@@ -214,6 +234,8 @@ let api = {
     informSendMessage: require('./inform/informSendMessage'),
     // 通过会话获取用户信息
     adminUserFindBySession: require('./adminUser/adminUserFindBySession'),
+    // 前端查询默认权限
+    getDefRolesResources: require('./webUser/getDefRolesResources'),
     // 第三方api
     // 天气查询
     weather: require('./thirdPartyAPI/weather'),

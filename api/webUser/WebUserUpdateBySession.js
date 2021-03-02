@@ -15,7 +15,6 @@ module.exports = async (req, res) => {
             userinf = (await link.WebUserFindAllById(userinf._id))[0];
             if (!userinf) throw new Error("");
         } catch (error) {
-            console.log(error)
             $result.msg = "用户不存在!";
             break;
         }

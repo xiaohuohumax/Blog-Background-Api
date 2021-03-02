@@ -9,7 +9,7 @@ module.exports = [authAdminByResource(["api_resourceinsert"]),async (req, res) =
     if (!req.body.params) {
         throw new Error("参数错误");
     }
-    let code = await link.AuthorityResourceFindByCode(req.body.params.code);
+    let code = await link.ResourceFindByCode(req.body.params.code);
     if (code.length == 0) {
         $result.flag = true;
         $result.msg = "资源创建成功!";

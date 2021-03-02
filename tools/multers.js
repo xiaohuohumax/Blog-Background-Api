@@ -1,18 +1,18 @@
 var multer = require('multer'); // 文件上传中间件
+var config = require('../config');
 
+// 文件上传限制
 module.exports = {
     toolMulter: multer({
         dest: "./upload/tool",
         limits: {
-            fileSize: 1024 * 1024 * 1000,
-            files: 5
+            ...config.uploadFile.tool
         },
     }),
     fileMulter: multer({
         dest: "./upload/file",
         limits: {
-            fileSize: 1024 * 1024 * 100000,
-            files: 5
+            ...config.uploadFile.virtual
         },
     })
 }

@@ -12,8 +12,21 @@ module.exports = {
         database: 'web', // 数据库名称
     },
     server: { // 服务器设置
-        host: "192.168.31.158",
+        host: "localhost",
         port: 8888,
+    },
+    log: {
+        openConsoleLog: true, // 打开控制台日志
+    },
+    uploadFile: { // 文件上传
+        tool: { // 在线工具
+            fileSize: 1024 * 1024 * 1000, // 单个大小
+            files: 5 // 单次数量
+        },
+        virtual: { // 虚拟文件
+            fileSize: 1024 * 1024 * 100000,
+            files: 5
+        }
     },
 
     urlOrigin: {
@@ -49,7 +62,7 @@ module.exports = {
         webState: true, // true 开放 false 维修
         opentime: Date.now(), // 维修结束时间
 
-        webKeyWords: ["xiaohuohu", "个人博客", "boke"], // 关键字
+        webKeyWords: ["xiaohuohu"], // 关键字
         webFontFamily: '微软雅黑',
         webTheme: 'color', // 网站主题
         webThemeList: [{
@@ -58,18 +71,18 @@ module.exports = {
         }, ],
         userDefIcon: [],
         bannerIcon: [],
-        copyRight: "",
+        copyRight: "Copyright © 2021 xiaohuohu",
+        touristDefRoles: [], // 游客默认角色
     },
 
+    // 第三方api
     thirdPartyAPI: {
-
         axois: { // axios 配置
-            // 高德天气接口
+            // 天气接口
             weather: (city, extensions = "all") => ({
                 method: "get",
                 url: 'https://restapi.amap.com/v3/weather/weatherInfo',
                 params: {
-                    // 开发key
                     key: amipKey,
                     // 城市id
                     city,
@@ -81,7 +94,6 @@ module.exports = {
                 method: "get",
                 url: 'https://restapi.amap.com/v3/ip',
                 params: {
-                    // 开发key
                     key: amipKey,
                     ip
                 }
